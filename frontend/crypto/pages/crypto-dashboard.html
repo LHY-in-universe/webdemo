@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-i18n-title="crypto.title">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>密钥加密</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../../shared/css/unified-styles.css?v=1756673001">
+    
+</head>
+<body class="module-background theme-transition">
+    <!-- Navigation -->
+    <nav class="navbar fade-in-up">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div class="navbar-brand">
+                <span data-i18n="crypto.title">密钥加密</span>
+            </div>
+            
+            <div class="navbar-nav">
+                <button class="theme-toggle" title="切换主题">
+                    <span>🌙</span>
+                </button>
+                <button class="language-toggle" title="切换语言">EN</button>
+                <button onclick="goHome()" class="btn btn-secondary btn-click">
+                    <span data-i18n="common.home">返回模块选择</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Navigation Tabs -->
+    <div class="secondary-background border-b border-gray-300">
+        <div class="max-w-4xl mx-auto">
+            <nav class="flex space-x-8 px-6">
+                <button onclick="showSection('overview')" class="navbar-link py-4 border-b-2 border-transparent hover:border-gray-400 whitespace-nowrap" data-i18n="crypto.nav.overview">概览</button>
+                <button onclick="showSection('keys')" class="navbar-link py-4 border-b-2 border-transparent hover:border-gray-400 whitespace-nowrap" data-i18n="crypto.nav.keys">密钥管理</button>
+                <button onclick="showSection('certificates')" class="navbar-link py-4 border-b-2 border-transparent hover:border-gray-400 whitespace-nowrap" data-i18n="crypto.nav.certificates">证书管理</button>
+                <button onclick="showSection('operations')" class="navbar-link py-4 border-b-2 border-transparent hover:border-gray-400 whitespace-nowrap" data-i18n="crypto.nav.operations">加密操作</button>
+                <button onclick="showSection('audit')" class="navbar-link py-4 border-b-2 border-transparent hover:border-gray-400 whitespace-nowrap" data-i18n="crypto.nav.audit">审计日志</button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto py-6 px-6">
+        
+        <!-- Overview Section -->
+        <div id="overview-section">
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="card cursor-pointer hover:bg-gray-50 transition-colors fade-in-up delay-1 card-hover btn-click" onclick="viewTotalKeysDetails()">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate" data-i18n="crypto.stats.totalKeys">总密钥数量</dt>
+                                <dd class="text-lg font-medium text-gray-900">24</dd>
+                            </dl>
+                            <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">点击查看详情</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card cursor-pointer hover:bg-gray-50 transition-colors fade-in-up delay-2 card-hover btn-click" onclick="viewActiveKeysDetails()">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate" data-i18n="crypto.stats.activeKeys">活跃密钥</dt>
+                                <dd class="text-lg font-medium text-gray-900">18</dd>
+                            </dl>
+                            <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">点击查看详情</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card cursor-pointer hover:bg-gray-50 transition-colors fade-in-up delay-3 card-hover btn-click" onclick="viewCertificatesDetails()">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate" data-i18n="crypto.stats.certificates">证书数量</dt>
+                                <dd class="text-lg font-medium text-gray-900">12</dd>
+                            </dl>
+                            <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">点击查看详情</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card cursor-pointer hover:bg-gray-50 transition-colors fade-in-up delay-4 card-hover btn-click" onclick="viewExpiringSoonDetails()">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                            </svg>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate" data-i18n="crypto.stats.expiringSoon">即将过期</dt>
+                                <dd class="text-lg font-medium text-gray-900">3</dd>
+                            </dl>
+                            <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">点击查看详情</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Keys -->
+            <div class="card mb-8 cursor-pointer hover:bg-gray-50 transition-colors fade-in-up delay-5 card-hover btn-click" onclick="viewRecentKeysDetails()">
+                <div class="mb-4">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900" data-i18n="crypto.recentKeys.title">最近密钥</h3>
+                    <p class="mt-1 text-sm text-gray-500" data-i18n="crypto.recentKeys.subtitle">最近创建和使用的密钥对</p>
+                    <div class="text-xs text-blue-600 mt-1">点击查看详情</div>
+                </div>
+                <ul class="divide-y divide-gray-200">
+                    <li class="py-4 hover:bg-gray-50 cursor-pointer">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900"><span data-i18n="crypto.keys.federatedLearningMainKey">联邦学习主密钥</span></p>
+                                    <p class="text-sm text-gray-500">RSA-2048 • 签名+加密 • 创建于2天前</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-medium text-gray-900" data-i18n="crypto.keys.active">活跃</p>
+                                <p class="text-sm text-gray-500">使用156次</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="py-4 hover:bg-gray-50 cursor-pointer">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900"><span data-i18n="crypto.keys.dataTransmissionEncryptionKey">数据传输加密密钥</span></p>
+                                    <p class="text-sm text-gray-500">AES-256 • 仅加密 • 创建于1周前</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-medium text-gray-900" data-i18n="crypto.keys.active">活跃</p>
+                                <p class="text-sm text-gray-500">使用1,024次</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="py-4 hover:bg-gray-50 cursor-pointer">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900"><span data-i18n="crypto.keys.temporarySigningKey">临时签名密钥</span></p>
+                                    <p class="text-sm text-gray-500">ECDSA-P256 • 仅签名 • 30天前过期</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-medium text-yellow-600" data-i18n="crypto.keys.expired">已过期</p>
+                                <p class="text-sm text-gray-500" data-i18n="crypto.keys.needsRenewal">需要续期</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Key Usage Chart -->
+            <div class="card fade-in-up delay-6">
+                <div class="mb-4">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900" data-i18n="crypto.keyUsageStats.title">密钥使用统计</h3>
+                    <p class="mt-1 text-sm text-gray-500" data-i18n="crypto.keyUsageStats.subtitle">最近30天的密钥使用情况</p>
+                </div>
+                <div class="h-80">
+                    <canvas id="keyUsageChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Keys Management Section -->
+        <div id="keys-section" class="hidden">
+            <div class="card fade-in-up delay-6">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h3 class="text-lg leading-6 font-medium text-gray-900" data-i18n="crypto.keyManagement.title">密钥管理</h3>
+                        <p class="mt-1 text-sm text-gray-500" data-i18n="crypto.keyManagement.subtitle">创建、管理和监控您的密钥对</p>
+                    </div>
+                    <button class="btn btn-primary btn-click">
+                        生成新密钥
+                    </button>
+                </div>
+                <div class="text-center text-gray-500 py-12">
+                    密钥管理功能开发中...
+                </div>
+            </div>
+        </div>
+
+        <!-- Certificates Section -->
+        <div id="certificates-section" class="hidden">
+            <div class="card fade-in-up delay-6">
+                <div class="mb-4">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">证书管理</h3>
+                    <p class="mt-1 text-sm text-gray-500">管理数字证书和CA证书</p>
+                </div>
+                <div class="text-center text-gray-500 py-12">
+                    证书管理功能开发中...
+                </div>
+            </div>
+        </div>
+
+        <!-- Operations Section -->
+        <div id="operations-section" class="hidden">
+            <div class="card fade-in-up delay-6">
+                <div class="mb-4">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">加密操作</h3>
+                    <p class="mt-1 text-sm text-gray-500">执行加密、解密和签名操作</p>
+                </div>
+                <div class="text-center text-gray-500 py-12">
+                    加密操作功能开发中...
+                </div>
+            </div>
+        </div>
+
+        <!-- Audit Section -->
+        <div id="audit-section" class="hidden">
+            <div class="card fade-in-up delay-6">
+                <div class="mb-4">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">审计日志</h3>
+                    <p class="mt-1 text-sm text-gray-500">查看密钥和证书操作的审计记录</p>
+                </div>
+                <div class="text-center text-gray-500 py-12">
+                    审计日志功能开发中...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 返回主页按钮 -->
+    <button class="homepage-return-btn btn-click" onclick="
+        console.log('🏠 密码学仪表板：按钮被点击了');
+        try {
+            if (typeof goHome === 'function') {
+                console.log('✅ 使用goHome函数');
+                goHome();
+            } else {
+                console.log('❌ goHome函数不存在，使用直接跳转');
+                window.location.href = '/homepage/index.html';
+            }
+        } catch (error) {
+            console.error('❌ 导航出错:', error);
+            window.location.href = '/homepage/index.html';
+        }
+    " title="返回主页">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+        </svg>
+    </button>
+
+    <script src="../../shared/js/navigation-unified.js?v=20250902"></script>
+    <script src="../../shared/js/theme-manager-unified.js?v=20250827"></script>
+    <script src="../../shared/js/i18n-manager.js"></script>
+    <script>
+        // 确保goHome函数可用（备用实现）
+        window.goHome = window.goHome || function() {
+            console.log('🏠 goHome函数被调用');
+            window.location.href = '/homepage/index.html';
+        };
+        
+        // Navigation functions
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = ['overview', 'keys', 'certificates', 'operations', 'audit'];
+            sections.forEach(section => {
+                document.getElementById(section + '-section').classList.add('hidden');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName + '-section').classList.remove('hidden');
+            
+            // Update navigation active state
+            document.querySelectorAll('nav button').forEach(button => {
+                button.classList.remove('border-gray-600');
+                button.classList.add('border-transparent');
+            });
+            event.target.classList.remove('border-transparent');
+            event.target.classList.add('border-gray-600');
+        }
+
+        // Initialize key usage chart
+        function initKeyUsageChart() {
+            const ctx = document.getElementById('keyUsageChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({length: 30}, (_, i) => {
+                        const date = new Date();
+                        date.setDate(date.getDate() - (29 - i));
+                        return date.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' });
+                    }),
+                    datasets: [{
+                        label: '签名操作',
+                        data: Array.from({length: 30}, () => Math.floor(Math.random() * 50) + 10),
+                        borderColor: 'rgb(115, 115, 115)',
+                        backgroundColor: 'rgba(115, 115, 115, 0.1)',
+                        tension: 0.1
+                    }, {
+                        label: '加密操作',
+                        data: Array.from({length: 30}, () => Math.floor(Math.random() * 80) + 20),
+                        borderColor: 'rgb(82, 82, 82)',
+                        backgroundColor: 'rgba(82, 82, 82, 0.1)',
+                        tension: 0.1
+                    }, {
+                        label: '解密操作',
+                        data: Array.from({length: 30}, () => Math.floor(Math.random() * 60) + 15),
+                        borderColor: 'rgb(64, 64, 64)',
+                        backgroundColor: 'rgba(64, 64, 64, 0.1)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '操作次数'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: '日期'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        // Page initialization
+        window.addEventListener('DOMContentLoaded', function() {
+            initKeyUsageChart();
+            showSection('overview');
+        });
+
+        // Modal functions
+        function showModal(title, content) {
+            const modal = document.getElementById('detailModal');
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalContent').innerHTML = content;
+            modal.classList.remove('hidden');
+            setTimeout(() => modal.classList.add('show'), 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('detailModal');
+            modal.classList.remove('show');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        }
+
+        // Click detail functions
+        function viewTotalKeysDetails() {
+            const content = `
+                <div class="detail-section">
+                    <div class="detail-header">
+                        <h4 class="detail-title">总密钥数量详情</h4>
+                        <span class="detail-badge success">24个密钥</span>
+                    </div>
+                    <div class="detail-grid">
+                        <div class="detail-card fade-in-up delay-6">
+                            <div class="detail-card-header fade-in-up delay-6">
+                                <h5>密钥类型分布</h5>
+                            </div>
+                            <div class="detail-card-content fade-in-up delay-6">
+                                <div class="detail-item">
+                                    <span>RSA密钥</span>
+                                    <span class="detail-time">12个</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>AES密钥</span>
+                                    <span class="detail-time">8个</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>ECC密钥</span>
+                                    <span class="detail-time">4个</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            showModal('总密钥数量详情', content);
+        }
+
+        function viewActiveKeysDetails() {
+            const content = `
+                <div class="detail-section">
+                    <div class="detail-header">
+                        <h4 class="detail-title">活跃密钥详情</h4>
+                        <span class="detail-badge success">18个活跃</span>
+                    </div>
+                    <div class="detail-grid">
+                        <div class="detail-card fade-in-up delay-6">
+                            <div class="detail-card-header fade-in-up delay-6">
+                                <h5>使用频率</h5>
+                            </div>
+                            <div class="detail-card-content fade-in-up delay-6">
+                                <div class="detail-item">
+                                    <span><span data-i18n="crypto.keys.federatedLearningMainKey">联邦学习主密钥</span></span>
+                                    <span class="detail-time">156次/天</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span><span data-i18n="crypto.keys.dataTransmissionEncryptionKey">数据传输加密密钥</span></span>
+                                    <span class="detail-time">1,024次/天</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span><span data-i18n="crypto.keys.temporarySigningKey">临时签名密钥</span></span>
+                                    <span class="detail-time">过期</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            showModal('活跃密钥详情', content);
+        }
+
+        function viewCertificatesDetails() {
+            const content = `
+                <div class="detail-section">
+                    <div class="detail-header">
+                        <h4 class="detail-title">证书管理详情</h4>
+                        <span class="detail-badge warning">12个证书</span>
+                    </div>
+                    <div class="detail-grid">
+                        <div class="detail-card fade-in-up delay-6">
+                            <div class="detail-card-header fade-in-up delay-6">
+                                <h5>证书状态</h5>
+                            </div>
+                            <div class="detail-card-content fade-in-up delay-6">
+                                <div class="detail-item">
+                                    <span>SSL证书</span>
+                                    <span class="detail-status-indicator active"></span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>代码签名证书</span>
+                                    <span class="detail-status-indicator active"></span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>客户端证书</span>
+                                    <span class="detail-status-indicator warning"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            showModal('证书管理详情', content);
+        }
+
+        function viewExpiringSoonDetails() {
+            const content = `
+                <div class="detail-section">
+                    <div class="detail-header">
+                        <h4 class="detail-title">即将过期详情</h4>
+                        <span class="detail-badge danger">3个即将过期</span>
+                    </div>
+                    <div class="detail-grid">
+                        <div class="detail-card fade-in-up delay-6">
+                            <div class="detail-card-header fade-in-up delay-6">
+                                <h5>过期警告</h5>
+                            </div>
+                            <div class="detail-card-content fade-in-up delay-6">
+                                <div class="detail-item">
+                                    <span>SSL服务器证书</span>
+                                    <span class="detail-time">2天后到期</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>客户端认证证书</span>
+                                    <span class="detail-time">7天后到期</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span><span data-i18n="crypto.keys.temporarySigningKey">临时签名密钥</span></span>
+                                    <span class="detail-time">15天后到期</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            showModal('即将过期详情', content);
+        }
+
+        function viewRecentKeysDetails() {
+            const content = `
+                <div class="detail-section">
+                    <div class="detail-header">
+                        <h4 class="detail-title">最近密钥详情</h4>
+                        <span class="detail-badge info">最新活动</span>
+                    </div>
+                    <div class="detail-grid">
+                        <div class="detail-card fade-in-up delay-6">
+                            <div class="detail-card-header fade-in-up delay-6">
+                                <h5>密钥活动</h5>
+                            </div>
+                            <div class="detail-card-content fade-in-up delay-6">
+                                <div class="detail-item">
+                                    <span><span data-i18n="crypto.keys.federatedLearningMainKey">联邦学习主密钥</span>创建</span>
+                                    <span class="detail-time">2天前</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>数据传输密钥更新</span>
+                                    <span class="detail-time">1周前</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span>签名密钥轮换</span>
+                                    <span class="detail-time">2周前</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            showModal('最近密钥详情', content);
+        }
+    </script>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+        }
+
+        .modal-overlay.hidden {
+            display: none;
+        }
+
+        .modal-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            max-height: 90vh;
+            width: 90%;
+            overflow: hidden;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.show .modal-container {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-content {
+            padding: 24px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .detail-section {
+            color: #374151;
+        }
+
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .detail-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0;
+        }
+
+        .detail-badge {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .detail-badge.success { background: #d1fae5; color: #065f46; }
+        .detail-badge.warning { background: #fef3c7; color: #92400e; }
+        .detail-badge.danger { background: #fee2e2; color: #dc2626; }
+        .detail-badge.info { background: #dbeafe; color: #1e40af; }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .detail-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .detail-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .detail-card-header h5 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #374151;
+            margin: 0;
+        }
+
+        .detail-card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+
+        .detail-time {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .detail-status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-left: 8px;
+        }
+
+        .detail-status-indicator.active { background: #10b981; }
+        .detail-status-indicator.warning { background: #f59e0b; }
+        .detail-status-indicator.expired { background: #ef4444; }
+    </style>
+
+    <!-- Detail Modal -->
+    <div id="detailModal" class="modal-overlay hidden">
+        <div class="modal-container content-area">
+            <div class="modal-header">
+                <h3 id="modalTitle" class="modal-title"></h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-content" id="modalContent">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+    <!-- <script src="../../shared/js/router-unified.js?v=20250827"></script> -->
+</body>
+</html>

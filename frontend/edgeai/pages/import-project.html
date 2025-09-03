@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-i18n-title="edgeai.modelManager.title">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模型管理 - EdgeAI</title>
+    <!-- ==================== 防白闪脚本 ==================== -->
+    <script>
+        (function() {
+            'use strict';
+            try {
+                // 获取保存的主题或系统偏好
+                const savedTheme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+                
+                // 立即设置主题属性
+                document.documentElement.setAttribute('data-theme', theme);
+                
+                console.log('🎨 防白闪: 主题已设置为', theme);
+            } catch (error) {
+                console.warn('⚠️ 防白闪脚本失败:', error);
+                // 降级到深色主题
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        })();
+    </script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/css/unified-styles.css?v=1756673001">
+    <link rel="stylesheet" href="../../shared/css/animations.css">
+</head>
+<body class="theme-transition">
+    <div class="page-container">
+        <!-- 顶部导航 -->
+        <nav class="page-nav sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <button onclick="goBack()" class="mr-4 text-gray-600 hover:text-gray-900 transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </button>
+                        <h1 class="text-xl font-semibold text-primary" data-i18n="edgeai.modelManager.title">模型管理</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <!-- 主题切换 -->
+                        <button class="theme-toggle" title="切换主题">
+                            <span data-theme-icon>🌙</span>
+                        </button>
+                        <!-- 语言切换 -->
+                        <button class="language-toggle" title="切换语言">EN</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 主要内容 -->
+        <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+            <!-- 页面头部 -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold text-primary" data-i18n="edgeai.modelManager.myModelLibrary">我的模型库</h2>
+                        <p class="text-secondary mt-1" data-i18n="edgeai.modelManager.manageAndViewSavedModels">管理和查看您保存的AI模型</p>
+                    </div>
+                    <button onclick="showAddModelModal()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        <span data-i18n="edgeai.modelManager.addModel">添加模型</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 搜索和筛选 -->
+            <div class="card mb-8 fade-in-up">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label for="searchModel" class="block text-sm font-medium mb-2 text-secondary" data-i18n="edgeai.modelManager.searchModel">搜索模型</label>
+                        <input type="text" id="searchModel" data-i18n-placeholder="edgeai.modelManager.searchModelPlaceholder" placeholder="输入模型名称..." 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               oninput="filterModels()">
+                    </div>
+                    <div>
+                        <label for="filterSize" class="block text-sm font-medium mb-2 text-secondary" data-i18n="edgeai.modelManager.sizeFilter">按大小筛选</label>
+                        <select id="filterSize" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" onchange="filterModels()">
+                            <option value="" data-i18n="edgeai.modelManager.allSizes">全部大小</option>
+                            <option value="small" data-i18n="edgeai.modelManager.smallSize">小型 (<100MB)</option>
+                            <option value="medium" data-i18n="edgeai.modelManager.mediumSize">中型 (100MB-1GB)</option>
+                            <option value="large" data-i18n="edgeai.modelManager.largeSize">大型 (>1GB)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="sortBy" class="block text-sm font-medium mb-2 text-secondary" data-i18n="edgeai.modelManager.sortBy">排序方式</label>
+                        <select id="sortBy" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" onchange="sortModels()">
+                            <option value="name" data-i18n="edgeai.modelManager.byName">按名称</option>
+                            <option value="size" data-i18n="edgeai.modelManager.bySize">按大小</option>
+                            <option value="created" data-i18n="edgeai.modelManager.byDate">按创建时间</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 模型列表 -->
+            <div class="space-y-6" id="modelsList">
+                <!-- 模型项目将通过JavaScript动态生成 -->
+            </div>
+
+            <!-- 空状态 -->
+            <div class="text-center py-12 hidden" id="emptyState">
+                <div class="w-24 h-24 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+                    <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mb-2" data-i18n="edgeai.modelManager.noModelsYet">还没有模型</h3>
+                <p class="text-gray-600 mb-6" data-i18n="edgeai.modelManager.startAddingModels">开始添加您的第一个AI模型到库中</p>
+                <button onclick="showAddModelModal()" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                    <span data-i18n="edgeai.modelManager.addFirstModel">添加第一个模型</span>
+                </button>
+            </div>
+            </div>
+        </div>
+
+        <!-- 添加模型模态框 -->
+        <div class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden" id="addModelModal">
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="card max-w-4xl w-full max-h-screen overflow-y-auto">
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xl font-semibold text-primary" data-i18n="edgeai.modelManager.addNewModel">添加新模型</h3>
+                            <button onclick="hideAddModelModal()" class="text-tertiary hover:opacity-70">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <form id="addModelForm" onsubmit="addModel(event)" class="space-y-6">
+                            <div>
+                                <label for="modelName" class="block text-sm font-medium mb-2 text-secondary" data-i18n="edgeai.modelManager.modelName">模型名称 *</label>
+                                <input type="text" id="modelName" required 
+                                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       data-i18n-placeholder="ResNet-50图像分类模型" placeholder="例如：ResNet-50 图像分类模型">
+                            </div>
+
+                            <div>
+                                <label for="modelPath" class="block text-sm font-medium mb-2 text-secondary" data-i18n="edgeai.modelManager.modelPath">模型本地地址 *</label>
+                                <div class="flex space-x-2">
+                                    <input type="text" id="modelPath" required 
+                                           class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                           placeholder="/Users/username/models/resnet50.h5">
+                                    <button type="button" onclick="browseModelPath()" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                                        <span data-i18n="edgeai.modelManager.browse">浏览</span>
+                                    </button>
+                                </div>
+                                <p class="text-sm mt-1 text-tertiary" data-i18n="edgeai.modelManager.supportedFormats">支持格式: .h5, .pb, .pth, .onnx, .pkl</p>
+                            </div>
+
+                            <div>
+                                <label for="modelSize" class="block text-sm font-medium mb-2 text-secondary" data-i18n="edgeai.modelManager.modelSize">模型大小</label>
+                                <div class="flex space-x-2">
+                                    <input type="number" id="modelSizeValue" step="0.1" min="0"
+                                           class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                           placeholder="123.5">
+                                    <select id="modelSizeUnit" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <option value="MB">MB</option>
+                                        <option value="GB">GB</option>
+                                        <option value="KB">KB</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="modelType" class="block text-sm font-medium mb-2 text-secondary" data-i18n="edgeai.modelManager.modelType">模型类型</label>
+                                <select id="modelType" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option value="" data-i18n="edgeai.modelManager.selectModelType">请选择模型类型</option>
+                                    <option value="classification" data-i18n="edgeai.modelManager.imageClassification">图像分类</option>
+                                    <option value="detection" data-i18n="edgeai.modelManager.objectDetection">目标检测</option>
+                                    <option value="segmentation" data-i18n="edgeai.modelManager.imageSegmentation">图像分割</option>
+                                    <option value="nlp" data-i18n="edgeai.modelManager.naturalLanguageProcessing">自然语言处理</option>
+                                    <option value="regression" data-i18n="edgeai.modelManager.regressionPrediction">回归预测</option>
+                                    <option value="clustering" data-i18n="edgeai.modelManager.clusteringAnalysis">聚类分析</option>
+                                    <option value="other" data-i18n="edgeai.modelManager.other">其他</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="modelDescription" class="block text-sm font-medium mb-2 text-secondary" data-i18n="edgeai.modelManager.modelDescription">模型描述</label>
+                                <textarea id="modelDescription" rows="4" 
+                                          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                          data-i18n-placeholder="edgeai.modelManager.modelDescriptionPlaceholder" placeholder="描述模型的功能、用途、训练数据集、性能指标等..."></textarea>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="modelFramework" class="block text-sm font-medium mb-2 text-secondary" data-i18n="edgeai.modelManager.framework">框架</label>
+                                    <select id="modelFramework" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <option value="" data-i18n="edgeai.modelManager.selectFramework">请选择框架</option>
+                                        <option value="tensorflow">TensorFlow</option>
+                                        <option value="pytorch">PyTorch</option>
+                                        <option value="keras">Keras</option>
+                                        <option value="onnx">ONNX</option>
+                                        <option value="scikit-learn">Scikit-learn</option>
+                                        <option value="other" data-i18n="edgeai.modelManager.other">其他</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="modelVersion" class="block text-sm font-medium mb-2 text-secondary" data-i18n="edgeai.modelManager.version">版本</label>
+                                    <input type="text" id="modelVersion" 
+                                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                           data-i18n-placeholder="edgeai.modelManager.versionPlaceholder" placeholder="例如：v1.0.0">
+                                </div>
+                            </div>
+
+                            <div class="flex justify-end space-x-3 pt-6">
+                                <button type="button" onclick="hideAddModelModal()" class="px-6 py-2 border rounded-lg transition-colors border-primary text-secondary">
+                                    <span data-i18n="common.cancel">取消</span>
+                                </button>
+                                <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                    <span data-i18n="edgeai.modelManager.addModel">添加模型</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../shared/js/navigation-unified.js"></script>
+    <script src="../../shared/js/theme-manager-unified.js"></script>
+    <script src="../../shared/js/i18n-manager.js?v=1756665500"></script>
+    <script>
+        // 模型管理系统
+        class ModelManager {
+            constructor() {
+                this.models = this.loadModels();
+                this.filteredModels = [...this.models];
+                this.init();
+            }
+
+            init() {
+                // 等待一点时间确保所有脚本加载完成
+                setTimeout(() => {
+                    try {
+                        this.renderModels();
+                        this.updateEmptyState();
+                        if (window.i18nManager) {
+                            window.i18nManager.applyTranslations();
+                        }
+                    } catch (error) {
+                        console.error('模型管理器初始化失败:', error);
+                        // 降级显示，使用简单的中文文本
+                        this.renderModelsSimple();
+                    }
+                }, 200);
+            }
+
+            // 从localStorage加载模型
+            loadModels() {
+                const saved = localStorage.getItem('edgeai_models');
+                if (saved) {
+                    return JSON.parse(saved);
+                }
+                
+                // 返回示例数据
+                return [
+                    {
+                        id: '1',
+                        name: 'ResNet-50 图像分类',
+                        path: '/Users/models/resnet50.h5',
+                        size: '102.4 MB',
+                        sizeBytes: 107374182,
+                        type: 'classification',
+                        framework: 'tensorflow',
+                        version: 'v1.0.0',
+                        description: '基于ImageNet预训练的ResNet-50模型，适用于1000类图像分类任务。准确率达到76.5%。',
+                        created: new Date('2024-01-15').toISOString()
+                    },
+                    {
+                        id: '2',
+                        name: 'BERT-Base 中文NLP',
+                        path: '/Users/models/bert-base-chinese.pth',
+                        size: '412.8 MB',
+                        sizeBytes: 432734502,
+                        type: 'nlp',
+                        framework: 'pytorch',
+                        version: 'v2.1.0',
+                        description: '中文BERT基础模型，支持文本分类、情感分析、命名实体识别等NLP任务。',
+                        created: new Date('2024-01-20').toISOString()
+                    },
+                    {
+                        id: '3',
+                        name: 'YOLOv5 目标检测',
+                        path: '/Users/models/yolov5s.pt',
+                        size: '14.1 MB',
+                        sizeBytes: 14787584,
+                        type: 'detection',
+                        framework: 'pytorch',
+                        version: 'v6.0',
+                        description: '轻量级目标检测模型，可检测80类常见物体，推理速度快，适合实时应用。',
+                        created: new Date('2024-02-01').toISOString()
+                    }
+                ];
+            }
+
+            // 保存模型到localStorage
+            saveModels() {
+                localStorage.setItem('edgeai_models', JSON.stringify(this.models));
+            }
+
+            // 渲染模型列表
+            renderModels() {
+                const container = document.getElementById('modelsList');
+                
+                if (this.filteredModels.length === 0) {
+                    container.innerHTML = '';
+                    this.updateEmptyState();
+                    return;
+                }
+
+                container.innerHTML = this.filteredModels.map(model => this.renderModelCard(model)).join('');
+                this.updateEmptyState();
+            }
+
+            // 简化渲染函数（降级方案）
+            renderModelsSimple() {
+                const container = document.getElementById('modelsList');
+                
+                if (this.filteredModels.length === 0) {
+                    container.innerHTML = '';
+                    this.updateEmptyState();
+                    return;
+                }
+
+                const simpleHtml = this.filteredModels.map(model => `
+                    <div class="card" style="border: 1px solid #e5e5e5; padding: 20px; margin-bottom: 16px; border-radius: 8px;">
+                        <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 12px;">${model.name}</h3>
+                        <p><strong>路径:</strong> ${model.path}</p>
+                        <p><strong>大小:</strong> ${model.size}</p>
+                        <p><strong>类型:</strong> ${model.type || '未指定'}</p>
+                        <p><strong>框架:</strong> ${model.framework || '未指定'}</p>
+                        <p><strong>版本:</strong> ${model.version || '未指定'}</p>
+                        ${model.description ? `<p><strong>描述:</strong> ${model.description}</p>` : ''}
+                        <p><strong>创建时间:</strong> ${new Date(model.created).toLocaleString()}</p>
+                        <div style="margin-top: 12px;">
+                            <button onclick="viewModelDetails('${model.id}')" style="background: #3b82f6; color: white; padding: 6px 12px; border: none; border-radius: 4px; margin-right: 8px;">查看详情</button>
+                            <button onclick="useModel('${model.id}')" style="background: #10b981; color: white; padding: 6px 12px; border: none; border-radius: 4px;">使用模型</button>
+                        </div>
+                    </div>
+                `).join('');
+                
+                container.innerHTML = simpleHtml;
+                this.updateEmptyState();
+            }
+
+            // 渲染单个模型卡片
+            renderModelCard(model) {
+                const typeColors = {
+                    'classification': 'bg-blue-100 text-blue-800',
+                    'detection': 'bg-green-100 text-green-800',
+                    'segmentation': 'bg-purple-100 text-purple-800',
+                    'nlp': 'bg-orange-100 text-orange-800',
+                    'regression': 'bg-red-100 text-red-800',
+                    'clustering': 'bg-cyan-100 text-cyan-800',
+                    'other': 'bg-gray-100 text-gray-800'
+                };
+
+                // 安全的i18n调用函数
+                const safeT = (key, fallback) => {
+                    try {
+                        return (window.i18nManager && window.i18nManager.t) ? window.i18nManager.t(key) : fallback;
+                    } catch (error) {
+                        console.warn(`i18n translation failed for key: ${key}`, error);
+                        return fallback;
+                    }
+                };
+
+                const typeNames = {
+                    'classification': safeT('edgeai.modelManager.imageClassification', '图像分类'),
+                    'detection': safeT('edgeai.modelManager.objectDetection', '目标检测'),
+                    'segmentation': safeT('edgeai.modelManager.imageSegmentation', '图像分割'),
+                    'nlp': safeT('edgeai.modelManager.naturalLanguageProcessing', '自然语言处理'),
+                    'regression': safeT('edgeai.modelManager.regressionPrediction', '回归预测'),
+                    'clustering': safeT('edgeai.modelManager.clusteringAnalysis', '聚类分析'),
+                    'other': safeT('edgeai.modelManager.other', '其他')
+                };
+
+                const frameworkNames = {
+                    'tensorflow': 'TensorFlow',
+                    'pytorch': 'PyTorch',
+                    'keras': 'Keras',
+                    'onnx': 'ONNX',
+                    'scikit-learn': 'Scikit-learn',
+                    'other': safeT('edgeai.modelManager.other', '其他')
+                };
+
+                return `
+                    <div class="card fade-in-up hover:shadow-xl transition-shadow">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-xl font-semibold text-primary">${model.name}</h3>
+                                    <div class="flex space-x-2">
+                                        <button onclick="editModel('${model.id}')" class="text-blue-600 hover:text-blue-800 transition-colors" title="编辑">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                            </svg>
+                                        </button>
+                                        <button onclick="deleteModel('${model.id}')" class="text-red-600 hover:text-red-800 transition-colors" title="删除">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex flex-wrap items-center gap-2 mb-3">
+                                    ${model.type ? `<span class="px-2 py-1 text-xs font-medium rounded-full ${typeColors[model.type] || typeColors['other']}">${typeNames[model.type] || model.type}</span>` : ''}
+                                    ${model.framework ? `<span class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">${frameworkNames[model.framework] || model.framework}</span>` : ''}
+                                    ${model.version ? `<span class="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-600 rounded-full">${model.version}</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <p class="text-sm mb-1 text-tertiary">${safeT('edgeai.modelManager.modelPathLabel', '模型路径')}</p>
+                                <p class="text-sm font-mono p-2 rounded break-all text-primary bg-tertiary">${model.path}</p>
+                            </div>
+                            <div>
+                                <p class="text-sm mb-1 text-tertiary">${safeT('edgeai.modelManager.modelSizeLabel', '模型大小')}</p>
+                                <p class="text-sm font-semibold text-primary">${model.size}</p>
+                            </div>
+                        </div>
+
+                        ${model.description ? `
+                            <div class="mb-4">
+                                <p class="text-sm mb-1 text-tertiary">${safeT('edgeai.modelManager.descriptionLabel', '描述')}</p>
+                                <p class="text-sm text-secondary">${model.description}</p>
+                            </div>
+                        ` : ''}
+
+                        <div class="flex justify-between items-center pt-4 border-t border-primary">
+                            <div class="flex items-center text-xs text-tertiary">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                ${safeT('edgeai.modelManager.createdOn', '创建于')} ${new Date(model.created).toLocaleDateString()}
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="viewModelDetails('${model.id}')" class="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition-colors">
+                                    ${safeT('edgeai.modelManager.viewDetails', '查看详情')}
+                                </button>
+                                <button onclick="useModel('${model.id}')" class="px-3 py-1 text-xs bg-green-100 text-green-700 rounded-full hover:bg-green-200 transition-colors">
+                                    ${safeT('edgeai.modelManager.useModel', '使用模型')}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // 更新空状态显示
+            updateEmptyState() {
+                const emptyState = document.getElementById('emptyState');
+                const modelsList = document.getElementById('modelsList');
+                
+                if (this.filteredModels.length === 0) {
+                    emptyState.classList.remove('hidden');
+                    modelsList.classList.add('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                    modelsList.classList.remove('hidden');
+                }
+            }
+
+            // 添加模型
+            addModel(modelData) {
+                const newModel = {
+                    id: Date.now().toString(),
+                    created: new Date().toISOString(),
+                    ...modelData
+                };
+
+                this.models.unshift(newModel);
+                this.saveModels();
+                this.filterModels();
+                
+                return newModel;
+            }
+
+            // 删除模型
+            deleteModel(id) {
+                this.models = this.models.filter(model => model.id !== id);
+                this.saveModels();
+                this.filterModels();
+            }
+
+            // 筛选模型
+            filterModels() {
+                const searchTerm = document.getElementById('searchModel').value.toLowerCase();
+                const sizeFilter = document.getElementById('filterSize').value;
+                
+                this.filteredModels = this.models.filter(model => {
+                    const matchesSearch = model.name.toLowerCase().includes(searchTerm) ||
+                                        model.description.toLowerCase().includes(searchTerm);
+                    
+                    let matchesSize = true;
+                    if (sizeFilter) {
+                        const sizeBytes = model.sizeBytes || 0;
+                        switch(sizeFilter) {
+                            case 'small':
+                                matchesSize = sizeBytes < 100 * 1024 * 1024; // <100MB
+                                break;
+                            case 'medium':
+                                matchesSize = sizeBytes >= 100 * 1024 * 1024 && sizeBytes < 1024 * 1024 * 1024; // 100MB-1GB
+                                break;
+                            case 'large':
+                                matchesSize = sizeBytes >= 1024 * 1024 * 1024; // >1GB
+                                break;
+                        }
+                    }
+                    
+                    return matchesSearch && matchesSize;
+                });
+
+                this.sortModels();
+            }
+
+            // 排序模型
+            sortModels() {
+                const sortBy = document.getElementById('sortBy').value;
+                
+                this.filteredModels.sort((a, b) => {
+                    switch(sortBy) {
+                        case 'name':
+                            return a.name.localeCompare(b.name);
+                        case 'size':
+                            return (b.sizeBytes || 0) - (a.sizeBytes || 0);
+                        case 'created':
+                            return new Date(b.created) - new Date(a.created);
+                        default:
+                            return 0;
+                    }
+                });
+
+                this.renderModels();
+            }
+        }
+
+        // 全局变量
+        let modelManager;
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            modelManager = new ModelManager();
+        });
+
+        // 全局函数
+        function showAddModelModal() {
+            document.getElementById('addModelModal').classList.remove('hidden');
+        }
+
+        function hideAddModelModal() {
+            document.getElementById('addModelModal').classList.add('hidden');
+            document.getElementById('addModelForm').reset();
+        }
+
+        function browseModelPath() {
+            // 模拟文件浏览器（在实际应用中可以使用文件选择对话框）
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.h5,.pb,.pth,.onnx,.pkl,.pt,.model,.weights';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    document.getElementById('modelPath').value = file.name;
+                    // 自动计算文件大小
+                    const sizeInMB = (file.size / (1024 * 1024)).toFixed(1);
+                    document.getElementById('modelSizeValue').value = sizeInMB;
+                    document.getElementById('modelSizeUnit').value = 'MB';
+                }
+            };
+            input.click();
+        }
+
+        function addModel(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const sizeValue = parseFloat(document.getElementById('modelSizeValue').value) || 0;
+            const sizeUnit = document.getElementById('modelSizeUnit').value;
+            
+            // 计算字节数
+            let sizeBytes = sizeValue;
+            switch(sizeUnit) {
+                case 'KB':
+                    sizeBytes *= 1024;
+                    break;
+                case 'MB':
+                    sizeBytes *= 1024 * 1024;
+                    break;
+                case 'GB':
+                    sizeBytes *= 1024 * 1024 * 1024;
+                    break;
+            }
+
+            const modelData = {
+                name: document.getElementById('modelName').value,
+                path: document.getElementById('modelPath').value,
+                size: sizeValue > 0 ? `${sizeValue} ${sizeUnit}` : (window.i18nManager ? window.i18nManager.t('edgeai.modelManager.unknownSize') : '未知'),
+                sizeBytes: sizeBytes,
+                type: document.getElementById('modelType').value,
+                framework: document.getElementById('modelFramework').value,
+                version: document.getElementById('modelVersion').value,
+                description: document.getElementById('modelDescription').value
+            };
+
+            const newModel = modelManager.addModel(modelData);
+            hideAddModelModal();
+            
+            // 显示成功消息
+            const successMsg = window.i18nManager ? 
+                window.i18nManager.t('edgeai.modelManager.modelAddedSuccess').replace('{name}', newModel.name) : 
+                `模型 "${newModel.name}" 添加成功！`;
+            alert(successMsg);
+        }
+
+        function filterModels() {
+            modelManager.filterModels();
+        }
+
+        function sortModels() {
+            modelManager.sortModels();
+        }
+
+        function editModel(id) {
+            const model = modelManager.models.find(m => m.id === id);
+            if (!model) return;
+            
+            // 填充表单数据
+            document.getElementById('modelName').value = model.name;
+            document.getElementById('modelPath').value = model.path;
+            document.getElementById('modelType').value = model.type || '';
+            document.getElementById('modelFramework').value = model.framework || '';
+            document.getElementById('modelVersion').value = model.version || '';
+            document.getElementById('modelDescription').value = model.description || '';
+            
+            // 解析大小
+            if (model.size && model.size !== '未知') {
+                const sizeMatch = model.size.match(/^([\d.]+)\s*(\w+)$/);
+                if (sizeMatch) {
+                    document.getElementById('modelSizeValue').value = sizeMatch[1];
+                    document.getElementById('modelSizeUnit').value = sizeMatch[2];
+                }
+            }
+            
+            // 修改表单提交处理
+            const form = document.getElementById('addModelForm');
+            form.onsubmit = function(event) {
+                event.preventDefault();
+                
+                const sizeValue = parseFloat(document.getElementById('modelSizeValue').value) || 0;
+                const sizeUnit = document.getElementById('modelSizeUnit').value;
+                
+                let sizeBytes = sizeValue;
+                switch(sizeUnit) {
+                    case 'KB':
+                        sizeBytes *= 1024;
+                        break;
+                    case 'MB':
+                        sizeBytes *= 1024 * 1024;
+                        break;
+                    case 'GB':
+                        sizeBytes *= 1024 * 1024 * 1024;
+                        break;
+                }
+
+                // 更新模型数据
+                Object.assign(model, {
+                    name: document.getElementById('modelName').value,
+                    path: document.getElementById('modelPath').value,
+                    size: sizeValue > 0 ? `${sizeValue} ${sizeUnit}` : (window.i18nManager ? window.i18nManager.t('edgeai.modelManager.unknownSize') : '未知'),
+                    sizeBytes: sizeBytes,
+                    type: document.getElementById('modelType').value,
+                    framework: document.getElementById('modelFramework').value,
+                    version: document.getElementById('modelVersion').value,
+                    description: document.getElementById('modelDescription').value
+                });
+
+                modelManager.saveModels();
+                modelManager.filterModels();
+                hideAddModelModal();
+                
+                // 恢复原始提交处理
+                form.onsubmit = addModel;
+                
+                const updateMsg = window.i18nManager ? 
+                    window.i18nManager.t('edgeai.modelManager.modelUpdatedSuccess').replace('{name}', model.name) : 
+                    `模型 "${model.name}" 更新成功！`;
+                alert(updateMsg);
+            };
+            
+            showAddModelModal();
+        }
+
+        function deleteModel(id) {
+            const model = modelManager.models.find(m => m.id === id);
+            if (!model) return;
+            
+            const confirmMsg = window.i18nManager ? 
+                window.i18nManager.t('edgeai.modelManager.confirmDelete').replace('{name}', model.name) : 
+                `确定要删除模型 "${model.name}" 吗？此操作不可撤销。`;
+            if (confirm(confirmMsg)) {
+                modelManager.deleteModel(id);
+                const deleteMsg = window.i18nManager ? window.i18nManager.t('edgeai.modelManager.modelDeletedSuccess') : '模型删除成功！';
+                alert(deleteMsg);
+            }
+        }
+
+        function viewModelDetails(id) {
+            const model = modelManager.models.find(m => m.id === id);
+            if (!model) return;
+            
+            const detailsMsg = window.i18nManager ? 
+                window.i18nManager.t('edgeai.modelManager.modelDetailsText')
+                    .replace('{name}', model.name)
+                    .replace('{path}', model.path)
+                    .replace('{size}', model.size)
+                    .replace('{type}', model.type || window.i18nManager.t('edgeai.modelManager.unspecified'))
+                    .replace('{framework}', model.framework || window.i18nManager.t('edgeai.modelManager.unspecified'))
+                    .replace('{version}', model.version || window.i18nManager.t('edgeai.modelManager.unspecified'))
+                    .replace('{created}', new Date(model.created).toLocaleString())
+                    .replace('{description}', model.description || window.i18nManager.t('edgeai.modelManager.noDescription')) :
+                `模型详情：\n\n名称：${model.name}\n路径：${model.path}\n大小：${model.size}\n类型：${model.type || '未指定'}\n框架：${model.framework || '未指定'}\n版本：${model.version || '未指定'}\n创建时间：${new Date(model.created).toLocaleString()}\n\n描述：${model.description || '无描述'}`;
+            alert(detailsMsg);
+        }
+
+        function useModel(id) {
+            const model = modelManager.models.find(m => m.id === id);
+            if (!model) return;
+            
+            const useMsg = window.i18nManager ? 
+                window.i18nManager.t('edgeai.modelManager.useModelText').replace('{name}', model.name) :
+                `使用模型 "${model.name}"\n\n功能开发中，即将支持：\n- 模型推理测试\n- 性能基准测试\n- 导出到训练项目\n- 模型部署`;
+            alert(useMsg);
+        }
+
+        // 模态框点击外部关闭
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('addModelModal');
+            if (event.target === modal) {
+                hideAddModelModal();
+            }
+        });
+
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modal = document.getElementById('addModelModal');
+                if (!modal.classList.contains('hidden')) {
+                    hideAddModelModal();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+/**
+ * AI模块专用样式 - 优化版
+ * 只包含AI模块特有的样式，重复样式已移至共享文件
+ */
+
+/* ====================== AI模块颜色变量 ====================== */
+:root {
+    --module-primary: #667eea;
+    --module-primary-dark: #5a67d8;
+    --module-secondary: #764ba2;
+    --module-accent: #e0e7ff;
+    --module-light: #f0f4ff;
+    --ai-success: #10b981;
+    --ai-warning: #f59e0b;
+    --ai-error: #ef4444;
+    --ai-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --ai-gradient-light: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+}
+
+/* ====================== AI特色样式 ====================== */
+.ai-hero-section {
+    background: var(--ai-gradient);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ====================== 训练状态指示器 ====================== */
+.training-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.training-status.active {
+    background: rgba(16, 185, 129, 0.1);
+    color: #065f46;
+}
+
+.training-status.pending {
+    background: rgba(245, 158, 11, 0.1);
+    color: #92400e;
+}
+
+.training-status.completed {
+    background: rgba(59, 130, 246, 0.1);
+    color: #1e40af;
+}
+
+.training-status.failed {
+    background: rgba(239, 68, 68, 0.1);
+    color: #991b1b;
+}
+
+/* ====================== 模型卡片 ====================== */
+.model-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.model-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--ai-gradient);
+}
+
+.model-performance {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.performance-metric {
+    text-align: center;
+}
+
+.performance-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--module-primary);
+    display: block;
+}
+
+.performance-label {
+    font-size: 12px;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ====================== 联邦学习节点 ====================== */
+.federation-nodes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.node-card {
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.node-card.online {
+    border-color: #10b981;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(16, 185, 129, 0.1) 100%);
+}
+
+.node-card.offline {
+    border-color: #ef4444;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(239, 68, 68, 0.1) 100%);
+}
+
+.node-status {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.node-status.online {
+    background: #10b981;
+    animation: pulse 2s infinite;
+}
+
+.node-status.offline {
+    background: #ef4444;
+}
+
+/* ====================== 训练进度 ====================== */
+.training-progress {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--module-primary);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.progress-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.progress-percentage {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--module-primary);
+}
+
+.epoch-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* ====================== 数据集可视化 ====================== */
+.dataset-preview {
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 1px dashed #d1d5db;
+    transition: all 0.3s ease;
+}
+
+.dataset-preview:hover {
+    border-color: var(--module-primary);
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.dataset-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.dataset-stat {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--module-primary);
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 0.25rem;
+}
+
+/* ====================== 响应式设计 ====================== */
+@media (max-width: 768px) {
+    .ai-hero-section {
+        padding: 3rem 1rem;
+    }
+    
+    .federation-nodes {
+        grid-template-columns: 1fr;
+    }
+    
+    .model-performance {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ====================== 暗色模式 ====================== */
+[data-theme="dark"] .training-progress {
+    background: #1f2937;
+    border-color: var(--module-primary);
+}
+
+[data-theme="dark"] .progress-title {
+    color: #f9fafb;
+}
+
+[data-theme="dark"] .dataset-preview {
+    background: #374151;
+    border-color: #4b5563;
+}
+
+[data-theme="dark"] .dataset-preview:hover {
+    background: rgba(102, 126, 234, 0.1);
+    border-color: var(--module-primary);
+}
+
+[data-theme="dark"] .node-card {
+    background: #374151;
+    border-color: #4b5563;
+}
+
+[data-theme="dark"] .node-card.online {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.2) 100%);
+}
+
+[data-theme="dark"] .node-card.offline {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.2) 100%);
+}

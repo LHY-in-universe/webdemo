@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-i18n-title="ai.dashboard.server.title">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务器控制台</title>
+    <!-- ==================== 防白闪脚本 ==================== -->
+    <script>
+        (function() {
+            'use strict';
+            try {
+                // 获取保存的主题或系统偏好
+                const savedTheme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+                
+                // 立即设置主题属性到html元素
+                document.documentElement.setAttribute('data-theme', theme);
+                
+                // 立即设置基础背景色防止白闪
+                if (theme === 'dark') {
+                    document.documentElement.style.backgroundColor = '#1f2937';
+                    document.documentElement.style.color = '#f9fafb';
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.style.backgroundColor = '#ffffff';
+                    document.documentElement.style.color = '#1f2937';
+                    document.documentElement.classList.remove('dark');
+                }
+                
+                console.log('🎨 防白闪: 主题已设置为', theme);
+                
+            } catch (error) {
+                console.warn('⚠️ 防白闪脚本失败:', error);
+                // 降级到深色主题作为默认
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.documentElement.style.backgroundColor = '#1f2937';
+                document.documentElement.style.color = '#f9fafb';
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+    
+    <!-- ==================== 关键CSS预加载 ==================== -->
+    <style>
+        /* 防止白闪的关键样式 */
+        html[data-theme="dark"] {
+            background-color: #1f2937 !important;
+            color: #f9fafb !important;
+        }
+        html[data-theme="light"] {
+            background-color: #ffffff !important;
+            color: #1f2937 !important;
+        }
+        
+        /* 确保body继承正确的背景 */
+        html[data-theme="dark"] body {
+            background-color: #1f2937 !important;
+            color: #f9fafb !important;
+        }
+        html[data-theme="light"] body {
+            background-color: #ffffff !important;
+            color: #1f2937 !important;
+        }
+        
+        /* 平滑过渡 */
+        html, body {
+            transition: background-color 0.3s ease, color 0.3s ease !important;
+        }
+    </style>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../../shared/css/unified-styles.css?v=1756673001">
+    
+    <link rel="stylesheet" href="../assets/ai-styles.css?v=20250901">
+    <link rel="stylesheet" href="../assets/server-dashboard-styles.css?v=20250901">
+    <style>
+        /* AI服务器控制台深色模式样式 */
+        [data-theme="dark"] .module-card {
+            background: rgba(31, 41, 55, 0.8) !important;
+            border: 1px solid rgba(75, 85, 99, 0.4) !important;
+        }
+        
+        [data-theme="dark"] .bg-blue-50 {
+            background: rgba(59, 130, 246, 0.2) !important;
+        }
+        
+        [data-theme="dark"] .bg-green-50 {
+            background: rgba(34, 197, 94, 0.2) !important;
+        }
+        
+        [data-theme="dark"] .bg-orange-50 {
+            background: rgba(249, 115, 22, 0.2) !important;
+        }
+        
+        [data-theme="dark"] .bg-yellow-50 {
+            background: rgba(245, 158, 11, 0.2) !important;
+        }
+        
+        [data-theme="dark"] .bg-gray-50 {
+            background: rgba(55, 65, 81, 0.6) !important;
+        }
+        
+        /* 修夏按钮背景 */
+        [data-theme="dark"] .btn-module-primary {
+            background: rgba(59, 130, 246, 0.8) !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(59, 130, 246, 0.4) !important;
+        }
+        
+        [data-theme="dark"] .btn-module-secondary {
+            background: rgba(55, 65, 81, 0.8) !important;
+            color: #d1d5db !important;
+            border: 1px solid rgba(107, 114, 128, 0.3) !important;
+        }
+        
+        [data-theme="dark"] .btn-mini.primary {
+            background: rgba(59, 130, 246, 0.8) !important;
+            color: #ffffff !important;
+            border: none !important;
+        }
+        
+        [data-theme="dark"] .btn-mini.secondary {
+            background: rgba(55, 65, 81, 0.8) !important;
+            color: #d1d5db !important;
+            border: none !important;
+        }
+        
+        /* 修夏徽章背景 */
+        [data-theme="dark"] .bg-green-100 {
+            background: rgba(34, 197, 94, 0.2) !important;
+            color: #86efac !important;
+        }
+        
+        [data-theme="dark"] .bg-orange-100 {
+            background: rgba(249, 115, 22, 0.2) !important;
+            color: #fdba74 !important;
+        }
+        
+        [data-theme="dark"] .bg-blue-100 {
+            background: rgba(59, 130, 246, 0.2) !important;
+            color: #93c5fd !important;
+        }
+        
+        [data-theme="dark"] .bg-yellow-100 {
+            background: rgba(245, 158, 11, 0.2) !important;
+            color: #fbbf24 !important;
+        }
+        
+        [data-theme="dark"] .bg-gray-100 {
+            background: rgba(75, 85, 99, 0.4) !important;
+            color: #d1d5db !important;
+        }
+        
+        /* 修夏文字颜色 */
+        [data-theme="dark"] .text-green-800 {
+            color: #86efac !important;
+        }
+        
+        [data-theme="dark"] .text-orange-800 {
+            color: #fdba74 !important;
+        }
+        
+        [data-theme="dark"] .text-blue-800 {
+            color: #93c5fd !important;
+        }
+        
+        [data-theme="dark"] .text-yellow-800 {
+            color: #fbbf24 !important;
+        }
+        
+        [data-theme="dark"] .text-gray-600 {
+            color: #d1d5db !important;
+        }
+        
+        [data-theme="dark"] .text-blue-600 {
+            color: #93c5fd !important;
+        }
+        
+        /* 修夏进度条 */
+        [data-theme="dark"] .bg-gray-200 {
+            background: rgba(75, 85, 99, 0.6) !important;
+        }
+        
+        /* 浅色模式按钮样式 */
+        .btn-module-primary {
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .btn-module-secondary {
+            border: 1px solid rgba(107, 114, 128, 0.2);
+        }
+        
+        /* 修夏模态框 */
+        .modal-container {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        [data-theme="dark"] .modal-container {
+            background: rgba(31, 41, 55, 0.95) !important;
+            border: 1px solid rgba(75, 85, 99, 0.4) !important;
+        }
+        
+        [data-theme="dark"] .modal-header {
+            background: rgba(55, 65, 81, 0.8) !important;
+            border-bottom: none !important;
+        }
+        
+        [data-theme="dark"] .modal-title {
+            color: #f9fafb !important;
+        }
+        
+        [data-theme="dark"] .modal-close {
+            color: #d1d5db !important;
+        }
+        
+        [data-theme="dark"] .modal-close:hover {
+            color: #f9fafb !important;
+        }
+    </style>
+</head>
+<body class="module-background min-h-screen theme-transition">
+    <!-- 导航栏 -->
+    <nav class="navbar fixed top-0 left-0 right-0 z-40 fade-in-up">
+        <div class="max-w-7xl mx-auto flex items-center justify-between px-6">
+            <div class="navbar-brand">
+                <span data-i18n="ai.dashboard.server.title">服务器控制台</span>
+            </div>
+            
+            <div class="navbar-nav flex items-center gap-4">
+                <span id="userInfo" class="text-sm text-gray-600"></span>
+                <button class="theme-toggle" title="切换主题">
+                    <span>🌙</span>
+                </button>
+                <button class="language-toggle" title="切换语言">EN</button>
+                <button onclick="logout()" class="btn-secondary text-sm btn-click" data-i18n="common.logout">退出登录</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <div class="pt-20 pb-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- 页面标题 -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+                    <span data-i18n="ai.dashboard.server.title">服务器控制台</span>
+                </h1>
+                <p class="text-gray-600 dark:text-gray-300 mt-2">
+                    <span data-i18n="ai.dashboard.server.subtitle">管理联邦学习服务器和客户端连接</span>
+                </p>
+            </div>
+
+            <!-- 系统状态概览 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="module-card rounded-xl cursor-pointer hover:scale-105 transition-transform fade-in-up delay-1 card-hover btn-click" onclick="viewSystemStatus()">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                                <span data-i18n="ai.dashboard.server.systemStatus">系统状态</span>
+                            </h3>
+                            <p class="text-2xl font-bold text-green-600" data-i18n="ai.dashboard.server.online">在线</p>
+                            <p class="text-sm text-gray-500" data-i18n="ai.dashboard.server.uptime">运行时间: 15天</p>
+                        </div>
+                        <div class="text-4xl">💻</div>
+                    </div>
+                </div>
+
+                <div class="module-card rounded-xl cursor-pointer hover:scale-105 transition-transform fade-in-up delay-2 card-hover btn-click" onclick="viewConnectedClients()">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                                <span data-i18n="ai.dashboard.server.connectedClients">连接客户端</span>
+                            </h3>
+                            <p class="text-2xl font-bold text-blue-600">8</p>
+                            <p class="text-sm text-gray-500" data-i18n="ai.dashboard.server.clientStatus">6在线, 1空闲, 1离线</p>
+                        </div>
+                        <div class="text-4xl">👥</div>
+                    </div>
+                </div>
+
+                <div class="module-card rounded-xl cursor-pointer hover:scale-105 transition-transform fade-in-up delay-3 card-hover btn-click" onclick="viewActiveSessions()">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                                <span data-i18n="ai.dashboard.server.activeSessions">活跃会话</span>
+                            </h3>
+                            <p class="text-2xl font-bold text-purple-600">3</p>
+                            <p class="text-sm text-gray-500" data-i18n="ai.dashboard.server.sessionStatus">1训练中, 1等待, 1MPC</p>
+                        </div>
+                        <div class="text-4xl">🔄</div>
+                    </div>
+                </div>
+
+                <div class="module-card rounded-xl cursor-pointer hover:scale-105 transition-transform fade-in-up delay-4 card-hover btn-click" onclick="viewPendingRequests()">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                                <span data-i18n="ai.dashboard.server.pendingRequests">待审核申请</span>
+                            </h3>
+                            <p class="text-2xl font-bold text-orange-600">5</p>
+                            <p class="text-sm text-gray-500" data-i18n="ai.dashboard.server.needsReview">需要审核处理</p>
+                        </div>
+                        <div class="text-4xl">📋</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 主要功能区 -->
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-8">
+                <!-- 模型管理 -->
+                <div class="module-card rounded-xl fade-in-up delay-5">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+                            <span data-i18n="ai.dashboard.server.modelManagement">模型管理</span>
+                        </h2>
+                        <button onclick="viewModelManagementDetails()" class="btn-module-secondary text-sm btn-click">
+                            <span data-i18n="ai.dashboard.server.viewDetails">查看详情</span>
+                        </button>
+                    </div>
+
+                    <!-- 当前活跃模型 -->
+                    <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl mb-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-blue-600 dark:text-blue-400 font-medium" data-i18n="ai.dashboard.server.currentActiveModel">当前活跃模型</p>
+                                <p class="font-semibold text-gray-900 dark:text-white" id="currentModelName" data-i18n="ai.dashboard.server.cnnImageClassificationModel">CNN图像分类模型 v2.1</p>
+                            </div>
+                            <button onclick="openModelSelectionModal()" class="btn-module-primary text-sm btn-click">
+                                <span data-i18n="ai.dashboard.server.switchModel">切换模型</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 模型列表 -->
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <span class="font-medium text-gray-900 dark:text-white" data-i18n="ai.dashboard.server.cnnImageModel">CNN图像分类模型</span>
+                                <span class="text-sm px-2 py-1 bg-green-100 text-green-800 rounded" data-i18n="ai.dashboard.server.active">活跃</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="viewModelDetails('model1')" class="btn-mini primary btn-click" data-i18n="ai.dashboard.server.details">详情</button>
+                                <button onclick="editModel('model1')" class="btn-mini secondary btn-click" data-i18n="ai.dashboard.server.edit">编辑</button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 bg-gray-400 rounded-full"></div>
+                                <span class="font-medium text-gray-900 dark:text-white" data-i18n="ai.dashboard.server.lstmTextModel">LSTM文本分析模型</span>
+                                <span class="text-sm px-2 py-1 bg-gray-100 text-gray-600 rounded" data-i18n="ai.dashboard.server.inactive">非活跃</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="activateModel('model2')" class="btn-mini primary btn-click" data-i18n="ai.dashboard.server.activate">激活</button>
+                                <button onclick="editModel('model2')" class="btn-mini secondary btn-click" data-i18n="ai.dashboard.server.edit">编辑</button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 bg-gray-400 rounded-full"></div>
+                                <span class="font-medium text-gray-900 dark:text-white" data-i18n="ai.dashboard.server.mlpRegressionModel">MLP回归预测模型</span>
+                                <span class="text-sm px-2 py-1 bg-gray-100 text-gray-600 rounded" data-i18n="ai.dashboard.server.inactive">非活跃</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="activateModel('model3')" class="btn-mini primary btn-click" data-i18n="ai.dashboard.server.activate">激活</button>
+                                <button onclick="deleteModel('model3')" class="btn-mini secondary btn-click" data-i18n="ai.dashboard.server.delete">删除</button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                            <div class="flex items-center gap-3">
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                <span class="font-medium text-gray-900 dark:text-white" data-i18n="ai.dashboard.server.recommendationSystemModel">推荐系统模型</span>
+                                <span class="text-sm px-2 py-1 bg-yellow-100 text-yellow-800 rounded" data-i18n="ai.dashboard.server.draft">草稿</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="editModel('model4')" class="btn-mini primary btn-click" data-i18n="ai.dashboard.server.refine">完善</button>
+                                <button onclick="deleteModel('model4')" class="btn-mini secondary btn-click" data-i18n="ai.dashboard.server.delete">删除</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
+                        <button onclick="openCreateModelModal()" class="btn-module-primary w-full btn-click">
+                            ➕ <span data-i18n="ai.dashboard.server.createNewModel">创建新模型</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 网络性能监控 -->
+                <div class="module-card rounded-xl fade-in-up delay-5">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-gray-900 dark:text-white">
+                            <span data-i18n="ai.dashboard.server.networkPerformance">网络性能监控</span>
+                        </h2>
+                        <button onclick="viewNetworkPerformanceDetails()" class="btn-module-secondary text-sm btn-click">
+                            <span data-i18n="ai.dashboard.server.viewDetails">查看详情</span>
+                        </button>
+                    </div>
+
+                    <div class="relative h-64 mb-4">
+                        <canvas id="networkChart"></canvas>
+                    </div>
+
+                    <div class="flex justify-center gap-6">
+                        <div class="text-center p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl" style="min-width: 120px; max-width: 140px;">
+                            <p class="text-sm text-blue-600 dark:text-blue-400" data-i18n="ai.dashboard.server.currentLatency">当前延迟</p>
+                            <p class="text-2xl font-bold text-blue-800 dark:text-blue-300">45ms</p>
+                        </div>
+                        <div class="text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-xl" style="min-width: 120px; max-width: 140px;">
+                            <p class="text-sm text-green-600 dark:text-green-400" data-i18n="ai.dashboard.server.bandwidthUsage">带宽使用率</p>
+                            <p class="text-2xl font-bold text-green-800 dark:text-green-300">65%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 管理功能区 -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- 待审核训练申请 -->
+                <div class="module-card rounded-xl cursor-pointer fade-in-up delay-6 card-hover btn-click" onclick="viewPendingTrainingRequests()">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                            <span data-i18n="ai.dashboard.server.pendingRequests">待审核训练申请</span>
+                        </h3>
+                        <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-sm font-medium">3</span>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl max-w-sm mx-auto">
+                            <p class="font-medium text-gray-900 dark:text-white text-sm" data-i18n="ai.dashboard.server.imageClassificationFederated">图像分类联邦训练</p>
+                            <p class="text-xs text-gray-600 dark:text-gray-400" data-i18n="ai.dashboard.server.client1Waiting35">client1 • 等待35分钟</p>
+                            <div class="flex gap-2 mt-2 justify-center">
+                                <button onclick="approveRequest('req1')" class="btn-mini primary btn-click" data-i18n="ai.dashboard.server.approve">批准</button>
+                                <button onclick="rejectRequest('req1')" class="btn-mini secondary btn-click" data-i18n="ai.dashboard.server.reject">拒绝</button>
+                            </div>
+                        </div>
+                        
+                        <div class="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl max-w-sm mx-auto">
+                            <p class="font-medium text-gray-900 dark:text-white text-sm" data-i18n="ai.dashboard.server.textAnalysisMPCTraining">文本分析MPC训练</p>
+                            <p class="text-xs text-gray-600 dark:text-gray-400" data-i18n="ai.dashboard.server.client2Waiting5">client2 • 等待5分钟</p>
+                            <div class="flex gap-2 mt-2 justify-center">
+                                <button onclick="approveRequest('req2')" class="btn-mini primary btn-click" data-i18n="ai.dashboard.server.approve">批准</button>
+                                <button onclick="rejectRequest('req2')" class="btn-mini secondary btn-click" data-i18n="ai.dashboard.server.reject">拒绝</button>
+                            </div>
+                        </div>
+
+                        <button class="text-sm text-blue-600 hover:text-blue-800 font-medium px-3 py-1 rounded bg-transparent hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors" data-i18n="ai.dashboard.server.viewAllRequests">查看所有申请 →</button>
+                    </div>
+                </div>
+
+                <!-- 活跃训练会话 -->
+                <div class="module-card rounded-xl cursor-pointer fade-in-up delay-6 card-hover btn-click" onclick="viewActiveTrainingSessionsDetails()">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                            <span data-i18n="ai.dashboard.server.activeSessions">活跃训练会话</span>
+                        </h3>
+                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm font-medium">3</span>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="p-3 bg-green-50 dark:bg-green-900/20 rounded-xl max-w-sm mx-auto">
+                            <p class="font-medium text-gray-900 dark:text-white text-sm" data-i18n="ai.dashboard.server.cnnFaultDetectionTitle">CNN故障检测</p>
+                            <p class="text-xs text-gray-600 dark:text-gray-400" data-i18n="ai.dashboard.server.participants5Progress">5个参与方 • 进度 45%</p>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                <div class="bg-green-600 h-2 rounded-full" style="width: 45%"></div>
+                            </div>
+                            <div class="flex gap-2 mt-2 justify-center">
+                                <button onclick="viewSession('session1')" class="btn-mini primary btn-click" data-i18n="ai.dashboard.server.view">查看</button>
+                                <button onclick="pauseSession('session1')" class="btn-mini secondary btn-click" data-i18n="ai.dashboard.server.pause">暂停</button>
+                            </div>
+                        </div>
+                        
+                        <div class="p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-xl max-w-sm mx-auto">
+                            <p class="font-medium text-gray-900 dark:text-white text-sm" data-i18n="ai.dashboard.server.lstmSentimentAnalysisTitle">LSTM情感分析</p>
+                            <p class="text-xs text-gray-600 dark:text-gray-400" data-i18n="ai.dashboard.server.participants2Of4Waiting">2/4个参与方 • 等待中</p>
+                            <div class="flex gap-2 mt-2 justify-center">
+                                <button onclick="inviteParticipants('session2')" class="btn-mini primary btn-click" data-i18n="ai.dashboard.server.invite">邀请</button>
+                                <button onclick="viewSession('session2')" class="btn-mini secondary btn-click" data-i18n="ai.dashboard.server.view">查看</button>
+                            </div>
+                        </div>
+
+                        <button class="text-sm text-blue-600 hover:text-blue-800 font-medium px-3 py-1 rounded bg-transparent hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors" data-i18n="ai.dashboard.server.viewAllSessions">查看所有会话 →</button>
+                    </div>
+                </div>
+
+                <!-- 客户端管理 -->
+                <div class="module-card rounded-xl cursor-pointer fade-in-up delay-6 card-hover btn-click" onclick="viewClientManagementDetails()">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                            <span data-i18n="ai.dashboard.server.clientManagement">客户端管理</span>
+                        </h3>
+                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm font-medium">4</span>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between p-2 bg-green-50 dark:bg-green-900/20 rounded-xl max-w-xs mx-auto">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span class="text-sm font-medium text-gray-900 dark:text-white">client1</span>
+                                <span class="text-xs text-gray-600 dark:text-gray-400" data-i18n="ai.dashboard.server.online_status">在线</span>
+                            </div>
+                            <div class="flex gap-1">
+                                <button onclick="viewClient('client1')" class="btn-mini primary btn-click" data-i18n="ai.dashboard.server.view">查看</button>
+                                <button onclick="kickClient('client1')" class="btn-mini secondary btn-click" data-i18n="ai.dashboard.server.kick">踢出</button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-2 bg-green-50 dark:bg-green-900/20 rounded-xl max-w-xs mx-auto">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span class="text-sm font-medium text-gray-900 dark:text-white">client2</span>
+                                <span class="text-xs text-gray-600 dark:text-gray-400" data-i18n="ai.dashboard.server.online_status">在线</span>
+                            </div>
+                            <div class="flex gap-1">
+                                <button onclick="viewClient('client2')" class="btn-mini primary btn-click" data-i18n="ai.dashboard.server.view">查看</button>
+                                <button onclick="kickClient('client2')" class="btn-mini secondary btn-click" data-i18n="ai.dashboard.server.kick">踢出</button>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-2 bg-yellow-50 dark:bg-yellow-900/20 rounded-xl max-w-xs mx-auto">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                                <span class="text-sm font-medium text-gray-900 dark:text-white">client3</span>
+                                <span class="text-xs text-gray-600 dark:text-gray-400" data-i18n="ai.dashboard.server.idle">空闲</span>
+                            </div>
+                            <div class="flex gap-1">
+                                <button onclick="viewClient('client3')" class="btn-mini primary btn-click" data-i18n="ai.dashboard.server.view">查看</button>
+                                <button onclick="removeClient('client3')" class="btn-mini secondary btn-click" data-i18n="ai.dashboard.server.remove">移除</button>
+                            </div>
+                        </div>
+
+                        <button class="text-sm text-blue-600 hover:text-blue-800 font-medium px-3 py-1 rounded bg-transparent hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors" data-i18n="ai.dashboard.server.viewAllClients">查看所有客户端 →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 系统日志 -->
+            <div class="mt-8">
+                <div class="module-card rounded-xl cursor-pointer fade-in-up delay-6 card-hover btn-click" onclick="viewSystemLogsDetails()">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                            <span data-i18n="ai.dashboard.server.systemLogs">系统日志</span>
+                        </h3>
+                        <span class="text-sm text-gray-500" data-i18n="ai.dashboard.server.realTimeUpdates">实时更新</span>
+                    </div>
+                    
+                    <div class="bg-black text-green-400 p-4 rounded-xl font-mono text-sm h-32 overflow-y-auto" id="systemLogs">
+                        <div data-i18n="ai.dashboard.server.log.clientStatusCheck">[08/22/2025, 9:15:30 AM] 客户端状态检查完成</div>
+                        <div data-i18n="ai.dashboard.server.log.trainingSessionNormal">[08/22/2025, 9:16:45 AM] 训练会话性能正常</div>
+                        <div data-i18n="ai.dashboard.server.log.newTrainingRequest">[08/22/2025, 9:17:12 AM] 收到新的训练申请</div>
+                        <div data-i18n="ai.dashboard.server.log.mpcRoundComplete">[08/22/2025, 9:18:01 AM] MPC计算完成一轮</div>
+                        <div data-i18n="ai.dashboard.server.log.networkStable">[08/22/2025, 9:18:33 AM] 网络连接稳定</div>
+                        <div data-i18n="ai.dashboard.server.log.dataSyncComplete">[08/22/2025, 9:19:15 AM] 数据同步完成</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 -->
+    <div id="detailModal" class="modal-overlay hidden">
+        <div class="modal-container content-area">
+            <div class="modal-header">
+                <h3 id="modalTitle" class="modal-title">详情</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="modalContent" class="modal-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 返回主页按钮 -->
+    <button class="homepage-return-btn btn-click" onclick="goHome()" title="返回主页">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+        </svg>
+    </button>
+
+    <!-- 脚本引用 -->
+    <script src="../../shared/js/navigation-unified.js?v=20250902"></script>
+    <script src="../../shared/js/theme-manager-unified.js?v=20250827"></script>
+    <!-- <script src="../../shared/js/router-unified.js?v=20250827"></script> -->
+    <script src="../../shared/js/i18n-manager.js?v=20250901"></script>
+    <script src="../assets/server-dashboard-scripts.js?v=20250901"></script>
+    
+    <!-- Enhanced modal styles for better visibility -->
+    <style>
+        /* 深色模式下模态框内卡片的特殊样式 */
+        [data-theme="dark"] .modal-card-blue {
+            background-color: rgba(59, 130, 246, 0.15) !important;
+            border: 1px solid rgba(59, 130, 246, 0.3) !important;
+        }
+        
+        [data-theme="dark"] .modal-card-green {
+            background-color: rgba(34, 197, 94, 0.15) !important;
+            border: 1px solid rgba(34, 197, 94, 0.3) !important;
+        }
+        
+        [data-theme="dark"] .modal-card-indigo {
+            background-color: rgba(99, 102, 241, 0.15) !important;
+            border: 1px solid rgba(99, 102, 241, 0.3) !important;
+        }
+        
+        [data-theme="dark"] .modal-card-amber {
+            background-color: rgba(245, 158, 11, 0.15) !important;
+            border: 1px solid rgba(245, 158, 11, 0.3) !important;
+        }
+        
+        [data-theme="dark"] .modal-card-red {
+            background-color: rgba(239, 68, 68, 0.15) !important;
+            border: 1px solid rgba(239, 68, 68, 0.3) !important;
+        }
+        
+        [data-theme="dark"] .modal-card-yellow {
+            background-color: rgba(234, 179, 8, 0.15) !important;
+            border: 1px solid rgba(234, 179, 8, 0.3) !important;
+        }
+        
+        /* 深色模式下的文字颜色调整 */
+        [data-theme="dark"] .modal-text-blue { color: #60a5fa !important; }
+        [data-theme="dark"] .modal-text-green { color: #4ade80 !important; }
+        [data-theme="dark"] .modal-text-indigo { color: #818cf8 !important; }
+        [data-theme="dark"] .modal-text-amber { color: #fbbf24 !important; }
+        [data-theme="dark"] .modal-text-red { color: #f87171 !important; }
+        [data-theme="dark"] .modal-text-yellow { color: #facc15 !important; }
+        
+        [data-theme="dark"] .modal-title-blue { color: #93c5fd !important; }
+        [data-theme="dark"] .modal-title-green { color: #86efac !important; }
+        [data-theme="dark"] .modal-title-indigo { color: #a5b4fc !important; }
+        [data-theme="dark"] .modal-title-amber { color: #fcd34d !important; }
+        [data-theme="dark"] .modal-title-red { color: #fca5a5 !important; }
+        [data-theme="dark"] .modal-title-yellow { color: #fde047 !important; }
+        
+        /* 深色模式下服务器界面内部卡片的背景修复 */
+        [data-theme="dark"] .bg-blue-50 {
+            background-color: rgba(59, 130, 246, 0.1) !important;
+            border: 1px solid rgba(59, 130, 246, 0.2) !important;
+        }
+        
+        [data-theme="dark"] .bg-green-50 {
+            background-color: rgba(34, 197, 94, 0.1) !important;
+            border: 1px solid rgba(34, 197, 94, 0.2) !important;
+        }
+        
+        [data-theme="dark"] .bg-orange-50 {
+            background-color: rgba(249, 115, 22, 0.1) !important;
+            border: 1px solid rgba(249, 115, 22, 0.2) !important;
+        }
+        
+        [data-theme="dark"] .bg-purple-50 {
+            background-color: rgba(147, 51, 234, 0.1) !important;
+            border: 1px solid rgba(147, 51, 234, 0.2) !important;
+        }
+        
+        [data-theme="dark"] .bg-yellow-50 {
+            background-color: rgba(234, 179, 8, 0.1) !important;
+            border: 1px solid rgba(234, 179, 8, 0.2) !important;
+        }
+        
+        [data-theme="dark"] .bg-gray-50 {
+            background-color: rgba(75, 85, 99, 0.15) !important;
+            border: 1px solid rgba(75, 85, 99, 0.3) !important;
+        }
+        
+        /* 深色模式下标签/徽章颜色 */
+        [data-theme="dark"] .bg-orange-100 {
+            background-color: rgba(249, 115, 22, 0.15) !important;
+            color: #fed7aa !important;
+        }
+        
+        [data-theme="dark"] .bg-green-100 {
+            background-color: rgba(34, 197, 94, 0.15) !important;
+            color: #bbf7d0 !important;
+        }
+        
+        [data-theme="dark"] .bg-blue-100 {
+            background-color: rgba(59, 130, 246, 0.15) !important;
+            color: #dbeafe !important;
+        }
+        
+        [data-theme="dark"] .text-orange-800 { color: #fed7aa !important; }
+        [data-theme="dark"] .text-green-800 { color: #bbf7d0 !important; }
+        [data-theme="dark"] .text-blue-800 { color: #dbeafe !important; }
+        
+        /* 深色模式下进度条背景 */
+        [data-theme="dark"] .bg-gray-200 {
+            background-color: rgba(75, 85, 99, 0.3) !important;
+        }
+        
+        /* 强制深色模式样式 - 最高优先级 */
+        html[data-theme="dark"] .bg-blue-50,
+        html[data-theme="dark"] body .bg-blue-50,
+        [data-theme="dark"] html .bg-blue-50,
+        [data-theme="dark"] body .bg-blue-50 {
+            background-color: rgba(59, 130, 246, 0.15) !important;
+            border: 1px solid rgba(59, 130, 246, 0.3) !important;
+        }
+        
+        html[data-theme="dark"] .bg-green-50,
+        html[data-theme="dark"] body .bg-green-50,
+        [data-theme="dark"] html .bg-green-50,
+        [data-theme="dark"] body .bg-green-50 {
+            background-color: rgba(34, 197, 94, 0.15) !important;
+            border: 1px solid rgba(34, 197, 94, 0.3) !important;
+        }
+        
+        html[data-theme="dark"] .bg-yellow-50,
+        html[data-theme="dark"] body .bg-yellow-50,
+        [data-theme="dark"] html .bg-yellow-50,
+        [data-theme="dark"] body .bg-yellow-50 {
+            background-color: rgba(234, 179, 8, 0.15) !important;
+            border: 1px solid rgba(234, 179, 8, 0.3) !important;
+        }
+        
+        html[data-theme="dark"] .bg-orange-50,
+        html[data-theme="dark"] body .bg-orange-50,
+        [data-theme="dark"] html .bg-orange-50,
+        [data-theme="dark"] body .bg-orange-50 {
+            background-color: rgba(249, 115, 22, 0.15) !important;
+            border: 1px solid rgba(249, 115, 22, 0.3) !important;
+        }
+        
+        html[data-theme="dark"] .bg-gray-50,
+        html[data-theme="dark"] body .bg-gray-50,
+        [data-theme="dark"] html .bg-gray-50,
+        [data-theme="dark"] body .bg-gray-50 {
+            background-color: rgba(75, 85, 99, 0.15) !important;
+            border: 1px solid rgba(75, 85, 99, 0.3) !important;
+        }
+        
+        /* 强制标签颜色 */
+        html[data-theme="dark"] .bg-orange-100,
+        [data-theme="dark"] .bg-orange-100 {
+            background-color: rgba(249, 115, 22, 0.2) !important;
+            color: #fed7aa !important;
+        }
+        
+        html[data-theme="dark"] .bg-green-100,
+        [data-theme="dark"] .bg-green-100 {
+            background-color: rgba(34, 197, 94, 0.2) !important;
+            color: #bbf7d0 !important;
+        }
+        
+        html[data-theme="dark"] .bg-blue-100,
+        [data-theme="dark"] .bg-blue-100 {
+            background-color: rgba(59, 130, 246, 0.2) !important;
+            color: #dbeafe !important;
+        }
+        
+        /* 深色模式下透明背景按钮的样式 */
+        [data-theme="dark"] .bg-transparent {
+            background-color: transparent !important;
+        }
+        
+        [data-theme="dark"] .hover\:bg-blue-50:hover {
+            background-color: rgba(59, 130, 246, 0.1) !important;
+        }
+        
+        /* 深色模式下文字按钮的颜色 */
+        [data-theme="dark"] .text-blue-600 {
+            color: #60a5fa !important;
+        }
+        
+        [data-theme="dark"] .hover\:text-blue-800:hover {
+            color: #93c5fd !important;
+        }
+        
+        /* 深色模式下模态框关闭按钮样式 */
+        [data-theme="dark"] .modal-close {
+            background-color: rgba(75, 85, 99, 0.1) !important;
+            border: 1px solid rgba(75, 85, 99, 0.3) !important;
+            color: #9ca3af !important;
+            transition: all 0.2s ease !important;
+        }
+        
+        [data-theme="dark"] .modal-close:hover {
+            background-color: rgba(239, 68, 68, 0.1) !important;
+            border-color: rgba(239, 68, 68, 0.3) !important;
+            color: #f87171 !important;
+        }
+        
+        /* 确保模态框关闭按钮不被其他样式覆盖 */
+        html[data-theme="dark"] .modal-close,
+        html[data-theme="dark"] body .modal-close,
+        [data-theme="dark"] html .modal-close,
+        [data-theme="dark"] body .modal-close {
+            background-color: rgba(75, 85, 99, 0.15) !important;
+            border: 1px solid rgba(75, 85, 99, 0.3) !important;
+            color: #9ca3af !important;
+        }
+        
+        html[data-theme="dark"] .modal-close:hover,
+        html[data-theme="dark"] body .modal-close:hover,
+        [data-theme="dark"] html .modal-close:hover,
+        [data-theme="dark"] body .modal-close:hover {
+            background-color: rgba(239, 68, 68, 0.15) !important;
+            border-color: rgba(239, 68, 68, 0.4) !important;
+            color: #f87171 !important;
+        }
+    </style>
+    
+    <!-- Fixed click handlers with modal functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔧 Fixing server dashboard click handlers...');
+            
+            // Force override all view functions with working implementations
+            window.viewSystemStatus = function() {
+                console.log('🔍 System Status clicked');
+                showFixedModal('系统状态详情', `
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-4 rounded modal-card-green" style="background-color: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2);">
+                                <div class="font-semibold modal-title-green" style="color: #14532d;">CPU使用率</div>
+                                <div class="text-xl modal-text-green" style="color: #16a34a;">45%</div>
+                            </div>
+                            <div class="p-4 rounded modal-card-yellow" style="background-color: rgba(234, 179, 8, 0.1); border: 1px solid rgba(234, 179, 8, 0.2);">
+                                <div class="font-semibold modal-title-yellow" style="color: #a16207;">内存使用率</div>
+                                <div class="text-xl modal-text-yellow" style="color: #ca8a04;">67%</div>
+                            </div>
+                            <div class="p-4 rounded modal-card-green" style="background-color: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2);">
+                                <div class="font-semibold modal-title-green" style="color: #14532d;">磁盘使用率</div>
+                                <div class="text-xl modal-text-green" style="color: #16a34a;">23%</div>
+                            </div>
+                            <div class="p-4 rounded modal-card-blue" style="background-color: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2);">
+                                <div class="font-semibold modal-title-blue" style="color: #1e3a8a;">网络状态</div>
+                                <div class="text-xl modal-text-blue" style="color: #2563eb;">在线</div>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-3 rounded" style="background-color: rgba(156, 163, 175, 0.1); border: 1px solid rgba(156, 163, 175, 0.2);">
+                            <h4 class="font-semibold mb-2">系统信息</h4>
+                            <p>OS: Ubuntu 20.04 LTS</p>
+                            <p>Python: 3.8.10</p>
+                            <p>PyTorch: 1.9.0</p>
+                            <p>运行时间: 7 days 14 hours</p>
+                        </div>
+                    </div>
+                `);
+            };
+            
+            window.viewConnectedClients = function() {
+                console.log('👥 Connected Clients clicked');
+                showFixedModal('已连接客户端', `
+                    <div class="space-y-3">
+                        <div class="border rounded p-3">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <div class="font-semibold">Client Alpha</div>
+                                    <div class="text-sm text-gray-600">ID: client-001</div>
+                                </div>
+                                <div class="text-green-600">活跃</div>
+                            </div>
+                            <div class="text-xs text-gray-500 mt-1">最后活动: 2分钟前</div>
+                        </div>
+                        <div class="border rounded p-3">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <div class="font-semibold">Client Beta</div>
+                                    <div class="text-sm text-gray-600">ID: client-002</div>
+                                </div>
+                                <div class="text-blue-600">训练中</div>
+                            </div>
+                            <div class="text-xs text-gray-500 mt-1">最后活动: 1分钟前</div>
+                        </div>
+                        <div class="border rounded p-3">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <div class="font-semibold">Client Gamma</div>
+                                    <div class="text-sm text-gray-600">ID: client-003</div>
+                                </div>
+                                <div class="text-gray-600">空闲</div>
+                            </div>
+                            <div class="text-xs text-gray-500 mt-1">最后活动: 5分钟前</div>
+                        </div>
+                    </div>
+                `);
+            };
+            
+            window.viewActiveSessions = function() {
+                console.log('🎯 Active Sessions clicked');
+                showFixedModal('活跃训练会话', `
+                    <div class="space-y-3">
+                        <div class="border rounded p-3">
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="font-semibold">ResNet-50 训练</div>
+                                <div class="text-green-600">进行中</div>
+                            </div>
+                            <div class="text-sm text-gray-600">参与方: 5 | 进度: 65%</div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="border rounded p-3">
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="font-semibold">BERT-base 训练</div>
+                                <div class="text-blue-600">进行中</div>
+                            </div>
+                            <div class="text-sm text-gray-600">参与方: 3 | 进度: 23%</div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: 23%"></div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            };
+            
+            window.logout = function() {
+                console.log('🚪 Logout clicked');
+                if (confirm('确定要退出登录吗？')) {
+                    localStorage.clear();
+                    window.location.href = '/p2pai/pages/login.html';
+                }
+            };
+            
+            // Unified modal function that always works
+            function showFixedModal(title, content) {
+                const modal = document.getElementById('detailModal');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalContent = document.getElementById('modalContent');
+                
+                if (!modal || !modalTitle || !modalContent) {
+                    alert(title + '\\n\\n功能暂时不可用，模态框元素未找到');
+                    return;
+                }
+                
+                modalTitle.textContent = title;
+                modalContent.innerHTML = content;
+                
+                // Force show modal with multiple approaches
+                modal.classList.remove('hidden');
+                modal.style.display = 'flex';
+                modal.style.visibility = 'visible';
+                modal.style.opacity = '1';
+                
+                console.log('✅ Modal shown successfully');
+            }
+            
+            // Enhanced close modal function
+            window.closeModal = function() {
+                console.log('❌ Close Modal clicked');
+                const modal = document.getElementById('detailModal');
+                if (modal) {
+                    modal.classList.add('hidden');
+                    modal.style.display = 'none';
+                    modal.style.visibility = 'hidden';
+                    modal.style.opacity = '0';
+                }
+            };
+            
+            // Force enable all onclick elements
+            document.querySelectorAll('[onclick]').forEach(el => {
+                el.style.pointerEvents = 'auto';
+                el.style.cursor = 'pointer';
+                el.addEventListener('click', function(e) {
+                    console.log('🖱️ Element clicked:', e.target);
+                });
+            });
+            
+            // Add backup alias functions
+            window.viewPendingTrainingRequests = window.viewActiveSessions;
+            window.viewActiveTrainingSessionsDetails = window.viewActiveSessions;
+            window.viewClientManagementDetails = window.viewConnectedClients;
+            window.viewPendingRequests = window.viewActiveSessions;
+            
+            // Model management functions
+            window.editModel = function(modelId) {
+                console.log('✏️ Edit model clicked:', modelId);
+                showFixedModal('编辑模型: ' + modelId, `
+                    <div class="space-y-4">
+                        <div class="form-group">
+                            <label class="block font-semibold mb-2">模型名称</label>
+                            <input type="text" value="${modelId}" class="w-full p-2 border rounded" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="block font-semibold mb-2">模型版本</label>
+                            <input type="text" value="v2.1" class="w-full p-2 border rounded">
+                        </div>
+                        <div class="form-group">
+                            <label class="block font-semibold mb-2">模型描述</label>
+                            <textarea class="w-full p-2 border rounded h-20" placeholder="输入模型描述..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="block font-semibold mb-2">训练参数</label>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm mb-1">学习率</label>
+                                    <input type="number" value="0.001" step="0.0001" class="w-full p-2 border rounded">
+                                </div>
+                                <div>
+                                    <label class="block text-sm mb-1">批量大小</label>
+                                    <input type="number" value="32" class="w-full p-2 border rounded">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2 mt-6">
+                            <button onclick="alert('模型设置已保存'); closeModal();" class="btn-primary px-4 py-2 rounded">保存设置</button>
+                            <button onclick="closeModal()" class="btn-secondary px-4 py-2 rounded">取消</button>
+                        </div>
+                    </div>
+                `);
+            };
+            
+            window.activateModel = function(modelId) {
+                console.log('🚀 Activate model clicked:', modelId);
+                if (confirm('确定要激活模型 ' + modelId + ' 吗？\\n\\n激活后此模型将成为当前活跃模型用于训练。')) {
+                    // 模拟激活过程
+                    setTimeout(() => {
+                        alert('模型 ' + modelId + ' 已成功激活！');
+                        // 刷新页面状态
+                        location.reload();
+                    }, 1000);
+                }
+            };
+            
+            window.deleteModel = function(modelId) {
+                console.log('🗑️ Delete model clicked:', modelId);
+                if (confirm('⚠️ 危险操作\\n\\n确定要删除模型 ' + modelId + ' 吗？\\n删除后无法恢复！')) {
+                    // 二次确认
+                    if (confirm('请再次确认：真的要删除模型 ' + modelId + ' 吗？')) {
+                        setTimeout(() => {
+                            alert('模型 ' + modelId + ' 已被删除');
+                            location.reload();
+                        }, 1000);
+                    }
+                }
+            };
+            
+            window.viewModelDetails = function(modelId) {
+                console.log('👁️ View model details clicked:', modelId);
+                const modelData = {
+                    'model1': { name: 'CNN图像分类模型', version: 'v2.1', status: '活跃', accuracy: '94.2%', size: '98MB' },
+                    'model2': { name: 'LSTM文本分析模型', version: 'v1.3', status: '非活跃', accuracy: '89.7%', size: '156MB' },
+                    'model3': { name: 'MLP回归预测模型', version: 'v1.0', status: '非活跃', accuracy: '87.3%', size: '45MB' },
+                    'model4': { name: '推荐系统模型', version: 'v0.8', status: '草稿', accuracy: 'N/A', size: '234MB' }
+                };
+                
+                const model = modelData[modelId] || { name: modelId, version: 'Unknown', status: 'Unknown', accuracy: 'N/A', size: 'N/A' };
+                
+                showFixedModal('模型详情: ' + model.name, `
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-4 rounded modal-card-blue" style="background-color: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2);">
+                                <div class="font-semibold modal-title-blue" style="color: #1e3a8a;">模型状态</div>
+                                <div class="text-xl modal-text-blue" style="color: #2563eb;">${model.status}</div>
+                            </div>
+                            <div class="p-4 rounded modal-card-green" style="background-color: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2);">
+                                <div class="font-semibold modal-title-green" style="color: #14532d;">准确率</div>
+                                <div class="text-xl modal-text-green" style="color: #16a34a;">${model.accuracy}</div>
+                            </div>
+                            <div class="p-4 rounded modal-card-indigo" style="background-color: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2);">
+                                <div class="font-semibold modal-title-indigo" style="color: #312e81;">模型版本</div>
+                                <div class="text-xl modal-text-indigo" style="color: #4f46e5;">${model.version}</div>
+                            </div>
+                            <div class="p-4 rounded modal-card-amber" style="background-color: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2);">
+                                <div class="font-semibold modal-title-amber" style="color: #78350f;">模型大小</div>
+                                <div class="text-xl modal-text-amber" style="color: #d97706;">${model.size}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h4 class="font-semibold mb-3">训练历史</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between p-2 bg-gray-50 rounded">
+                                    <span>最后训练时间</span>
+                                    <span class="text-gray-600">2小时前</span>
+                                </div>
+                                <div class="flex justify-between p-2 bg-gray-50 rounded">
+                                    <span>训练轮数</span>
+                                    <span class="text-gray-600">150 epochs</span>
+                                </div>
+                                <div class="flex justify-between p-2 bg-gray-50 rounded">
+                                    <span>参与方数量</span>
+                                    <span class="text-gray-600">5 clients</span>
+                                </div>
+                                <div class="flex justify-between p-2 bg-gray-50 rounded">
+                                    <span>总训练时间</span>
+                                    <span class="text-gray-600">3.5 小时</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            };
+            
+            window.openCreateModelModal = function() {
+                console.log('➕ Create new model clicked');
+                showFixedModal('创建新模型', `
+                    <div class="space-y-4">
+                        <div class="form-group">
+                            <label class="block font-semibold mb-2">选择模型类型</label>
+                            <select class="w-full p-2 border rounded">
+                                <option value="cnn">CNN - 卷积神经网络</option>
+                                <option value="lstm">LSTM - 长短期记忆网络</option>
+                                <option value="mlp">MLP - 多层感知机</option>
+                                <option value="transformer">Transformer - 注意力机制</option>
+                                <option value="custom">自定义模型</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="block font-semibold mb-2">模型名称</label>
+                            <input type="text" placeholder="输入模型名称..." class="w-full p-2 border rounded">
+                        </div>
+                        <div class="form-group">
+                            <label class="block font-semibold mb-2">应用场景</label>
+                            <select class="w-full p-2 border rounded">
+                                <option value="image">图像分类</option>
+                                <option value="text">文本分析</option>
+                                <option value="prediction">数值预测</option>
+                                <option value="recommendation">推荐系统</option>
+                            </select>
+                        </div>
+                        <div class="flex space-x-2 mt-6">
+                            <button onclick="alert('新模型创建成功！'); closeModal();" class="btn-primary px-4 py-2 rounded">创建模型</button>
+                            <button onclick="closeModal()" class="btn-secondary px-4 py-2 rounded">取消</button>
+                        </div>
+                    </div>
+                `);
+            };
+            
+            window.openModelSelectionModal = function() {
+                console.log('🔄 Switch model clicked');
+                showFixedModal('切换当前模型', `
+                    <div class="space-y-4">
+                        <p class="text-gray-600 mb-4">选择要切换到的模型：</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center p-3 border rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="selectedModel" value="model1" class="mr-3">
+                                <div class="flex-1">
+                                    <div class="font-semibold">CNN图像分类模型 v2.1</div>
+                                    <div class="text-sm text-gray-600">准确率: 94.2% | 大小: 98MB</div>
+                                </div>
+                                <div class="text-green-600 text-sm">当前活跃</div>
+                            </label>
+                            <label class="flex items-center p-3 border rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="selectedModel" value="model2" class="mr-3">
+                                <div class="flex-1">
+                                    <div class="font-semibold">LSTM文本分析模型 v1.3</div>
+                                    <div class="text-sm text-gray-600">准确率: 89.7% | 大小: 156MB</div>
+                                </div>
+                            </label>
+                            <label class="flex items-center p-3 border rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="radio" name="selectedModel" value="model3" class="mr-3">
+                                <div class="flex-1">
+                                    <div class="font-semibold">MLP回归预测模型 v1.0</div>
+                                    <div class="text-sm text-gray-600">准确率: 87.3% | 大小: 45MB</div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="flex space-x-2 mt-6">
+                            <button onclick="alert('模型切换成功！'); closeModal();" class="btn-primary px-4 py-2 rounded">确认切换</button>
+                            <button onclick="closeModal()" class="btn-secondary px-4 py-2 rounded">取消</button>
+                        </div>
+                    </div>
+                `);
+            };
+            
+            window.viewModelManagementDetails = function() {
+                console.log('📊 Model management details clicked');
+                const isEnglish = localStorage.getItem('language') === 'en';
+                const title = isEnglish ? 'Model Management Details' : '模型管理详情';
+                const totalModelsText = isEnglish ? 'Total Models' : '总模型数';
+                const activeModelsText = isEnglish ? 'Active Models' : '活跃模型';
+                showFixedModal(title, `
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="p-4 rounded text-center modal-card-blue" style="background-color: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2);">
+                                <div class="text-2xl font-bold modal-text-blue" style="color: #2563eb;">4</div>
+                                <div class="font-semibold modal-title-blue" style="color: #1e3a8a;">${totalModelsText}</div>
+                            </div>
+                            <div class="p-4 rounded text-center modal-card-green" style="background-color: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2);">
+                                <div class="text-2xl font-bold modal-text-green" style="color: #16a34a;">1</div>
+                                <div class="font-semibold modal-title-green" style="color: #14532d;">${activeModelsText}</div>
+                            </div>
+                            <div class="p-4 rounded text-center modal-card-amber" style="background-color: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.2);">
+                                <div class="text-2xl font-bold modal-text-amber" style="color: #d97706;">2</div>
+                                <div class="font-semibold modal-title-amber" style="color: #78350f;">训练中</div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold mb-3">存储使用情况</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span>已使用存储</span>
+                                    <span class="font-semibold">533 MB / 2 GB</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-600 h-2 rounded-full" style="width: 26.65%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold mb-3">模型性能统计</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between p-2 bg-gray-50 rounded">
+                                    <span>平均准确率</span>
+                                    <span class="font-semibold text-green-600">90.3%</span>
+                                </div>
+                                <div class="flex justify-between p-2 bg-gray-50 rounded">
+                                    <span>最佳性能模型</span>
+                                    <span class="font-semibold">CNN图像分类 (94.2%)</span>
+                                </div>
+                                <div class="flex justify-between p-2 bg-gray-50 rounded">
+                                    <span>总训练时间</span>
+                                    <span class="font-semibold">147.5 小时</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t pt-4">
+                            <div class="flex space-x-2">
+                                <button onclick="openCreateModelModal()" class="btn-primary px-4 py-2 rounded">创建新模型</button>
+                                <button onclick="alert('导出功能开发中...')" class="btn-secondary px-4 py-2 rounded">导出报告</button>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            };
+            
+            // Additional missing functions for server dashboard
+            window.approveRequest = function(requestId) {
+                console.log('✅ Approve request clicked:', requestId);
+                if (confirm('确定要批准训练请求 ' + requestId + ' 吗？')) {
+                    setTimeout(() => {
+                        alert('训练请求 ' + requestId + ' 已批准！');
+                        location.reload();
+                    }, 1000);
+                }
+            };
+            
+            window.rejectRequest = function(requestId) {
+                console.log('❌ Reject request clicked:', requestId);
+                if (confirm('确定要拒绝训练请求 ' + requestId + ' 吗？')) {
+                    setTimeout(() => {
+                        alert('训练请求 ' + requestId + ' 已拒绝');
+                        location.reload();
+                    }, 1000);
+                }
+            };
+            
+            window.viewSession = function(sessionId) {
+                console.log('👀 View session clicked:', sessionId);
+                showFixedModal('训练会话详情: ' + sessionId, `
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-4 rounded modal-card-blue">
+                                <div class="font-semibold modal-title-blue">会话状态</div>
+                                <div class="text-xl modal-text-blue">进行中</div>
+                            </div>
+                            <div class="p-4 rounded modal-card-green">
+                                <div class="font-semibold modal-title-green">参与方数量</div>
+                                <div class="text-xl modal-text-green">5</div>
+                            </div>
+                            <div class="p-4 rounded modal-card-amber">
+                                <div class="font-semibold modal-title-amber">当前轮次</div>
+                                <div class="text-xl modal-text-amber">Round 12</div>
+                            </div>
+                            <div class="p-4 rounded modal-card-indigo">
+                                <div class="font-semibold modal-title-indigo">训练进度</div>
+                                <div class="text-xl modal-text-indigo">45%</div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold mb-3">参与方列表</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between p-2 bg-gray-100 rounded">
+                                    <span>Client-001</span>
+                                    <span class="text-green-600">在线</span>
+                                </div>
+                                <div class="flex justify-between p-2 bg-gray-100 rounded">
+                                    <span>Client-002</span>
+                                    <span class="text-green-600">在线</span>
+                                </div>
+                                <div class="flex justify-between p-2 bg-gray-100 rounded">
+                                    <span>Client-003</span>
+                                    <span class="text-yellow-600">同步中</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            };
+            
+            window.pauseSession = function(sessionId) {
+                console.log('⏸️ Pause session clicked:', sessionId);
+                if (confirm('确定要暂停训练会话 ' + sessionId + ' 吗？')) {
+                    setTimeout(() => {
+                        alert('训练会话 ' + sessionId + ' 已暂停');
+                        location.reload();
+                    }, 1000);
+                }
+            };
+            
+            window.inviteParticipants = function(sessionId) {
+                console.log('👥 Invite participants clicked:', sessionId);
+                showFixedModal('邀请参与方: ' + sessionId, `
+                    <div class="space-y-4">
+                        <p class="text-gray-600">选择要邀请的客户端参与训练会话：</p>
+                        <div class="space-y-2">
+                            <label class="flex items-center p-3 border rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" class="mr-3" checked>
+                                <div class="flex-1">
+                                    <div class="font-semibold">Client-004</div>
+                                    <div class="text-sm text-gray-600">在线 | 计算能力: 高</div>
+                                </div>
+                            </label>
+                            <label class="flex items-center p-3 border rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" class="mr-3">
+                                <div class="flex-1">
+                                    <div class="font-semibold">Client-005</div>
+                                    <div class="text-sm text-gray-600">在线 | 计算能力: 中</div>
+                                </div>
+                            </label>
+                            <label class="flex items-center p-3 border rounded hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" class="mr-3">
+                                <div class="flex-1">
+                                    <div class="font-semibold">Client-006</div>
+                                    <div class="text-sm text-gray-600">离线 | 计算能力: 高</div>
+                                </div>
+                                <div class="text-gray-400">离线</div>
+                            </label>
+                        </div>
+                        <div class="flex space-x-2 mt-6">
+                            <button onclick="alert('邀请已发送！'); closeModal();" class="btn-primary px-4 py-2 rounded">发送邀请</button>
+                            <button onclick="closeModal()" class="btn-secondary px-4 py-2 rounded">取消</button>
+                        </div>
+                    </div>
+                `);
+            };
+            
+            window.viewClient = function(clientId) {
+                console.log('👤 View client clicked:', clientId);
+                showFixedModal('客户端详情: ' + clientId, `
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-4 rounded modal-card-green">
+                                <div class="font-semibold modal-title-green">连接状态</div>
+                                <div class="text-xl modal-text-green">在线</div>
+                            </div>
+                            <div class="p-4 rounded modal-card-blue">
+                                <div class="font-semibold modal-title-blue">计算能力</div>
+                                <div class="text-xl modal-text-blue">高</div>
+                            </div>
+                            <div class="p-4 rounded modal-card-amber">
+                                <div class="font-semibold modal-title-amber">在线时长</div>
+                                <div class="text-xl modal-text-amber">2.5h</div>
+                            </div>
+                            <div class="p-4 rounded modal-card-indigo">
+                                <div class="font-semibold modal-title-indigo">参与会话</div>
+                                <div class="text-xl modal-text-indigo">3</div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-semibold mb-3">客户端信息</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between p-2 bg-gray-100 rounded">
+                                    <span>IP地址</span>
+                                    <span>192.168.1.${Math.floor(Math.random() * 255)}</span>
+                                </div>
+                                <div class="flex justify-between p-2 bg-gray-100 rounded">
+                                    <span>最后活动</span>
+                                    <span>2分钟前</span>
+                                </div>
+                                <div class="flex justify-between p-2 bg-gray-100 rounded">
+                                    <span>数据集大小</span>
+                                    <span>~1,200 样本</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            };
+            
+            window.kickClient = function(clientId) {
+                console.log('🦵 Kick client clicked:', clientId);
+                if (confirm('确定要踢出客户端 ' + clientId + ' 吗？\\n\\n此操作将断开客户端连接。')) {
+                    setTimeout(() => {
+                        alert('客户端 ' + clientId + ' 已被踢出');
+                        location.reload();
+                    }, 1000);
+                }
+            };
+            
+            window.removeClient = function(clientId) {
+                console.log('🗑️ Remove client clicked:', clientId);
+                if (confirm('确定要移除客户端 ' + clientId + ' 吗？\\n\\n此操作将永久移除客户端记录。')) {
+                    if (confirm('请再次确认：真的要移除客户端 ' + clientId + ' 吗？')) {
+                        setTimeout(() => {
+                            alert('客户端 ' + clientId + ' 已被移除');
+                            location.reload();
+                        }, 1000);
+                    }
+                }
+            };
+            
+            // Force fix background colors with JavaScript
+            function forceFixBackgrounds() {
+                const theme = document.documentElement.getAttribute('data-theme');
+                if (theme === 'dark') {
+                    // Fix all bg-*-50 elements
+                    const bgElements = {
+                        'bg-blue-50': 'rgba(59, 130, 246, 0.15)',
+                        'bg-green-50': 'rgba(34, 197, 94, 0.15)',
+                        'bg-yellow-50': 'rgba(234, 179, 8, 0.15)',
+                        'bg-orange-50': 'rgba(249, 115, 22, 0.15)',
+                        'bg-gray-50': 'rgba(75, 85, 99, 0.15)',
+                        'bg-purple-50': 'rgba(147, 51, 234, 0.15)'
+                    };
+                    
+                    Object.entries(bgElements).forEach(([className, color]) => {
+                        const elements = document.querySelectorAll('.' + className);
+                        elements.forEach(el => {
+                            el.style.backgroundColor = color;
+                            el.style.border = `1px solid ${color.replace('0.15', '0.3')}`;
+                        });
+                    });
+                    
+                    // Fix all bg-*-100 elements (badges)
+                    const badgeElements = {
+                        'bg-orange-100': 'rgba(249, 115, 22, 0.2)',
+                        'bg-green-100': 'rgba(34, 197, 94, 0.2)',
+                        'bg-blue-100': 'rgba(59, 130, 246, 0.2)'
+                    };
+                    
+                    Object.entries(badgeElements).forEach(([className, color]) => {
+                        const elements = document.querySelectorAll('.' + className);
+                        elements.forEach(el => {
+                            el.style.backgroundColor = color;
+                        });
+                    });
+                    
+                    // Fix transparent buttons
+                    const transparentButtons = document.querySelectorAll('.bg-transparent');
+                    transparentButtons.forEach(btn => {
+                        if (btn.classList.contains('text-blue-600')) {
+                            btn.style.color = '#60a5fa';
+                            btn.style.backgroundColor = 'transparent';
+                        }
+                    });
+                    
+                    console.log('🎨 Force fixed background colors for dark mode');
+                }
+            }
+            
+            // Run immediately and on theme change
+            forceFixBackgrounds();
+            
+            // Listen for theme changes
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                        setTimeout(forceFixBackgrounds, 100);
+                    }
+                });
+            });
+            
+            observer.observe(document.documentElement, {
+                attributes: true,
+                attributeFilter: ['data-theme']
+            });
+            
+            console.log('✅ All server dashboard handlers fixed and loaded');
+        });
+    </script>
+</body>
+</html>

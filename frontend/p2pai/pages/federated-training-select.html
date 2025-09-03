@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-i18n-title="ai.training.federated.title">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择分布式训练模式</title>
+    <!-- ==================== 防白闪脚本 ==================== -->
+    <script>
+        (function() {
+            'use strict';
+            try {
+                const savedTheme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+                
+                document.documentElement.setAttribute('data-theme', theme);
+                
+                if (theme === 'dark') {
+                    document.documentElement.style.backgroundColor = '#1f2937';
+                    document.documentElement.style.color = '#f9fafb';
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.style.backgroundColor = '#ffffff';
+                    document.documentElement.style.color = '#1f2937';
+                    document.documentElement.classList.remove('dark');
+                }
+                
+                console.log('🎨 防白闪: 主题已设置为', theme);
+                
+            } catch (error) {
+                console.warn('⚠️ 防白闪脚本失败:', error);
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.documentElement.style.backgroundColor = '#1f2937';
+                document.documentElement.style.color = '#f9fafb';
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+    
+    <!-- ==================== 关键CSS预加载 ==================== -->
+    <style>
+        /* 防止白闪的关键样式 */
+        html[data-theme="dark"] {
+            background-color: #1f2937 !important;
+            color: #f9fafb !important;
+        }
+        html[data-theme="light"] {
+            background-color: #ffffff !important;
+            color: #1f2937 !important;
+        }
+        
+        html[data-theme="dark"] body {
+            background-color: #1f2937 !important;
+            color: #f9fafb !important;
+        }
+        html[data-theme="light"] body {
+            background-color: #ffffff !important;
+            color: #1f2937 !important;
+        }
+        
+        /* 深色模式下的文本颜色修复 */
+        html[data-theme="dark"] .text-gray-900 {
+            color: #f9fafb !important;
+        }
+        
+        html[data-theme="dark"] .text-gray-600 {
+            color: #9ca3af !important;
+        }
+        
+        /* 导航栏返回按钮样式修复 */
+        [data-theme="dark"] .navbar-brand button {
+            background-color: #374151 !important;
+            border: 1px solid #4b5563 !important;
+            color: #f9fafb !important;
+        }
+        
+        [data-theme="dark"] .navbar-brand button:hover {
+            background-color: #4b5563 !important;
+            color: #f9fafb !important;
+        }
+        
+        [data-theme="dark"] .navbar-brand button svg {
+            color: #f9fafb !important;
+        }
+        
+        /* 平滑过渡 */
+        html, body {
+            transition: background-color 0.3s ease, color 0.3s ease !important;
+        }
+    </style>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../shared/css/unified-styles.css?v=1756673001">
+    
+</head>
+<body class="module-background min-h-screen theme-transition">
+    <!-- Navigation -->
+    <nav class="navbar fade-in-up">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div class="navbar-brand">
+                <button onclick="goBack()" class="mr-4 p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                <span data-i18n="ai.training.federated.title">选择分布式训练模式</span>
+            </div>
+            
+            <div class="navbar-nav">
+                <button class="theme-toggle" title="切换主题">
+                    <span data-theme-icon>🌙</span>
+                </button>
+                <button class="language-toggle" title="切换语言">EN</button>
+                <button onclick="goHome()" class="btn btn-secondary text-sm btn-click">
+                    <span data-i18n="common.home">返回主页</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-6 py-8 content-area">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <div class="flex items-center justify-center mb-6">
+                <div class="w-16 h-16 bg-gray-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                </div>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-i18n="ai.training.federated.title">分布式训练模式选择</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto" data-i18n="ai.training.federated.subtitle">
+                根据您的隐私需求和训练目标，选择最适合的分布式训练方案
+            </p>
+        </div>
+
+        <!-- Training Mode Cards -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <!-- Standard Federated Learning -->
+            <div class="card p-8 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg fade-in-up delay-1 card-hover btn-click" onclick="selectMode('federated')">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gray-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4" data-i18n="ai.training.federated.standard">分布式训练</h3>
+                    <p class="text-gray-600 mb-6" data-i18n="ai.training.federated.standardDesc">
+                        传统的分布式训练模式，在保护数据隐私的同时，允许查看全局训练进度和统计信息
+                    </p>
+
+                    <!-- Features -->
+                    <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                        <h4 class="font-semibold text-gray-900 mb-3" data-i18n="ai.training.federated.coreFeatures">核心特性</h4>
+                        <div class="space-y-2 text-sm text-gray-700">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span data-i18n="ai.training.federated.globalProgress">可查看全局训练进度</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span data-i18n="ai.training.federated.participantInfo">参与方信息可见</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span data-i18n="ai.training.federated.transparentAggregation">模型聚合透明</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span data-i18n="ai.training.federated.highEfficiency">训练效率较高</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Privacy Level -->
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-700" data-i18n="ai.training.federated.privacyLevel">隐私保护级别</span>
+                            <span class="text-sm font-medium text-gray-600" data-i18n="ai.training.federated.standard">标准</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-gray-600 h-2 rounded-full" style="width: 70%"></div>
+                        </div>
+                    </div>
+
+                    <div class="text-gray-700 font-semibold text-lg">
+                        <span data-i18n="ai.training.federated.selectStandard">选择分布式训练</span> →
+                    </div>
+                </div>
+            </div>
+
+            <!-- MPC Federated Learning -->
+            <div class="card p-8 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg fade-in-up delay-2 card-hover btn-click" onclick="selectMode('mpc')">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gray-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4" data-i18n="ai.training.federated.mpc">MPC加密分布训练</h3>
+                    <p class="text-gray-600 mb-6" data-i18n="ai.training.federated.mpcDesc">
+                        多方安全计算模式，提供最高级别的隐私保护，只能查看自己的训练进度
+                    </p>
+
+                    <!-- Features -->
+                    <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                        <h4 class="font-semibold text-gray-900 mb-3" data-i18n="ai.training.federated.coreFeatures">核心特性</h4>
+                        <div class="space-y-2 text-sm text-gray-700">
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span data-i18n="ai.training.federated.personalProgress">只显示个人训练进度</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span data-i18n="ai.training.federated.confidentialParticipants">参与方信息保密</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span data-i18n="ai.training.federated.cryptographicSecurity">密码学安全保障</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 mr-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span data-i18n="ai.training.federated.zeroKnowledge">零知识证明验证</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Privacy Level -->
+                    <div class="mb-6">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-700" data-i18n="ai.training.federated.privacyLevel">隐私保护级别</span>
+                            <span class="text-sm font-medium text-gray-600" data-i18n="ai.training.federated.highest">最高</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-gray-600 h-2 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+
+                    <div class="text-gray-700 font-semibold text-lg">
+                        <span data-i18n="ai.training.federated.selectMPC">选择MPC加密分布训练</span> →
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="card p-8 mb-8 fade-in-up delay-3">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center" data-i18n="ai.training.federated.detailedComparison">详细对比</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-gray-200 table-row">
+                            <th class="text-left py-3 px-4 font-semibold text-gray-900" data-i18n="ai.training.federated.feature">特性</th>
+                            <th class="text-center py-3 px-4 font-semibold text-gray-600" data-i18n="ai.training.federated.standard">分布式训练</th>
+                            <th class="text-center py-3 px-4 font-semibold text-gray-600" data-i18n="ai.training.federated.mpc">MPC加密分布训练</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr class="border-b border-gray-100 table-row">
+                            <td class="py-3 px-4 font-medium text-gray-900" data-i18n="ai.training.federated.globalVisibility">全局进度可见性</td>
+                            <td class="py-3 px-4 text-center text-gray-600">✓ <span data-i18n="ai.training.federated.fullyVisible">完全可见</span></td>
+                            <td class="py-3 px-4 text-center text-gray-400">✗ <span data-i18n="ai.training.federated.notVisible">不可见</span></td>
+                        </tr>
+                        <tr class="border-b border-gray-100 table-row">
+                            <td class="py-3 px-4 font-medium text-gray-900" data-i18n="ai.training.federated.participantInfo">参与方信息</td>
+                            <td class="py-3 px-4 text-center text-gray-600">✓ <span data-i18n="ai.training.federated.viewable">可查看</span></td>
+                            <td class="py-3 px-4 text-center text-gray-400">✗ <span data-i18n="ai.training.federated.anonymous">匿名</span></td>
+                        </tr>
+                        <tr class="border-b border-gray-100 table-row">
+                            <td class="py-3 px-4 font-medium text-gray-900" data-i18n="ai.training.federated.dataPrivacy">数据隐私保护</td>
+                            <td class="py-3 px-4 text-center text-gray-600">★★★☆☆</td>
+                            <td class="py-3 px-4 text-center text-gray-600">★★★★★</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 table-row">
+                            <td class="py-3 px-4 font-medium text-gray-900" data-i18n="ai.training.federated.trainingEfficiency">训练效率</td>
+                            <td class="py-3 px-4 text-center text-gray-600">★★★★☆</td>
+                            <td class="py-3 px-4 text-center text-gray-600">★★★☆☆</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 table-row">
+                            <td class="py-3 px-4 font-medium text-gray-900" data-i18n="ai.training.federated.computationalComplexity">计算复杂度</td>
+                            <td class="py-3 px-4 text-center text-gray-600">★★☆☆☆</td>
+                            <td class="py-3 px-4 text-center text-gray-600">★★★★☆</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-medium text-gray-900" data-i18n="ai.training.federated.useCase">适用场景</td>
+                            <td class="py-3 px-4 text-center text-gray-600" data-i18n="ai.training.federated.generalBusiness">一般商业应用</td>
+                            <td class="py-3 px-4 text-center text-gray-600" data-i18n="ai.training.federated.sensitiveData">高敏感数据</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tips -->
+        <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
+            <div class="flex items-start">
+                <svg class="w-6 h-6 text-gray-600 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div>
+                    <h4 class="font-semibold text-gray-900 mb-2" data-i18n="ai.training.federated.recommendations">选择建议</h4>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li data-i18n="ai.training.federated.recommendation1">• 如果您希望了解整体训练进展和参与方情况，选择<strong>分布式训练</strong></li>
+                        <li data-i18n="ai.training.federated.recommendation2">• 如果您的数据极其敏感，只关心自己的训练效果，选择<strong>MPC加密分布训练</strong></li>
+                        <li data-i18n="ai.training.federated.recommendation3">• MPC模式下训练时间可能会更长，但隐私保护更加严格</li>
+                        <li data-i18n="ai.training.federated.recommendation4">• 两种模式都确保您的原始数据不会离开本地环境</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 返回主页按钮 -->
+    <button class="homepage-return-btn btn-click" onclick="goHome()" title="返回主页">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+        </svg>
+    </button>
+
+    <script src="../../shared/js/navigation-unified.js?v=20250902"></script>
+    <script src="../../shared/js/theme-manager-unified.js?v=20250827"></script>
+    <script src="../../shared/js/i18n-manager.js"></script>
+    <script>
+        // 确保goHome函数可用（备用实现）
+        window.goHome = window.goHome || function() {
+            console.log('🏠 goHome函数被调用');
+            window.location.href = '/homepage/index.html';
+        };
+                function selectMode(mode) {
+            // 保存选择的模式
+            localStorage.setItem('federatedMode', mode);
+            
+            // 跳转到对应的训练页面
+            if (mode === 'federated') {
+                window.location.href = '/p2pai/pages/federated-training.html';
+            } else if (mode === 'mpc') {
+                window.location.href = '/p2pai/pages/mpc-training.html';
+            }
+        }
+
+        function goBack() {
+            window.location.href = '/p2pai/pages/client-dashboard.html';
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200 + 300);
+            });
+        });
+    </script>
+</body>
+</html>

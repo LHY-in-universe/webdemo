@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-i18n-title="homepage.title">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>OpenTMP多方计算平台</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzM3NDE1MSIvPgo8cGF0aCBkPSJtMTcgOSA0IDQtNCA0LTQtNCA0LTR6IiBmaWxsPSIjZjlmYWZiIiBzdHJva2U9Im5vbmUiLz4KPC9zdmc+" />
+    <!-- ==================== 防白闪脚本 ==================== -->
+    <script>
+        (function() {
+            'use strict';
+            try {
+                // 获取保存的主题或系统偏好
+                const savedTheme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+                
+                // 立即设置主题属性到html元素
+                document.documentElement.setAttribute('data-theme', theme);
+                
+                // 立即设置基础背景色防止白闪
+                if (theme === 'dark') {
+                    document.documentElement.style.backgroundColor = '#1f2937';
+                    document.documentElement.style.color = '#f9fafb';
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.style.backgroundColor = '#ffffff';
+                    document.documentElement.style.color = '#1f2937';
+                    document.documentElement.classList.remove('dark');
+                }
+                
+                console.log('🎨 防白闪: 主题已设置为', theme);
+                
+            } catch (error) {
+                console.warn('⚠️ 防白闪脚本失败:', error);
+                // 降级到深色主题作为默认
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.documentElement.style.backgroundColor = '#1f2937';
+                document.documentElement.style.color = '#f9fafb';
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+    
+    <!-- ==================== 关键CSS预加载 ==================== -->
+    <style>
+        /* 防止白闪的关键样式 */
+        html[data-theme="dark"] {
+            background-color: #1f2937 !important;
+            color: #f9fafb !important;
+        }
+        html[data-theme="light"] {
+            background-color: #ffffff !important;
+            color: #1f2937 !important;
+        }
+        
+        /* 确保body继承正确的背景 */
+        html[data-theme="dark"] body {
+            background-color: #1f2937 !important;
+            color: #f9fafb !important;
+        }
+        html[data-theme="light"] body {
+            background-color: #ffffff !important;
+            color: #1f2937 !important;
+        }
+        
+        /* 平滑过渡 */
+        html, body {
+            transition: background-color 0.3s ease, color 0.3s ease !important;
+        }
+    </style>
+    
+    <!-- 使用本地Tailwind CSS文件来避免生产环境警告 -->
+    <style>
+        /* Tailwind CSS 核心样式 - 仅包含使用的类 */
+        .fixed { position: fixed !important; }
+        .relative { position: relative !important; }
+        .top-4 { top: 1rem !important; }
+        .right-4 { right: 1rem !important; }
+        .z-50 { z-index: 50 !important; }
+        .z-10 { z-index: 10 !important; }
+        .p-4 { padding: 1rem !important; }
+        .px-6 { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+        .py-3 { padding-top: 0.75rem !important; padding-bottom: 0.75rem !important; }
+        .pt-24 { padding-top: 6rem !important; }
+        .pb-20 { padding-bottom: 5rem !important; }
+        .mb-8 { margin-bottom: 2rem !important; }
+        .mb-4 { margin-bottom: 1rem !important; }
+        .mb-20 { margin-bottom: 5rem !important; }
+        .mt-8 { margin-top: 2rem !important; }
+        .mt-6 { margin-top: 1.5rem !important; }
+        .ml-2 { margin-left: 0.5rem !important; }
+        .max-w-6xl { max-width: 72rem !important; }
+        .max-w-4xl { max-width: 56rem !important; }
+        .max-w-3xl { max-width: 48rem !important; }
+        .max-w-sm { max-width: 24rem !important; }
+        .mx-auto { margin-left: auto !important; margin-right: auto !important; }
+        .flex { display: flex !important; }
+        .grid { display: grid !important; }
+        .inline-flex { display: inline-flex !important; }
+        .items-center { align-items: center !important; }
+        .justify-center { justify-content: center !important; }
+        .justify-between { justify-content: space-between !important; }
+        .space-x-4 > :not([hidden]) ~ :not([hidden]) { margin-left: 1rem !important; }
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+        .gap-8 { gap: 2rem !important; }
+        .rounded-lg { border-radius: 0.5rem !important; }
+        .rounded-xl { border-radius: 0.75rem !important; }
+        .rounded-full { border-radius: 9999px !important; }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important; }
+        .transition-all { transition-property: all !important; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important; transition-duration: 150ms !important; }
+        .duration-300 { transition-duration: 300ms !important; }
+        .cursor-pointer { cursor: pointer !important; }
+        .text-center { text-align: center !important; }
+        .text-xl { font-size: 1.25rem !important; line-height: 1.75rem !important; }
+        .text-2xl { font-size: 1.5rem !important; line-height: 2rem !important; }
+        .text-5xl { font-size: 3rem !important; line-height: 1 !important; }
+        .text-sm { font-size: 0.875rem !important; line-height: 1.25rem !important; }
+        .font-bold { font-weight: 700 !important; }
+        .font-medium { font-weight: 500 !important; }
+        .font-semibold { font-weight: 600 !important; }
+        .font-extrabold { font-weight: 800 !important; }
+        .leading-tight { line-height: 1.25 !important; }
+        .leading-relaxed { line-height: 1.625 !important; }
+        .w-4 { width: 1rem !important; }
+        .w-6 { width: 1.5rem !important; }
+        .w-10 { width: 2.5rem !important; }
+        .w-12 { width: 3rem !important; }
+        .w-24 { width: 6rem !important; }
+        .h-1 { height: 0.25rem !important; }
+        .h-4 { height: 1rem !important; }
+        .h-6 { height: 1.5rem !important; }
+        .h-10 { height: 2.5rem !important; }
+        .h-12 { height: 3rem !important; }
+        .bg-green-500 { background-color: rgb(34 197 94) !important; }
+        .bg-red-500 { background-color: rgb(239 68 68) !important; }
+        .bg-yellow-500 { background-color: rgb(234 179 8) !important; }
+        .bg-blue-500 { background-color: rgb(59 130 246) !important; }
+        .text-white { color: rgb(255 255 255) !important; }
+        .text-gray-900 { color: rgb(17 24 39) !important; }
+        .text-gray-600 { color: rgb(75 85 99) !important; }
+        .text-gray-500 { color: rgb(107 114 128) !important; }
+        .text-gray-100 { color: rgb(243 244 246) !important; }
+        .text-gray-700 { color: rgb(55 65 81) !important; }
+        .border-b { border-bottom-width: 1px !important; }
+        .border-gray-200\/20 { border-color: rgb(229 231 235 / 0.2) !important; }
+        .backdrop-blur-xl { backdrop-filter: blur(24px) !important; }
+        .bg-opacity-80 { background-color: rgb(var(--bg-primary) / 0.8) !important; }
+        
+        @media (min-width: 768px) {
+            .md\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+            .md\\:text-7xl { font-size: 4.5rem !important; line-height: 1 !important; }
+            .md\\:text-2xl { font-size: 1.5rem !important; line-height: 2rem !important; }
+        }
+        
+        /* 其他必要的工具类 */
+        .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)) !important; }
+        .from-transparent { --tw-gradient-from: transparent !important; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, transparent) !important; }
+        .via-gray-500 { --tw-gradient-stops: var(--tw-gradient-from), rgb(107 114 128), var(--tw-gradient-to, transparent) !important; }
+        .to-transparent { --tw-gradient-to: transparent !important; }
+    </style>
+    <link rel="stylesheet" href="../shared/css/unified-styles.css?v=1756673001">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        html, body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        /* 让统一CSS接管主题管理 */
+        .hero-gradient {
+            background: var(--bg-gradient);
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* 确保组件有正确的背景 */
+        .premium-module-card {
+            background: var(--bg-primary) !important;
+            border: none !important;
+        }
+
+        /* 导航栏样式由统一CSS处理 */
+        
+        /* 移除背景装饰 */
+        
+        
+        /* 企业级logo区域 */
+        .enterprise-logo {
+            background: linear-gradient(135deg, var(--gray-600) 0%, var(--gray-700) 100%);
+            box-shadow: 
+                0 20px 40px -12px rgba(82, 82, 82, 0.25),
+                0 8px 16px -8px rgba(82, 82, 82, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 高级模块卡片 - 添加圆角 */
+        .premium-module-card,
+        html .premium-module-card,
+        body .premium-module-card {
+            position: relative !important;
+            background: var(--bg-primary) !important;
+            border: none !important;
+            border-radius: 16px !important;
+            -webkit-border-radius: 16px !important;
+            -moz-border-radius: 16px !important;
+            padding: 40px 32px !important;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            overflow: hidden !important;
+        }
+        
+        .premium-module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gray-600) 0%, var(--gray-700) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .premium-module-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .premium-module-card:hover {
+            box-shadow: 
+                0 32px 64px -8px rgba(82, 82, 82, 0.25),
+                0 16px 32px -8px rgba(82, 82, 82, 0.15),
+                0 8px 16px -8px rgba(82, 82, 82, 0.1);
+            border-color: var(--gray-500);
+        }
+        
+        /* 图标容器升级 - 添加圆角 */
+        .premium-icon-container {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+            border-radius: 12px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 8px 16px -4px rgba(82, 82, 82, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .premium-module-card:hover .premium-icon-container {
+            background: linear-gradient(135deg, var(--gray-600) 0%, var(--gray-700) 100%);
+            box-shadow: 
+                0 16px 32px -8px rgba(82, 82, 82, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        .premium-module-card:hover .premium-icon-container svg {
+            color: var(--gray-100);
+        }
+        
+        /* 标题样式 - 使用主题变量 */
+        .hero-title {
+            color: var(--text-primary) !important;
+            font-weight: 900 !important;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+        }
+        
+        [data-theme="dark"] .hero-title {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--gray-400) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleShine 3s ease-in-out infinite alternate;
+        }
+
+        .hero-subtitle {
+            color: var(--text-secondary) !important;
+        }
+
+        /* 移除硬编码的颜色，统一使用主题变量 */
+        
+        @keyframes titleShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        /* 子标题效果 */
+        .hero-subtitle {
+            position: relative;
+            padding-left: 24px;
+        }
+        
+        .hero-subtitle::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--gray-600) 0%, var(--gray-700) 100%);
+            border-radius: 2px;
+        }
+        
+        /* 模块描述文字效果 */
+        .module-description {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .module-description::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, var(--gray-600) 50%, transparent 100%);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .premium-module-card:hover .module-description::after {
+            width: 80%;
+        }
+        
+        /* 响应式优化 */
+        @media (max-width: 768px) {
+            .premium-module-card {
+                padding: 32px 24px;
+            }
+            
+            .premium-icon-container {
+                width: 64px;
+                height: 64px;
+                border-radius: 16px;
+            }
+        }
+        
+        /* 加载动画 */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 错开动画 */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* 保留特殊的主页样式，其他深色模式样式已移至unified-styles.css */
+        .feature-icon-bg {
+            background: linear-gradient(135deg, var(--gray-100), var(--gray-200));
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .feature-icon-bg {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary)) !important;
+        }
+
+        .feature-icon-color {
+            color: var(--text-secondary);
+        }
+
+        /* 模块卡片特殊样式 - 深色模式圆角 */
+        [data-theme="dark"] .premium-module-card,
+        html[data-theme="dark"] .premium-module-card,
+        body[data-theme="dark"] .premium-module-card {
+            background: var(--bg-primary) !important;
+            border: none !important;
+            border-radius: 16px !important;
+            -webkit-border-radius: 16px !important;
+            -moz-border-radius: 16px !important;
+        }
+
+        [data-theme="dark"] .bg-gradient-to-r {
+            background: linear-gradient(90deg, transparent, var(--text-secondary), transparent) !important;
+        }
+
+        /* 恢复卡片圆角 */
+        .premium-module-card *,
+        .premium-module-card .premium-icon-container,
+        .premium-module-card .module-description,
+        .premium-module-card div,
+        .premium-module-card span,
+        .premium-module-card p,
+        .premium-module-card h3,
+        html .premium-module-card *,
+        body .premium-module-card * {
+            border-radius: 8px !important;
+            -webkit-border-radius: 8px !important;
+            -moz-border-radius: 8px !important;
+        }
+
+        /* 图标容器圆角 */
+        .premium-icon-container,
+        html .premium-icon-container,
+        body .premium-icon-container,
+        .premium-module-card .premium-icon-container {
+            border-radius: 12px !important;
+            -webkit-border-radius: 12px !important;
+            -moz-border-radius: 12px !important;
+        }
+
+        /* 卡片本身圆角 - 最高优先级 */
+        .premium-module-card,
+        html .premium-module-card,
+        body .premium-module-card,
+        div.premium-module-card {
+            border-radius: 16px !important;
+            -webkit-border-radius: 16px !important;
+            -moz-border-radius: 16px !important;
+        }
+
+        /* 完全移除所有边框 - 直接删除而不是圆角 */
+        .premium-module-card *,
+        .premium-module-card .module-description,
+        .premium-module-card p,
+        .premium-module-card span,
+        .premium-module-card div,
+        html .premium-module-card *,
+        body .premium-module-card *,
+        .premium-module-card,
+        html .premium-module-card,
+        body .premium-module-card {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            background-color: transparent !important;
+        }
+
+        /* 只为主卡片添加背景和圆角，内部元素完全透明 */
+        .premium-module-card {
+            background: var(--bg-elevated) !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+            border-radius: 16px !important;
+            border: none !important;
+        }
+
+        /* 强制删除描述框的所有边框和背景 */
+        .module-description,
+        p.module-description,
+        .premium-module-card .module-description,
+        html .module-description,
+        body .module-description,
+        html p.module-description,
+        body p.module-description {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            background: none !important;
+            background-color: transparent !important;
+            background-image: none !important;
+            backdrop-filter: none !important;
+        }
+
+        /* 移除所有可能的伪元素边框 */
+        .module-description::before,
+        .module-description::after {
+            display: none !important;
+            border: none !important;
+            background: none !important;
+        }
+
+        /* 强制移除容器边框 */
+        .flex,
+        div.flex,
+        .flex.flex-row {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- 高级导航栏 -->
+    <nav class="navbar backdrop-blur-xl bg-opacity-80 border-b border-gray-200/20">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="enterprise-logo w-12 h-12 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-gray-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <div class="navbar-brand text-xl font-bold">
+                    <span data-i18n="homepage.title">OpenTMP多方计算平台</span>
+                </div>
+            </div>
+            
+            <div class="navbar-nav">
+                <button class="theme-toggle" title="切换主题" aria-label="切换主题">
+                    <span data-theme-icon>🌙</span>
+                </button>
+                <button class="language-toggle" title="切换语言">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="relative z-10">
+        <!-- 英雄区域 -->
+        <div class="max-w-6xl mx-auto px-6 pt-24 pb-20">
+            <!-- 主标题区域 -->
+            <div class="text-center mb-20 fade-in-up">
+                <h1 class="hero-title text-5xl md:text-7xl font-extrabold mb-8 leading-tight" data-i18n="homepage.title">
+                    OpenTMP多方计算平台
+                </h1>
+                <p class="hero-subtitle text-xl md:text-2xl font-medium max-w-3xl mx-auto leading-relaxed" style="color: var(--text-secondary) !important; font-weight: 600 !important;" data-i18n="homepage.subtitle">
+                    安全、高效的分布式机器学习解决方案
+                </p>
+                <div class="mt-8 flex justify-center">
+                    <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gray-500 to-transparent"></div>
+                </div>
+            </div>
+
+            <!-- 模块选择区域 -->
+            <div class="flex flex-row gap-8 max-w-4xl mx-auto justify-center" style="border: none !important; outline: none !important; box-shadow: none !important;">
+                <!-- P2P AI模块 -->
+                <div class="premium-module-card cursor-pointer fade-in-up delay-1" onclick="selectBusinessType('p2pai')">
+                    <div class="text-center">
+                        <div class="premium-icon-container">
+                            <svg class="w-10 h-10 text-gray-700 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-900" data-i18n="homepage.modules.p2pai.title">P2P AI训练</h3>
+                        <p class="module-description text-gray-600 font-medium leading-relaxed" data-i18n="homepage.modules.p2pai.description">
+                            点对点联邦学习与多方计算
+                        </p>
+                        <div class="mt-6 inline-flex items-center text-sm font-semibold text-gray-500 transition-colors duration-300 group-hover:text-gray-700">
+                            <span data-i18n="homepage.enterModule">进入模块</span>
+                            <svg class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EdgeAI模块 -->
+                <div class="premium-module-card cursor-pointer fade-in-up delay-2" onclick="selectBusinessType('edgeai')">
+                    <div class="text-center">
+                        <div class="premium-icon-container">
+                            <svg class="w-10 h-10 text-gray-700 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-900" data-i18n="homepage.modules.edgeai.title">边缘AI智能</h3>
+                        <p class="module-description text-gray-600 font-medium leading-relaxed" data-i18n="homepage.modules.edgeai.description">
+                            边缘设备智能训练与可视化管理
+                        </p>
+                        <div class="mt-6 inline-flex items-center text-sm font-semibold text-gray-500 transition-colors duration-300 group-hover:text-gray-700">
+                            <span data-i18n="homepage.enterModule">进入模块</span>
+                            <svg class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+           
+        </div>
+    </div>
+
+    <!-- 脚本文件 -->
+    <script src="../shared/js/utils.js?v=20250901"></script>
+    <script src="../shared/js/common-utils.js?v=20250901"></script>
+    <script src="../shared/js/navigation-unified.js?v=20250902"></script>
+    <script src="../shared/js/theme-manager-unified.js?v=20250827"></script>
+    <!-- <script src="../../shared/js/router-unified.js?v=20250827"></script> -->
+    <script src="../shared/js/i18n-manager.js?v=20250831004"></script>
+    <script>
+        function selectBusinessType(type) {
+            localStorage.setItem('businessType', type);
+            localStorage.setItem('selectedModule', type);
+            
+            if (type === 'p2pai') {
+                window.location.href = '/p2pai/pages/user-type-select.html';
+            } else if (type === 'edgeai') {
+                window.location.href = '/edgeai/pages/login.html';
+            }
+        }
+
+
+        window.onload = function() {
+            localStorage.removeItem('userType');
+            localStorage.removeItem('userData');
+            
+            // 确保主题管理器已初始化
+            setTimeout(() => {
+                if (window.unifiedThemeManager) {
+                    console.log('主题管理器已初始化，当前主题:', window.unifiedThemeManager.getCurrentTheme());
+                    console.log('HTML data-theme 属性:', document.documentElement.getAttribute('data-theme'));
+                    
+                    // 测试主题切换功能
+                    window.testThemeSwitch = () => {
+                        const current = window.unifiedThemeManager.getCurrentTheme();
+                        const newTheme = current === 'light' ? 'dark' : 'light';
+                        console.log(`切换主题: ${current} → ${newTheme}`);
+                        window.unifiedThemeManager.setTheme(newTheme);
+                    };
+                    
+                    console.log('可以在控制台运行 testThemeSwitch() 来测试主题切换');
+                } else {
+                    console.warn('主题管理器未正确初始化');
+                    
+                    // 尝试手动创建实例
+                    if (typeof UnifiedThemeManager !== 'undefined') {
+                        console.log('尝试手动创建主题管理器实例...');
+                        window.unifiedThemeManager = new UnifiedThemeManager();
+                        window.themeManager = window.unifiedThemeManager;
+                    }
+                }
+            }, 500);
+        };
+    </script>
+</body>
+</html>
