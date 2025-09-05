@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-i18n-title="ai.training.mpc.title">
+<html lang="en" data-i18n-title="p2pai.dashboard.training.mpc.title">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,15 +19,15 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
                 </button>
-                <span data-i18n="ai.training.federated.mpcTitle">MPC联邦学习训练</span>
+                <span data-i18n="p2pai.dashboard.training.federated.mpcTitle">MPC联邦学习训练</span>
             </div>
             
             <div class="navbar-nav">
                 <span id="userInfo" class="text-sm text-gray-600"></span>
-                <button class="theme-toggle" title="切换主题">
-                    <span>🌙</span>
+                <button class="theme-toggle" title="Toggle Theme">
+                    <span data-theme-icon>🌙</span>
                 </button>
-                <button class="language-toggle" title="切换语言">EN</button>
+                <button class="language-toggle" title="Switch Language">EN</button>
                 <button onclick="logout()" class="btn btn-secondary text-sm btn-click">
                     <span data-i18n="common.logout">退出登录</span>
                 </button>
@@ -47,11 +47,11 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n="ai.training.federated.mpc">MPC联邦学习</h3>
-                        <p class="text-gray-600" data-i18n="ai.training.federated.mpcDesc">多方安全计算模式，提供最高级别的隐私保护，只能查看自己的训练进度</p>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2" data-i18n="p2pai.dashboard.training.federated.mpc">MPC联邦学习</h3>
+                <p class="text-gray-600" data-i18n="p2pai.dashboard.training.federated.mpcDesc">多方安全计算模式，提供最高级别的隐私保护，只能查看自己的训练进度</p>
                         <div class="mt-3 flex items-center text-sm">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800" data-i18n="ai.training.federated.cryptographicSecurity">密码学安全保障</span>
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 ml-2" data-i18n="ai.training.federated.personalProgress">只显示个人训练进度</span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800" data-i18n="p2pai.dashboard.training.federated.cryptographicSecurity">Cryptographic Security Guarantee</span>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 ml-2" data-i18n="p2pai.dashboard.training.federated.personalProgress">Personal Training Progress Only</span>
                         </div>
                     </div>
                 </div>
@@ -66,8 +66,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
                     </svg>
                     <div>
-                        <p class="text-sm text-yellow-800 font-medium" data-i18n="ai.training.mpc.privacyNotice">隐私保护说明</p>
-                        <p class="text-sm text-yellow-700 mt-1" data-i18n="ai.training.mpc.privacyDescription">在MPC模式下，您无法查看其他参与方的信息和全局统计数据，系统使用零知识证明确保完全的隐私保护。</p>
+                        <p class="text-sm text-yellow-800 font-medium" data-i18n="p2pai.dashboard.training.mpc.privacyNotice">Privacy Protection Notice</p>
+                <p class="text-sm text-yellow-700 mt-1" data-i18n="p2pai.dashboard.training.mpc.privacyDescription">In MPC mode, you cannot view information and global statistics of other participants. The system uses zero-knowledge proofs to ensure complete privacy protection.</p>
                     </div>
                 </div>
             </div>
@@ -76,28 +76,28 @@
         <!-- Training Configuration -->
         <div class="mb-8">
             <div class="card p-6 fade-in-up delay-3">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6" data-i18n="ai.training.local.trainingConfig">训练配置</h2>
+                <h2 class="text-2xl font-bold text-gray-900 mb-6" data-i18n="p2pai.dashboard.training.local.trainingConfig">训练配置</h2>
                 
                 <div class="grid md:grid-cols-2 gap-6">
                     <!-- Model Configuration -->
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="ai.training.local.modelConfig">模型配置</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.local.modelConfig">模型配置</h3>
                         <div class="space-y-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="ai.training.local.modelType">模型类型</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="p2pai.dashboard.training.local.modelType">模型类型</label>
                                 <select class="input" id="modelType">
-                                    <option value="cnn" data-i18n="ai.training.local.cnn">卷积神经网络 (CNN)</option>
-                                    <option value="rnn" data-i18n="ai.training.local.rnn">循环神经网络 (RNN)</option>
-                                    <option value="transformer" data-i18n="ai.training.local.transformer">Transformer</option>
-                                    <option value="mlp" data-i18n="ai.training.local.mlp">多层感知机 (MLP)</option>
+                                    <option value="cnn" data-i18n="p2pai.dashboard.training.local.cnn">卷积神经网络 (CNN)</option>
+                                    <option value="rnn" data-i18n="p2pai.dashboard.training.local.rnn">循环神经网络 (RNN)</option>
+                                    <option value="transformer" data-i18n="p2pai.dashboard.training.local.transformer">Transformer</option>
+                                    <option value="mlp" data-i18n="p2pai.dashboard.training.local.mlp">多层感知机 (MLP)</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="ai.training.local.learningRate">学习率</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="p2pai.dashboard.training.local.learningRate">学习率</label>
                                 <input type="number" class="input" value="0.001" step="0.0001" min="0.0001" max="0.1" id="learningRate">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="ai.training.local.batchSize">批次大小</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="p2pai.dashboard.training.local.batchSize">批次大小</label>
                                 <select class="input" id="batchSize">
                                     <option value="16">16</option>
                                     <option value="32" selected>32</option>
@@ -106,7 +106,7 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="ai.training.local.epochs">训练轮数</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="p2pai.dashboard.training.local.epochs">训练轮数</label>
                                 <input type="number" class="input" value="10" min="1" max="100" id="epochs">
                             </div>
                         </div>
@@ -114,34 +114,34 @@
 
                     <!-- MPC Configuration -->
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="ai.training.mpc.mpcConfig">MPC配置</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.mpc.mpcConfig">MPC配置</h3>
                         <div class="space-y-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="ai.training.mpc.secretSharing">秘密共享方案</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="p2pai.dashboard.training.mpc.secretSharing">秘密共享方案</label>
                                 <select class="input" id="secretSharing">
-                                    <option value="shamir" data-i18n="ai.training.mpc.shamir">Shamir秘密共享</option>
-                                    <option value="additive" data-i18n="ai.training.mpc.additive">加法秘密共享</option>
-                                    <option value="replicated" data-i18n="ai.training.mpc.replicated">复制秘密共享</option>
+                                    <option value="shamir" data-i18n="p2pai.dashboard.training.mpc.shamir">Shamir秘密共享</option>
+                                    <option value="additive" data-i18n="p2pai.dashboard.training.mpc.additive">加法秘密共享</option>
+                                    <option value="replicated" data-i18n="p2pai.dashboard.training.mpc.replicated">复制秘密共享</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="ai.training.mpc.threshold">门限值</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="p2pai.dashboard.training.mpc.threshold">门限值</label>
                                 <input type="number" class="input" value="2" min="2" max="5" id="threshold">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="ai.training.mpc.securityLevel">安全等级</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="p2pai.dashboard.training.mpc.securityLevel">安全等级</label>
                                 <select class="input" id="securityLevel">
-                                    <option value="128" data-i18n="ai.training.mpc.security128">128位安全</option>
-                                    <option value="192" data-i18n="ai.training.mpc.security192">192位安全</option>
-                                    <option value="256" selected data-i18n="ai.training.mpc.security256">256位安全</option>
+                                    <option value="128" data-i18n="p2pai.dashboard.training.mpc.security128">128位安全</option>
+                                    <option value="192" data-i18n="p2pai.dashboard.training.mpc.security192">192位安全</option>
+                                    <option value="256" selected data-i18n="p2pai.dashboard.training.mpc.security256">256位安全</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="ai.training.mpc.verificationMethod">验证方法</label>
+                                <label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="p2pai.dashboard.training.mpc.verificationMethod">验证方法</label>
                                 <select class="input" id="verificationMethod">
-                                    <option value="zkp" data-i18n="ai.training.mpc.zkProof">零知识证明</option>
-                                    <option value="commit" data-i18n="ai.training.mpc.commitment">承诺验证</option>
-                                    <option value="mac" data-i18n="ai.training.mpc.mac">MAC验证</option>
+                                    <option value="zkp" data-i18n="p2pai.dashboard.training.mpc.zkProof">零知识证明</option>
+                                    <option value="commit" data-i18n="p2pai.dashboard.training.mpc.commitment">承诺验证</option>
+                                    <option value="mac" data-i18n="p2pai.dashboard.training.mpc.mac">MAC验证</option>
                                 </select>
                             </div>
                         </div>
@@ -152,17 +152,17 @@
                 <div class="flex justify-between items-center mt-8">
                     <div class="flex space-x-4">
                         <button id="startTrainingBtn" onclick="startTraining()" class="btn btn-primary btn-click">
-                            <span data-i18n="ai.training.local.startTraining">开始训练</span>
+                            <span data-i18n="p2pai.dashboard.training.local.startTraining">开始训练</span>
                         </button>
                         <button id="pauseTrainingBtn" onclick="pauseTraining()" class="btn btn-secondary hidden btn-click">
-                            <span data-i18n="ai.training.local.pauseTraining">暂停训练</span>
+                            <span data-i18n="p2pai.dashboard.training.local.pauseTraining">Pause Training</span>
                         </button>
                         <button id="stopTrainingBtn" onclick="stopTraining()" class="btn btn-secondary hidden btn-click">
-                            <span data-i18n="ai.training.local.stopTraining">停止训练</span>
+                            <span data-i18n="p2pai.dashboard.training.local.stopTraining">停止训练</span>
                         </button>
                     </div>
                     <button onclick="resetConfig()" class="btn btn-secondary btn-click">
-                        <span data-i18n="ai.training.federated.resetConfig">重置配置</span>
+                        <span data-i18n="p2pai.dashboard.training.federated.resetConfig">重置配置</span>
                     </button>
                 </div>
             </div>
@@ -172,27 +172,27 @@
         <div class="grid lg:grid-cols-2 gap-8 mb-8">
             <!-- Personal Training Progress -->
             <div class="card p-6 fade-in-up delay-3">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="ai.training.mpc.personalStatus">个人训练状态</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.mpc.personalStatus">个人训练状态</h3>
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-gray-600" data-i18n="ai.training.local.currentStatus">当前状态</span>
-                        <span id="trainingStatus" class="text-sm font-semibold text-gray-900" data-i18n="ai.training.local.notStarted">● 未开始</span>
+                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.currentStatus">当前状态</span>
+                        <span id="trainingStatus" class="text-sm font-semibold text-gray-900" data-i18n="p2pai.dashboard.training.local.notStarted">● 未开始</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-gray-600" data-i18n="ai.training.mpc.mpcRound">MPC计算轮次</span>
+                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.mpc.mpcRound">MPC计算轮次</span>
                         <span id="mpcRound" class="text-sm font-semibold text-gray-900">0/5</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-gray-600" data-i18n="ai.training.mpc.connectionStatus">连接状态</span>
-                        <span id="connectionStatus" class="text-sm font-semibold text-gray-900" data-i18n="ai.training.mpc.waiting">等待连接</span>
+                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.mpc.connectionStatus">连接状态</span>
+                        <span id="connectionStatus" class="text-sm font-semibold text-gray-900" data-i18n="p2pai.dashboard.training.mpc.waiting">等待连接</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-gray-600" data-i18n="ai.training.local.trainingTime">训练时间</span>
+                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.trainingTime">训练时间</span>
                         <span id="trainingTime" class="text-sm font-semibold text-gray-900">00:00:00</span>
                     </div>
                     <div>
                         <div class="flex items-center justify-between mb-2">
-                            <span class="text-sm font-medium text-gray-600" data-i18n="ai.training.local.progress">进度</span>
+                            <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.progress">进度</span>
                             <span id="progressPercentage" class="text-sm font-semibold text-gray-900">0%</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-2">
@@ -204,23 +204,23 @@
 
             <!-- Personal Performance Metrics -->
             <div class="card p-6 fade-in-up delay-3">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="ai.training.mpc.personalMetrics">个人性能指标</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.mpc.personalMetrics">Personal Performance Metrics</h3>
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-gray-600" data-i18n="ai.training.local.currentAccuracy">当前准确率</span>
+                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.currentAccuracy">Current Accuracy</span>
                         <span id="currentAccuracy" class="text-sm font-semibold text-gray-900">0%</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-gray-600" data-i18n="ai.training.local.currentLoss">当前损失</span>
+                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.currentLoss">Current Loss</span>
                         <span id="currentLoss" class="text-sm font-semibold text-gray-900">0.0</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-gray-600" data-i18n="ai.training.local.bestAccuracy">最佳准确率</span>
+                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.bestAccuracy">Best Accuracy</span>
                         <span id="bestAccuracy" class="text-sm font-semibold text-gray-900">0%</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-gray-600" data-i18n="ai.training.mpc.verificationStatus">验证状态</span>
-                        <span id="verificationStatus" class="text-sm font-semibold text-gray-900" data-i18n="ai.training.mpc.notVerified">未验证</span>
+                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.mpc.verificationStatus">Verification Status</span>
+                        <span id="verificationStatus" class="text-sm font-semibold text-gray-900" data-i18n="p2pai.dashboard.training.mpc.notVerified">Not Verified</span>
                     </div>
                 </div>
             </div>
@@ -228,7 +228,7 @@
 
         <!-- Personal Training Chart -->
         <div class="card p-6 mb-8 fade-in-up delay-6">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="ai.training.mpc.personalTrainingMetrics">个人训练指标</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.mpc.personalTrainingMetrics">Personal Training Metrics</h3>
             <div class="h-80">
                 <canvas id="trainingChart"></canvas>
             </div>
@@ -236,19 +236,19 @@
 
         <!-- MPC Security Information -->
         <div class="card p-6 fade-in-up delay-3">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="ai.training.mpc.securityInfo">MPC安全信息</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.mpc.securityInfo">MPC Security Information</h3>
             <div class="grid md:grid-cols-3 gap-6">
                 <div class="text-center p-4 bg-gray-50 rounded-lg">
-                    <div class="text-lg font-bold text-gray-700" id="encryptionStatus" data-i18n="ai.training.mpc.encrypted">已加密</div>
-                    <div class="text-sm text-gray-500" data-i18n="ai.training.mpc.dataEncryption">数据加密状态</div>
+                    <div class="text-lg font-bold text-gray-700" id="encryptionStatus" data-i18n="p2pai.dashboard.training.mpc.encrypted">Encrypted</div>
+                    <div class="text-sm text-gray-500" data-i18n="p2pai.dashboard.training.mpc.dataEncryption">Data Encryption Status</div>
                 </div>
                 <div class="text-center p-4 bg-gray-50 rounded-lg">
                     <div class="text-lg font-bold text-gray-700" id="sharesStatus">0/3</div>
-                    <div class="text-sm text-gray-500" data-i18n="ai.training.mpc.secretShares">秘密份额状态</div>
+                    <div class="text-sm text-gray-500" data-i18n="p2pai.dashboard.training.mpc.secretShares">Secret Shares Status</div>
                 </div>
                 <div class="text-center p-4 bg-gray-50 rounded-lg">
-                    <div class="text-lg font-bold text-gray-700" id="proofStatus" data-i18n="ai.training.mpc.valid">有效</div>
-                    <div class="text-sm text-gray-500" data-i18n="ai.training.mpc.zeroKnowledgeProof">零知识证明</div>
+                    <div class="text-lg font-bold text-gray-700" id="proofStatus" data-i18n="p2pai.dashboard.training.mpc.valid">Valid</div>
+                    <div class="text-sm text-gray-500" data-i18n="p2pai.dashboard.training.mpc.zeroKnowledgeProof">Zero-Knowledge Proof</div>
                 </div>
             </div>
             
@@ -258,16 +258,16 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     <div>
-                        <p class="text-sm text-green-800 font-medium" data-i18n="ai.training.mpc.securityGuarantee">安全保证</p>
-                        <p class="text-sm text-green-700 mt-1" data-i18n="ai.training.mpc.securityDescription">您的数据在整个训练过程中保持加密状态，任何参与方都无法获得您的原始数据或推断出敏感信息。</p>
+                        <p class="text-sm text-green-800 font-medium" data-i18n="p2pai.dashboard.training.mpc.securityGuarantee">Security Guarantee</p>
+                        <p class="text-sm text-green-700 mt-1" data-i18n="p2pai.dashboard.training.mpc.securityDescription">Your data remains encrypted throughout the entire training process. No participant can obtain your raw data or infer sensitive information.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 返回主页按钮 -->
-    <button class="homepage-return-btn btn-click" onclick="goHome()" title="返回主页">
+    <!-- Back to Home Button -->
+    <button class="homepage-return-btn btn-click" onclick="goHome()" title="Back to Home">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
         </svg>
@@ -275,7 +275,7 @@
 
     <script src="../../shared/js/navigation-unified.js?v=20250902"></script>
     <script src="../../shared/js/theme-manager-unified.js?v=20250827"></script>
-    <script src="../../shared/js/i18n-manager.js"></script>
+    <script src="../../shared/js/i18n-manager.js?v=20250905"></script>
     <script>
         // 确保goHome函数可用（备用实现）
         window.goHome = window.goHome || function() {
@@ -302,9 +302,9 @@
             currentTrainingStatus = 'training';
             trainingStartTime = Date.now();
             
-            document.getElementById('trainingStatus').textContent = '● 训练中';
-            document.getElementById('connectionStatus').textContent = '已连接';
-            document.getElementById('verificationStatus').textContent = '验证中';
+            document.getElementById('trainingStatus').textContent = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.training.local.training') : '● Training';
+            document.getElementById('connectionStatus').textContent = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.training.mpc.connected') : 'Connected';
+            document.getElementById('verificationStatus').textContent = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.training.mpc.verifying') : 'Verifying';
             document.getElementById('startTrainingBtn').classList.add('hidden');
             document.getElementById('pauseTrainingBtn').classList.remove('hidden');
             document.getElementById('stopTrainingBtn').classList.remove('hidden');
@@ -315,7 +315,7 @@
             // 模拟MPC设置
             setTimeout(() => {
                 document.getElementById('sharesStatus').textContent = '3/3';
-                document.getElementById('verificationStatus').textContent = '已验证';
+                document.getElementById('verificationStatus').textContent = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.training.mpc.verified') : 'Verified';
             }, 3000);
         }
 
@@ -323,13 +323,13 @@
             if (currentTrainingStatus === 'training') {
                 currentTrainingStatus = 'paused';
                 clearInterval(trainingInterval);
-                document.getElementById('trainingStatus').textContent = '● 已暂停';
-                document.getElementById('pauseTrainingBtn').textContent = '继续训练';
+                document.getElementById('trainingStatus').textContent = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.training.local.paused') : '● Paused';
+            document.getElementById('pauseTrainingBtn').textContent = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.training.local.continueTraining') : 'Continue Training';
             } else if (currentTrainingStatus === 'paused') {
                 currentTrainingStatus = 'training';
                 trainingInterval = setInterval(updateTrainingProgress, 1000);
-                document.getElementById('trainingStatus').textContent = '● 训练中';
-                document.getElementById('pauseTrainingBtn').textContent = '暂停训练';
+                document.getElementById('trainingStatus').textContent = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.training.local.training') : '● Training';
+            document.getElementById('pauseTrainingBtn').textContent = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.training.local.pauseTraining') : 'Pause Training';
             }
         }
 
@@ -337,8 +337,8 @@
             currentTrainingStatus = 'stopped';
             clearInterval(trainingInterval);
             
-            document.getElementById('trainingStatus').textContent = '● 已停止';
-            document.getElementById('connectionStatus').textContent = '已断开';
+            document.getElementById('trainingStatus').textContent = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.training.local.stopped') : '● Stopped';
+            document.getElementById('connectionStatus').textContent = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.training.mpc.disconnected') : 'Disconnected';
             document.getElementById('startTrainingBtn').classList.remove('hidden');
             document.getElementById('pauseTrainingBtn').classList.add('hidden');
             document.getElementById('stopTrainingBtn').classList.add('hidden');
@@ -388,8 +388,8 @@
             if (progress >= 1) {
                 currentTrainingStatus = 'completed';
                 clearInterval(trainingInterval);
-                document.getElementById('trainingStatus').textContent = '● 训练完成';
-                document.getElementById('verificationStatus').textContent = '完全验证';
+                document.getElementById('trainingStatus').textContent = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.training.local.completed') : '● Training Completed';
+            document.getElementById('verificationStatus').textContent = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.training.mpc.fullyVerified') : 'Fully Verified';
                 document.getElementById('startTrainingBtn').classList.remove('hidden');
                 document.getElementById('pauseTrainingBtn').classList.add('hidden');
                 document.getElementById('stopTrainingBtn').classList.add('hidden');

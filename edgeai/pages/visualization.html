@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EdgeAI可视化 v2.1</title>
+    <title>EdgeAI Visualization v2.1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../shared/css/unified-styles.css?v=1756673003">
     
@@ -171,7 +171,7 @@
             }
         }
         
-        /* 训练完成状态样式 */
+        /* Training completion status styles */
         .training-complete-title {
             font-size: 32px;
             font-weight: bold;
@@ -206,7 +206,7 @@
             }
         }
         
-        /* 深色模式适配 */
+        /* Dark mode adaptation */
         [data-theme="dark"] .visualization-container {
             background: rgba(31, 41, 55, 0.8);
             border-color: rgba(75, 85, 99, 0.4);
@@ -644,49 +644,49 @@
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
-                    返回
+                    Back
                 </button>
-                <span data-i18n="edgeai.visualization.title">项目可视化</span>
+                <span data-i18n="edgeai.visualization.title">Project Visualization</span>
                 <span id="projectName" class="ml-2 text-sm text-gray-600"></span>
             </div>
             
             <div class="navbar-nav">
-                <button class="theme-toggle" title="切换主题">
+                <button class="theme-toggle" title="Toggle Theme">
                     <span>🌙</span>
                 </button>
-                <button class="language-toggle" title="切换语言">EN</button>
+                <button class="language-toggle" title="Switch Language">EN</button>
             </div>
         </div>
     </nav>
 
     <div class="max-w-7xl mx-auto px-6 py-8 content-area">
-        <!-- 项目信息区域 -->
+        <!-- Project Information Area -->
         <div class="project-info-header mb-8 fade-in-up">
             <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
                 <div class="flex items-start justify-between mb-6">
                     <div class="flex-1">
-                        <h2 id="projectTitle" class="text-2xl font-bold text-gray-900 mb-2">智能制造监控系统</h2>
-                        <p id="projectDescription" class="text-gray-600 mb-4">基于EdgeAI的工厂设备实时监控和预测维护系统，实现设备状态智能分析和故障预警。</p>
+                        <h2 id="projectTitle" class="text-2xl font-bold text-gray-900 mb-2">Strawberry Robot Agricultural Training</h2>
+                        <p id="projectDescription" class="text-gray-600 mb-4">EdgeAI-based strawberry harvesting robot training system using LLM models for intelligent fruit recognition and automated picking optimization.</p>
                         
                         <div class="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm">
                             <div class="flex items-center whitespace-nowrap">
                                 <div id="statusDot" class="w-2 h-2 bg-green-500 rounded-full mr-2 flex-shrink-0"></div>
-                                <span class="text-gray-500">状态：</span>
-                                <span id="projectStatus" class="font-semibold text-green-600 ml-2">训练中</span>
+                                <span class="text-gray-500">Status:</span>
+                                <span id="projectStatus" class="font-semibold text-green-600 ml-2">Training</span>
                             </div>
                             <div class="flex items-center whitespace-nowrap">
                                 <svg class="w-4 h-4 text-gray-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
-                                <span class="text-gray-500">创建时间：</span>
+                                <span class="text-gray-500">Created:</span>
                                 <span id="projectCreated" class="font-medium ml-2">2024-01-15</span>
                             </div>
                             <div class="flex items-center whitespace-nowrap">
                                 <svg class="w-4 h-4 text-gray-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                                 </svg>
-                                <span class="text-gray-500">最后更新：</span>
-                                <span id="projectUpdated" class="font-medium ml-2">2小时前</span>
+                                <span class="text-gray-500">Last Updated:</span>
+                                <span id="projectUpdated" class="font-medium ml-2">2 hours ago</span>
                             </div>
                         </div>
                     </div>
@@ -706,11 +706,11 @@
                         <!-- 快速统计 -->
                         <div class="text-right space-y-1">
                             <div class="text-2xl font-bold text-gray-900" id="quickNodeCount">15</div>
-                            <div class="text-sm text-gray-500">总节点数</div>
+                            <div class="text-sm text-gray-500">Total Nodes</div>
                             <div class="text-sm">
                                 <span class="text-green-600 font-semibold" id="quickOnlineCount">12</span> 
                                 <span class="text-gray-400">/</span> 
-                                <span class="text-blue-600 font-semibold" id="quickTrainingCount">8</span> 训练中
+                                <span class="text-blue-600 font-semibold" id="quickTrainingCount">8</span> Training
                             </div>
                         </div>
                     </div>
@@ -718,8 +718,8 @@
                     <!-- 整体训练进度条 -->
                     <div class="mt-4 px-2">
                         <div class="flex items-center justify-between mb-2">
-                            <span class="text-sm font-medium text-gray-700">整体训练进度</span>
-                            <span class="text-sm text-gray-500" id="progressDetails">轮次 187/250</span>
+                            <span class="text-sm font-medium text-gray-700">Overall Training Progress</span>
+                            <span class="text-sm text-gray-500" id="progressDetails">Round 187/250</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-3 relative overflow-hidden">
                             <!-- 背景渐变 -->
@@ -732,9 +732,9 @@
                         </div>
                         <!-- 阶段指示器 -->
                         <div class="flex justify-between mt-2 text-xs text-gray-500">
-                            <span id="stage1" class="stage-indicator">初始化</span>
-                            <span id="stage2" class="stage-indicator active">训练中</span>
-                            <span id="stage3" class="stage-indicator">收敛完成</span>
+                            <span id="stage1" class="stage-indicator">Initialization</span>
+                            <span id="stage2" class="stage-indicator active">Training</span>
+                            <span id="stage3" class="stage-indicator">Convergence Complete</span>
                         </div>
                     </div>
                 </div>
@@ -742,20 +742,20 @@
                 <!-- 项目配置信息 -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-gray-100">
                     <div class="text-center">
-                        <div class="text-sm text-gray-500 mb-1">AI模型</div>
-                        <div class="font-semibold text-gray-900" id="aiModelType">CNN深度学习</div>
+                        <div class="text-sm text-gray-500 mb-1">AI Model</div>
+                        <div class="font-semibold text-gray-900" id="aiModelType">LLM (Large Language Model)</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-sm text-gray-500 mb-1">训练策略</div>
-                        <div class="font-semibold text-gray-900" id="trainingStrategy">联邦学习</div>
+                        <div class="text-sm text-gray-500 mb-1">Training Strategy</div>
+                        <div class="font-semibold text-gray-900" id="trainingStrategy">FedAvg</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-sm text-gray-500 mb-1">目标准确率</div>
-                        <div class="font-semibold text-gray-900" id="targetAccuracy">≥90%</div>
+                        <div class="text-sm text-gray-500 mb-1">Target Accuracy</div>
+                        <div class="font-semibold text-gray-900" id="targetAccuracy">≥95%</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-sm text-gray-500 mb-1">预计完成</div>
-                        <div class="font-semibold text-gray-900" id="estimatedTime">2天后</div>
+                        <div class="text-sm text-gray-500 mb-1">Estimated Completion</div>
+                        <div class="font-semibold text-gray-900" id="estimatedTime">3 days</div>
                     </div>
                 </div>
             </div>
@@ -786,78 +786,78 @@
                     <!-- 背景遮罩 -->
                     <rect width="100%" height="100%" fill="rgba(16, 185, 129, 0.1)" rx="10"/>
                     
-                    <!-- 完成状态文字 -->
+                    <!-- Training Complete Status Text -->
                     <text x="50%" y="40%" text-anchor="middle" class="training-complete-title">
-                        🎉 训练完成 🎉
+                        🎉 Training Complete 🎉
                     </text>
                     
                     <text x="50%" y="50%" text-anchor="middle" class="training-complete-subtitle">
-                        所有边缘节点已完成训练任务
+                        All edge nodes have completed training tasks
                     </text>
                     
                     <text x="50%" y="60%" text-anchor="middle" class="training-complete-stats" id="trainingCompleteStats">
-                        共完成 0 个节点的训练
+                        Completed training on 0 nodes
                     </text>
                 </g>
             </svg>
             
             <!-- 控制面板 -->
             <div class="control-panel">
-                <h4 class="text-lg font-semibold mb-4" data-i18n="edgeai.visualization.controls">控制面板</h4>
+                <h4 class="text-lg font-semibold mb-4" data-i18n="edgeai.visualization.controls">Control Panel</h4>
                 
-                <!-- 按钮网格布局 -->
+                <!-- Button Grid Layout -->
                 <div class="grid grid-cols-2 gap-3 mb-6">
                     <button onclick="showInviteUserModal()" class="btn btn-primary btn-click text-sm py-3 px-4">
-                        <span data-i18n="edgeai.visualization.inviteUser">邀请用户</span>
+                        <span data-i18n="edgeai.visualization.inviteUser">Invite User</span>
                     </button>
                     <button onclick="showAddNodeModal()" class="btn btn-secondary btn-click text-sm py-3 px-4">
-                        <span data-i18n="edgeai.visualization.addNode">添加节点</span>
+                        <span data-i18n="edgeai.visualization.addNode">Add Node</span>
                     </button>
                     <button onclick="startTraining()" class="btn btn-secondary btn-click text-sm py-3 px-4">
-                        <span data-i18n="edgeai.visualization.startTraining">开始训练</span>
+                        <span data-i18n="edgeai.visualization.startTraining">Start Training</span>
                     </button>
                     <button onclick="resetView()" class="btn btn-secondary btn-click text-sm py-3 px-4">
-                        <span data-i18n="edgeai.visualization.resetView">重置视图</span>
+                        <span data-i18n="edgeai.visualization.resetView">Reset View</span>
                     </button>
                 </div>
                 
-                <!-- 测试按钮单独一行 -->
+                <!-- Test Button in Separate Row -->
                 <div class="mb-6">
                     <button onclick="completeAllTraining()" class="btn btn-success btn-click w-full text-sm py-3">
-                        <span>完成训练(测试)</span>
+                        <span>Complete Training (Test)</span>
                     </button>
                 </div>
                 
-                <!-- 实时状态 -->
+                <!-- Real-time Status -->
                 <div class="pt-4 border-t border-gray-200">
-                    <h5 class="text-base font-medium text-gray-600 mb-3">实时状态</h5>
+                    <h5 class="text-base font-medium text-gray-600 mb-3">Real-time Status</h5>
                     <div class="grid grid-cols-3 gap-4">
                         <div class="text-center">
                             <div class="text-2xl font-bold text-green-600" id="onlineNodes">8</div>
-                            <div class="text-sm text-gray-600">在线节点</div>
+                            <div class="text-sm text-gray-600">Online Nodes</div>
                         </div>
                         <div class="text-center">
                             <div class="text-2xl font-bold text-blue-600" id="trainingNodes">3</div>
-                            <div class="text-sm text-gray-600">训练中</div>
+                            <div class="text-sm text-gray-600">Training</div>
                         </div>
                         <div class="text-center">
                             <div class="text-lg font-bold text-purple-600" id="dataTransfer">1.2MB/s</div>
-                            <div class="text-sm text-gray-600">数据传输</div>
+                            <div class="text-sm text-gray-600">Data Transfer</div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- 节点详情面板 -->
+            <!-- Node Details Panel -->
             <div id="nodeDetails" class="node-details">
                 <div class="flex justify-between items-center mb-4">
-                    <h4 class="text-lg font-semibold" id="nodeTitle">节点详情</h4>
+                    <h4 class="text-lg font-semibold" id="nodeTitle">Node Details</h4>
                     <button onclick="closeNodeDetails()" class="btn btn-secondary btn-click text-sm py-2 px-4">
-                        关闭
+                        Close
                     </button>
                 </div>
                 <div id="nodeInfo" class="space-y-3">
-                    <!-- 节点信息将在这里动态填充 -->
+                    <!-- Node information will be dynamically populated here -->
                 </div>
             </div>
         </div>
@@ -939,7 +939,7 @@
                         </div>
                     </div>
 
-                    <!-- 底部操作按钮 -->
+                    <!-- Bottom Action Buttons -->
                     <div class="flex justify-end space-x-3 mt-8 pt-6 border-t border-gray-200">
                         <button onclick="closeInviteUserModal()" class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors">
                             取消
@@ -1031,48 +1031,48 @@
                             </select>
                         </div>
 
-                        <!-- 资源配置 */
+                        <!-- Resource Configuration */
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">预期资源配置</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Expected Resource Configuration</label>
                             <div class="grid grid-cols-3 gap-4">
                                 <div>
-                                    <label class="block text-xs text-gray-500 mb-1">CPU核心数</label>
+                                    <label class="block text-xs text-gray-500 mb-1">CPU Cores</label>
                                     <input type="number" id="nodeCpuCores" placeholder="4" min="1" max="64" 
                                            class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-500 focus:border-transparent">
                                 </div>
                                 <div>
-                                    <label class="block text-xs text-gray-500 mb-1">内存 (GB)</label>
+                                    <label class="block text-xs text-gray-500 mb-1">Memory (GB)</label>
                                     <input type="number" id="nodeMemory" placeholder="8" min="1" max="128" 
                                            class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-500 focus:border-transparent">
                                 </div>
                                 <div>
-                                    <label class="block text-xs text-gray-500 mb-1">GPU类型</label>
+                                    <label class="block text-xs text-gray-500 mb-1">GPU Type</label>
                                     <select id="nodeGpuType" class="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                                        <option value="">无GPU</option>
+                                        <option value="">No GPU</option>
                                         <option value="rtx3080">RTX 3080</option>
                                         <option value="rtx3090">RTX 3090</option>
                                         <option value="rtx4090">RTX 4090</option>
-                                        <option value="tesla">Tesla系列</option>
+                                        <option value="tesla">Tesla Series</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 安全配置 -->
+                        <!-- Security Configuration -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">安全配置</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Security Configuration</label>
                             <div class="space-y-3">
                                 <label class="flex items-center">
                                     <input type="checkbox" id="enableSSL" checked class="mr-3">
-                                    <span>启用SSL加密通信</span>
+                                    <span>Enable SSL Encrypted Communication</span>
                                 </label>
                                 <label class="flex items-center">
                                     <input type="checkbox" id="enableAuth" checked class="mr-3">
-                                    <span>启用节点身份验证</span>
+                                    <span>Enable Node Authentication</span>
                                 </label>
                                 <label class="flex items-center">
                                     <input type="checkbox" id="enableMonitoring" checked class="mr-3">
-                                    <span>启用性能监控</span>
+                                    <span>Enable Performance Monitoring</span>
                                 </label>
                             </div>
                         </div>
@@ -1116,28 +1116,28 @@
                         </button>
                     </div>
 
-                    <!-- 主要内容区域 -->
+                    <!-- Main Content Area -->
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <!-- 左侧：基础信息和连接信息 -->
+                        <!-- Left Side: Basic Information and Connection Info -->
                         <div class="space-y-6">
-                            <!-- 基础信息卡片 -->
+                            <!-- Basic Information Card -->
                             <div class="bg-gray-50 rounded-lg p-6">
-                                <h3 class="text-lg font-semibold mb-4 text-gray-900">基础信息</h3>
+                                <h3 class="text-lg font-semibold mb-4 text-gray-900">Basic Information</h3>
                                 <div class="space-y-3">
                                     <div class="flex justify-between">
-                                        <span class="text-gray-600">节点名称：</span>
+                                        <span class="text-gray-600">Node Name:</span>
                                         <span class="font-semibold" id="modalNodeName">-</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-gray-600">节点地址：</span>
+                                        <span class="text-gray-600">Node Address:</span>
                                         <span class="font-mono text-sm bg-blue-100 px-2 py-1 rounded" id="modalNodeUrl">-</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-gray-600">训练轮次：</span>
+                                        <span class="text-gray-600">Training Rounds:</span>
                                         <span class="font-semibold" id="modalTrainingRounds">-</span>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-gray-600">训练进度：</span>
+                                        <span class="text-gray-600">Training Progress:</span>
                                         <div class="flex items-center space-x-2">
                                             <div class="w-20 bg-gray-200 rounded-full h-2">
                                                 <div class="bg-blue-600 h-2 rounded-full" id="modalProgressBar"></div>
@@ -1146,36 +1146,36 @@
                                         </div>
                                     </div>
                                     <div class="flex justify-between">
-                                        <span class="text-gray-600">心跳状态：</span>
+                                        <span class="text-gray-600">Heartbeat Status:</span>
                                         <span class="font-semibold text-green-600" id="modalHeartbeat">-</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- 连接信息卡片 -->
+                            <!-- Connection Information Card -->
                             <div class="bg-gray-50 rounded-lg p-6">
-                                <h3 class="text-lg font-semibold mb-4 text-gray-900">网络连接</h3>
+                                <h3 class="text-lg font-semibold mb-4 text-gray-900">Network Connection</h3>
                                 <div class="space-y-3">
                                     <div>
-                                        <span class="text-gray-600 block mb-2">连接到控制节点：</span>
+                                        <span class="text-gray-600 block mb-2">Connected to Control Node:</span>
                                         <div class="space-y-1" id="modalConnectedNodes">
-                                            <!-- 动态填充连接的节点 -->
+                                            <!-- Dynamically populated connected nodes -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 右侧：性能监控和训练统计 -->
+                        <!-- Right Side: Performance Monitoring and Training Statistics -->
                         <div class="space-y-6">
-                            <!-- 性能监控卡片 -->
+                            <!-- Performance Monitoring Card -->
                             <div class="bg-gray-50 rounded-lg p-6">
-                                <h3 class="text-lg font-semibold mb-4 text-gray-900">资源使用情况</h3>
+                                <h3 class="text-lg font-semibold mb-4 text-gray-900">Resource Usage</h3>
                                 <div class="space-y-4">
-                                    <!-- CPU使用率 -->
+                                    <!-- CPU Usage -->
                                     <div>
                                         <div class="flex justify-between mb-1">
-                                            <span class="text-sm text-gray-600">CPU使用率</span>
+                                            <span class="text-sm text-gray-600">CPU Usage</span>
                                             <span class="text-sm font-semibold" id="modalCpuValue">-</span>
                                         </div>
                                         <div class="w-full bg-gray-200 rounded-full h-3">
@@ -1183,10 +1183,10 @@
                                         </div>
                                     </div>
                                     
-                                    <!-- GPU使用率 -->
+                                    <!-- GPU Usage -->
                                     <div>
                                         <div class="flex justify-between mb-1">
-                                            <span class="text-sm text-gray-600">GPU使用率</span>
+                                            <span class="text-sm text-gray-600">GPU Usage</span>
                                             <span class="text-sm font-semibold" id="modalGpuValue">-</span>
                                         </div>
                                         <div class="w-full bg-gray-200 rounded-full h-3">
@@ -1194,43 +1194,43 @@
                                         </div>
                                     </div>
                                     
-                                    <!-- 内存使用 -->
+                                    <!-- Memory Usage -->
                                     <div>
                                         <div class="flex justify-between mb-1">
-                                            <span class="text-sm text-gray-600">内存使用</span>
+                                            <span class="text-sm text-gray-600">Memory Usage</span>
                                             <span class="text-sm font-semibold" id="modalMemoryValue">-</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- 训练统计卡片 -->
+                            <!-- Training Statistics Card -->
                             <div class="bg-gray-50 rounded-lg p-6" id="modalTrainingStats" style="display: none;">
-                                <h3 class="text-lg font-semibold mb-4 text-gray-900" id="modalTrainingStatsTitle">训练统计</h3>
+                                <h3 class="text-lg font-semibold mb-4 text-gray-900" id="modalTrainingStatsTitle">Training Statistics</h3>
                                 <div class="grid grid-cols-2 gap-4 mb-6">
                                     <div class="text-center">
                                         <div class="text-2xl font-bold text-green-600" id="modalAccuracy">-</div>
-                                        <div class="text-sm text-gray-600" id="modalAccuracyLabel">当前准确率</div>
+                                        <div class="text-sm text-gray-600" id="modalAccuracyLabel">Current Accuracy</div>
                                     </div>
                                     <div class="text-center">
                                         <div class="text-2xl font-bold text-red-600" id="modalLoss">-</div>
-                                        <div class="text-sm text-gray-600" id="modalLossLabel">损失值</div>
+                                        <div class="text-sm text-gray-600" id="modalLossLabel">Loss Value</div>
                                     </div>
                                 </div>
                                 
-                                <!-- 历史趋势曲线图 -->
+                                <!-- Historical Trend Chart -->
                                 <div>
-                                    <h4 class="text-sm font-semibold mb-2 text-gray-700" id="modalChartTitle">准确率历史趋势</h4>
+                                    <h4 class="text-sm font-semibold mb-2 text-gray-700" id="modalChartTitle">Accuracy Historical Trend</h4>
                                     <div class="h-24 bg-white rounded p-3 relative">
                                         <svg width="100%" height="100%" id="modalAccuracyChart" class="overflow-visible">
-                                            <!-- SVG曲线图将在这里生成 -->
+                                            <!-- SVG curve chart will be generated here -->
                                         </svg>
                                         <div class="absolute bottom-1 left-3 right-3 flex justify-between text-xs text-gray-400">
-                                            <span id="modalRoundStart">轮次</span>
-                                            <span id="modalRoundEnd">当前</span>
+                                            <span id="modalRoundStart">Round</span>
+                                            <span id="modalRoundEnd">Current</span>
                                         </div>
                                     </div>
-                                    <div class="text-xs text-gray-500 mt-2" id="modalAccuracyHistory">历史数据</div>
+                                    <div class="text-xs text-gray-500 mt-2" id="modalAccuracyHistory">Historical Data</div>
                                 </div>
                             </div>
                         </div>
@@ -1239,16 +1239,16 @@
                     <!-- 底部操作按钮 -->
                     <div class="flex justify-end space-x-3 mt-8 pt-6 border-t border-gray-200" id="modalActionButtons">
                         <button id="stopTrainingBtn" onclick="stopTraining()" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors">
-                            停止训练
+                            Stop Training
                         </button>
                         <button id="restartTrainingBtn" onclick="restartTraining()" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors">
-                            重启训练
+                            Restart Training
                         </button>
                         <button id="exportResultBtn" onclick="exportTrainingResult()" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors" style="display: none;">
-                            导出结果
+                            Export Results
                         </button>
                         <button onclick="closeNodeModal()" class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors">
-                            关闭
+                            Close
                         </button>
                     </div>
                 </div>
@@ -1294,7 +1294,7 @@
             <div class="overview-card">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm text-gray-600" data-i18n="edgeai.visualization.networkLatency">网络延迟</p>
+                        <p class="text-sm text-gray-600" data-i18n="edgeai.visualization.networkLatency">Network Latency</p>
                         <p class="text-2xl font-bold text-green-600" id="networkLatency">23ms</p>
                     </div>
                     <div class="text-3xl">⚡</div>
@@ -1304,8 +1304,8 @@
             <div class="overview-card">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm text-gray-600" data-i18n="edgeai.visualization.systemHealth">系统健康</p>
-                        <p class="text-2xl font-bold text-purple-600" id="systemHealth">良好</p>
+                        <p class="text-sm text-gray-600" data-i18n="edgeai.visualization.systemHealth">System Health</p>
+                        <p class="text-2xl font-bold text-purple-600" id="systemHealth">Good</p>
                     </div>
                     <div class="text-3xl">💚</div>
                 </div>
@@ -1315,27 +1315,27 @@
         <!-- 节点详情列表 -->
         <div class="mt-12 fade-in-up delay-3">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold text-gray-900" data-i18n="edgeai.visualization.nodeList">节点详情列表</h3>
+                <h3 class="text-xl font-bold text-gray-900" data-i18n="edgeai.visualization.nodeList">Node Details List</h3>
                 <div class="flex items-center space-x-4 text-sm text-gray-600">
-                    <span>控制节点: <span class="font-semibold text-green-600" id="controlNodeCount">3</span></span>
-                    <span>边缘节点: <span class="font-semibold text-blue-600" id="edgeNodeCount">12</span></span>
-                    <span>总计: <span class="font-semibold text-gray-900" id="totalNodeCount">15</span></span>
+                    <span>Control Nodes: <span class="font-semibold text-green-600" id="controlNodeCount">3</span></span>
+                    <span>Edge Nodes: <span class="font-semibold text-blue-600" id="edgeNodeCount">12</span></span>
+                    <span>Total: <span class="font-semibold text-gray-900" id="totalNodeCount">15</span></span>
                 </div>
             </div>
             
             <!-- 控制节点表格 -->
             <div class="mb-8">
-                <h4 class="text-lg font-semibold mb-4 text-green-600">控制节点 (最多15个)</h4>
+                <h4 class="text-lg font-semibold mb-4 text-green-600">Control Nodes (Max 15)</h4>
                 <div class="overflow-x-auto bg-white rounded-lg shadow">
                     <table class="min-w-full">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">节点名称</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">角色</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">状态</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">负责用户</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">IP地址</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">连接节点</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Node Name</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Responsible User</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">IP Address</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Connected Nodes</th>
                             </tr>
                         </thead>
                         <tbody id="controlNodesTable" class="bg-white divide-y divide-gray-200">
@@ -1347,33 +1347,33 @@
             
             <!-- 边缘节点表格 -->
             <div class="mb-8">
-                <h4 class="text-lg font-semibold mb-4 text-blue-600">边缘节点 (最多15个)</h4>
+                <h4 class="text-lg font-semibold mb-4 text-blue-600">Edge Nodes (Max 15)</h4>
                 <div class="overflow-x-auto bg-white rounded-lg shadow">
                     <table class="min-w-full">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none" onclick="sortEdgeNodes('name')">
-                                    节点名称 <span id="sort-name" class="ml-1">⇅</span>
+                                    Node Name <span id="sort-name" class="ml-1">⇅</span>
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none" onclick="sortEdgeNodes('status')">
-                                    状态 <span id="sort-status" class="ml-1">⇅</span>
+                                    Status <span id="sort-status" class="ml-1">⇅</span>
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none" onclick="sortEdgeNodes('progress')">
-                                    训练进度 <span id="sort-progress" class="ml-1">⇅</span>
+                                    Training Progress <span id="sort-progress" class="ml-1">⇅</span>
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none" onclick="sortEdgeNodes('cpu')">
                                     CPU <span id="sort-cpu" class="ml-1">⇅</span>
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none" onclick="sortEdgeNodes('memory')">
-                                    内存 <span id="sort-memory" class="ml-1">⇅</span>
+                                    Memory <span id="sort-memory" class="ml-1">⇅</span>
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none" onclick="sortEdgeNodes('gpu')">
                                     GPU <span id="sort-gpu" class="ml-1">⇅</span>
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none" onclick="sortEdgeNodes('heartbeat')">
-                                    最后心跳 <span id="sort-heartbeat" class="ml-1">⇅</span>
+                                    Last Heartbeat <span id="sort-heartbeat" class="ml-1">⇅</span>
                                 </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                             </tr>
                         </thead>
                         <tbody id="edgeNodesTable" class="bg-white divide-y divide-gray-200">
@@ -1423,17 +1423,17 @@
         const edgeColor2 = generateRandomNodeColor();
         const edgeColor3 = generateRandomNodeColor();
         
-        // 模拟网络数据
+        // Simulated network data
         const networkData = {
             controlNodes: [
                 { 
                     id: 'control-1', 
                     x: 200, 
                     y: 80, 
-                    name: '主控节点1', 
+                    name: 'Model Node 1', 
                     type: 'master', 
                     status: 'active', 
-                    user: '管理员', 
+                    user: 'Administrator', 
                     ip: '192.168.1.100',
                     color: { fill: edgeColor1.fill, stroke: edgeColor1.stroke, name: 'random1' }
                 },
@@ -1441,10 +1441,10 @@
                     id: 'control-2', 
                     x: 400, 
                     y: 80, 
-                    name: '主控节点2', 
+                    name: 'Model Node 2', 
                     type: 'participant', 
                     status: 'active', 
-                    user: '协调员', 
+                    user: 'Coordinator', 
                     ip: '192.168.1.101',
                     color: { fill: edgeColor2.fill, stroke: edgeColor2.stroke, name: 'random2' }
                 },
@@ -1452,73 +1452,73 @@
                     id: 'control-3', 
                     x: 600, 
                     y: 80, 
-                    name: '备用控制', 
+                    name: 'Backup Control', 
                     type: 'observer', 
                     status: 'active', 
-                    user: '观察者', 
+                    user: 'Observer', 
                     ip: '192.168.1.102',
                     color: { fill: edgeColor3.fill, stroke: edgeColor3.stroke, name: 'random3' }
                 }
             ],
-            // 所有边缘节点（可以无限添加，可视化界面只显示活跃的15个）
+            // All edge nodes (can be added infinitely, visualization interface only shows active 15)
             allEdgeNodes: [
-                // 正在训练的节点
+                // Training nodes
                 { 
-                    id: 'edge-1', name: '节点01', status: 'training', progress: 97, cpu: 68, memory: '1.8GB', gpu: 83, heartbeat: '5秒前', priority: 1,
+                    id: 'edge-1', name: 'Node 01', status: 'training', progress: 97, cpu: 68, memory: '1.8GB', gpu: 83, heartbeat: '5 sec ago', priority: 1,
                     url: 'http://192.168.1.101:8080', connectedTo: ['http://192.168.1.100:8080'], 
                     trainingRounds: 245, accuracy: 95.2, loss: 0.048,
                     stats: { cpuHistory: [65, 68, 70, 68], gpuHistory: [80, 83, 85, 83], accuracyHistory: [92.1, 93.5, 94.8, 95.2] }
                 },
                 { 
-                    id: 'edge-3', name: '节点03', status: 'training', progress: 64, cpu: 85, memory: '1.5GB', gpu: 92, heartbeat: '1秒前', priority: 2,
+                    id: 'edge-3', name: 'Node 03', status: 'training', progress: 64, cpu: 85, memory: '1.5GB', gpu: 92, heartbeat: '1 sec ago', priority: 2,
                     url: 'http://192.168.1.103:8080', connectedTo: ['http://192.168.1.100:8080'], 
                     trainingRounds: 160, accuracy: 88.7, loss: 0.089,
                     stats: { cpuHistory: [80, 85, 87, 85], gpuHistory: [88, 92, 94, 92], accuracyHistory: [85.2, 86.8, 87.9, 88.7] }
                 },
                 { 
-                    id: 'edge-5', name: '节点05', status: 'training', progress: 83, cpu: 75, memory: '2.3GB', gpu: 88, heartbeat: '3秒前', priority: 3,
+                    id: 'edge-5', name: 'Node 05', status: 'training', progress: 83, cpu: 75, memory: '2.3GB', gpu: 88, heartbeat: '3 sec ago', priority: 3,
                     url: 'http://192.168.1.105:8080', connectedTo: ['http://192.168.1.101:8080'], 
                     trainingRounds: 208, accuracy: 91.3, loss: 0.065,
                     stats: { cpuHistory: [72, 75, 78, 75], gpuHistory: [85, 88, 90, 88], accuracyHistory: [88.5, 89.8, 90.6, 91.3] }
                 },
                 { 
-                    id: 'edge-8', name: '节点08', status: 'training', progress: 56, cpu: 90, memory: '2.8GB', gpu: 95, heartbeat: '1秒前', priority: 4,
+                    id: 'edge-8', name: 'Node 08', status: 'training', progress: 56, cpu: 90, memory: '2.8GB', gpu: 95, heartbeat: '1 sec ago', priority: 4,
                     url: 'http://192.168.1.108:8080', connectedTo: ['http://192.168.1.101:8080'], 
                     trainingRounds: 140, accuracy: 84.1, loss: 0.125,
                     stats: { cpuHistory: [88, 90, 92, 90], gpuHistory: [92, 95, 97, 95], accuracyHistory: [80.5, 82.1, 83.5, 84.1] }
                 },
                 { 
-                    id: 'edge-9', name: '节点09', status: 'training', progress: 72, cpu: 82, memory: '1.9GB', gpu: 78, heartbeat: '2秒前', priority: 5,
+                    id: 'edge-9', name: 'Node 09', status: 'training', progress: 72, cpu: 82, memory: '1.9GB', gpu: 78, heartbeat: '2 sec ago', priority: 5,
                     url: 'http://192.168.1.109:8080', connectedTo: ['http://192.168.1.102:8080'], 
                     trainingRounds: 180, accuracy: 89.5, loss: 0.078,
                     stats: { cpuHistory: [78, 82, 85, 82], gpuHistory: [75, 78, 80, 78], accuracyHistory: [86.2, 87.8, 88.9, 89.5] }
                 },
                 { 
-                    id: 'edge-11', name: '节点11', status: 'training', progress: 89, cpu: 78, memory: '2.2GB', gpu: 85, heartbeat: '1秒前', priority: 6,
+                    id: 'edge-11', name: 'Node 11', status: 'training', progress: 89, cpu: 78, memory: '2.2GB', gpu: 85, heartbeat: '1 sec ago', priority: 6,
                     url: 'http://192.168.1.111:8080', connectedTo: ['http://192.168.1.100:8080'], 
                     trainingRounds: 222, accuracy: 92.7, loss: 0.055,
                     stats: { cpuHistory: [75, 78, 80, 78], gpuHistory: [82, 85, 88, 85], accuracyHistory: [89.1, 90.8, 91.9, 92.7] }
                 },
                 { 
-                    id: 'edge-13', name: '节点13', status: 'training', progress: 42, cpu: 92, memory: '3.1GB', gpu: 89, heartbeat: '2秒前', priority: 7,
+                    id: 'edge-13', name: 'Node 13', status: 'training', progress: 42, cpu: 92, memory: '3.1GB', gpu: 89, heartbeat: '2 sec ago', priority: 7,
                     url: 'http://192.168.1.113:8080', connectedTo: ['http://192.168.1.101:8080'], 
                     trainingRounds: 105, accuracy: 78.3, loss: 0.187,
                     stats: { cpuHistory: [89, 92, 95, 92], gpuHistory: [86, 89, 91, 89], accuracyHistory: [74.5, 76.2, 77.8, 78.3] }
                 },
                 { 
-                    id: 'edge-14', name: '节点14', status: 'training', progress: 38, cpu: 87, memory: '2.7GB', gpu: 91, heartbeat: '1秒前', priority: 8,
+                    id: 'edge-14', name: 'Node 14', status: 'training', progress: 38, cpu: 87, memory: '2.7GB', gpu: 91, heartbeat: '1 sec ago', priority: 8,
                     url: 'http://192.168.1.114:8080', connectedTo: ['http://192.168.1.102:8080'], 
                     trainingRounds: 95, accuracy: 75.8, loss: 0.205,
                     stats: { cpuHistory: [84, 87, 90, 87], gpuHistory: [88, 91, 93, 91], accuracyHistory: [72.1, 73.7, 74.9, 75.8] }
                 },
-                // 等待训练的节点
-                { id: 'edge-4', name: '节点04', status: 'idle', progress: 0, cpu: 15, memory: '0.8GB', gpu: 0, heartbeat: '10秒前', priority: 9 },
-                { id: 'edge-10', name: '节点10', status: 'idle', progress: 0, cpu: 12, memory: '0.6GB', gpu: 0, heartbeat: '8秒前', priority: 10 },
-                { id: 'edge-15', name: '节点15', status: 'idle', progress: 0, cpu: 8, memory: '1.1GB', gpu: 0, heartbeat: '15秒前', priority: 11 },
-                { id: 'edge-16', name: '节点16', status: 'idle', progress: 0, cpu: 22, memory: '1.3GB', gpu: 0, heartbeat: '12秒前', priority: 12 },
-                // 已完成的节点（将逐渐淡出）
+                // Idle nodes waiting for training
+                { id: 'edge-4', name: 'Node 04', status: 'idle', progress: 0, cpu: 15, memory: '0.8GB', gpu: 0, heartbeat: '10 sec ago', priority: 9 },
+                { id: 'edge-10', name: 'Node 10', status: 'idle', progress: 0, cpu: 12, memory: '0.6GB', gpu: 0, heartbeat: '8 sec ago', priority: 10 },
+                { id: 'edge-15', name: 'Node 15', status: 'idle', progress: 0, cpu: 8, memory: '1.1GB', gpu: 0, heartbeat: '15 sec ago', priority: 11 },
+                { id: 'edge-16', name: 'Node 16', status: 'idle', progress: 0, cpu: 22, memory: '1.3GB', gpu: 0, heartbeat: '12 sec ago', priority: 12 },
+                // Completed nodes (will gradually fade out)
                 { 
-                    id: 'edge-2', name: '节点02', status: 'completed', progress: 100, cpu: 45, memory: '2.1GB', gpu: 0, heartbeat: '2秒前', priority: 13, fadeOut: true,
+                    id: 'edge-2', name: 'Node 02', status: 'completed', progress: 100, cpu: 45, memory: '2.1GB', gpu: 0, heartbeat: '2 sec ago', priority: 13, fadeOut: true,
                     url: 'http://192.168.1.102:8080', connectedTo: ['http://192.168.1.100:8080'], 
                     trainingRounds: 300, accuracy: 96.8, loss: 0.032,
                     stats: { 
@@ -1528,7 +1528,7 @@
                     }
                 },
                 { 
-                    id: 'edge-7', name: '节点07', status: 'completed', progress: 100, cpu: 25, memory: '1.2GB', gpu: 0, heartbeat: '4秒前', priority: 14, fadeOut: true,
+                    id: 'edge-7', name: 'Node 07', status: 'completed', progress: 100, cpu: 25, memory: '1.2GB', gpu: 0, heartbeat: '4 sec ago', priority: 14, fadeOut: true,
                     url: 'http://192.168.1.107:8080', connectedTo: ['http://192.168.1.101:8080'], 
                     trainingRounds: 280, accuracy: 94.2, loss: 0.041,
                     stats: { 
@@ -1538,7 +1538,7 @@
                     }
                 },
                 { 
-                    id: 'edge-12', name: '节点12', status: 'completed', progress: 100, cpu: 35, memory: '1.4GB', gpu: 0, heartbeat: '5秒前', priority: 15, fadeOut: true,
+                    id: 'edge-12', name: 'Node 12', status: 'completed', progress: 100, cpu: 35, memory: '1.4GB', gpu: 0, heartbeat: '5 sec ago', priority: 15, fadeOut: true,
                     url: 'http://192.168.1.112:8080', connectedTo: ['http://192.168.1.102:8080'], 
                     trainingRounds: 320, accuracy: 97.3, loss: 0.028,
                     stats: { 
@@ -1547,27 +1547,27 @@
                         accuracyHistory: [89.7, 93.1, 95.4, 97.3] 
                     }
                 },
-                // 错误节点
-                { id: 'edge-6', name: '节点06', status: 'error', progress: 23, cpu: 0, memory: '0GB', gpu: 0, heartbeat: '2分钟前', priority: 16, fadeOut: true },
-                // 更多节点...
-                { id: 'edge-17', name: '节点17', status: 'training', progress: 15, cpu: 95, memory: '2.9GB', gpu: 93, heartbeat: '1秒前', priority: 17 },
-                { id: 'edge-18', name: '节点18', status: 'idle', progress: 0, cpu: 18, memory: '1.5GB', gpu: 0, heartbeat: '20秒前', priority: 18 },
-                { id: 'edge-19', name: '节点19', status: 'training', progress: 67, cpu: 88, memory: '2.4GB', gpu: 86, heartbeat: '3秒前', priority: 19 },
-                { id: 'edge-20', name: '节点20', status: 'idle', progress: 0, cpu: 25, memory: '1.7GB', gpu: 0, heartbeat: '18秒前', priority: 20 }
+                // Error nodes
+                { id: 'edge-6', name: 'Node 06', status: 'error', progress: 23, cpu: 0, memory: '0GB', gpu: 0, heartbeat: '2 min ago', priority: 16, fadeOut: true },
+                // More nodes...
+                { id: 'edge-17', name: 'Node 17', status: 'training', progress: 15, cpu: 95, memory: '2.9GB', gpu: 93, heartbeat: '1 sec ago', priority: 17 },
+                { id: 'edge-18', name: 'Node 18', status: 'idle', progress: 0, cpu: 18, memory: '1.5GB', gpu: 0, heartbeat: '20 sec ago', priority: 18 },
+                { id: 'edge-19', name: 'Node 19', status: 'training', progress: 67, cpu: 88, memory: '2.4GB', gpu: 86, heartbeat: '3 sec ago', priority: 19 },
+                { id: 'edge-20', name: 'Node 20', status: 'idle', progress: 0, cpu: 25, memory: '1.7GB', gpu: 0, heartbeat: '18 sec ago', priority: 20 }
             ],
-            // 当前在可视化界面显示的节点（最多15个）
+            // Currently displayed nodes in visualization interface (max 15)
             edgeNodes: []
         };
         
         let selectedNode = null;
         let animationId = null;
-        let nodePositions = []; // 预定义的节点位置
+        let nodePositions = []; // Predefined node positions
         
-        // 排序相关变量
+        // Sorting related variables
         let currentSortField = 'priority';
         let currentSortDirection = 'asc';
         
-        // 预定义可视化节点位置（最多15个位置）
+        // Predefined visualization node positions (max 15 positions)
         function initializeNodePositions() {
             nodePositions = [
                 { x: 120, y: 280 }, { x: 200, y: 320 }, { x: 280, y: 360 }, { x: 360, y: 320 }, { x: 440, y: 280 },
@@ -1625,40 +1625,40 @@
         // 模拟项目数据（根据项目ID获取不同数据）
         const projectsData = {
             1: {
-                name: '智能制造监控系统',
-                description: '基于EdgeAI的工厂设备实时监控和预测维护系统，实现设备状态智能分析和故障预警。',
+                name: 'Smart Manufacturing Monitoring System',
+                description: 'EdgeAI-based factory equipment real-time monitoring and predictive maintenance system for intelligent equipment status analysis and fault warning.',
                 status: 'training',
                 created: '2024-01-15',
-                updated: '2小时前',
+                updated: '2 hours ago',
                 progress: 75,
-                aiModel: 'CNN深度学习',
-                strategy: '联邦学习',
+                aiModel: 'LLaMA-2 70B',
+                strategy: 'FedAvg',
                 targetAccuracy: '≥90%',
-                estimatedTime: '2天后'
+                estimatedTime: '2 days'
             },
             2: {
-                name: '智慧城市交通优化',
-                description: '利用EdgeAI技术实现城市交通流量实时分析，智能信号灯控制和路线优化推荐系统。',
+                name: 'Smart City Traffic Optimization',
+                description: 'EdgeAI technology for real-time urban traffic flow analysis, intelligent traffic light control and route optimization recommendation system.',
                 status: 'active',
                 created: '2024-02-10',
-                updated: '30分钟前',
+                updated: '30 minutes ago',
                 progress: 45,
-                aiModel: 'RNN循环神经网络',
-                strategy: '强化学习',
+                aiModel: 'RNN Recurrent Neural Network',
+                strategy: 'Reinforcement Learning',
                 targetAccuracy: '≥85%',
-                estimatedTime: '5天后'
+                estimatedTime: '5 days'
             },
             3: {
-                name: '医疗影像智能诊断',
-                description: '基于深度学习的医疗影像自动识别和诊断辅助系统，提升诊断准确性和效率。',
+                name: 'Medical Image Intelligent Diagnosis',
+                description: 'Deep learning-based medical image automatic recognition and diagnostic assistance system to improve diagnostic accuracy and efficiency.',
                 status: 'completed',
                 created: '2024-01-20',
-                updated: '1天前',
+                updated: '1 day ago',
                 progress: 100,
-                aiModel: 'ResNet深度残差网络',
-                strategy: '迁移学习',
+                aiModel: 'ResNet Deep Residual Network',
+                strategy: 'Transfer Learning',
                 targetAccuracy: '≥95%',
-                estimatedTime: '已完成'
+                estimatedTime: 'Completed'
             }
         };
         
@@ -1675,11 +1675,11 @@
             // 更新状态
             const statusElement = document.getElementById('projectStatus');
             const statusColors = {
-                'training': { color: 'text-blue-600', text: '训练中', bgColor: 'bg-blue-500' },
-                'active': { color: 'text-green-600', text: '运行中', bgColor: 'bg-green-500' },
-                'completed': { color: 'text-green-600', text: '已完成', bgColor: 'bg-green-500' },
-                'paused': { color: 'text-yellow-600', text: '暂停', bgColor: 'bg-yellow-500' },
-                'error': { color: 'text-red-600', text: '错误', bgColor: 'bg-red-500' }
+                'training': { color: 'text-blue-600', text: 'Training', bgColor: 'bg-blue-500' },
+                'active': { color: 'text-green-600', text: 'Running', bgColor: 'bg-green-500' },
+                'completed': { color: 'text-green-600', text: 'Completed', bgColor: 'bg-green-500' },
+                'paused': { color: 'text-yellow-600', text: 'Paused', bgColor: 'bg-yellow-500' },
+                'error': { color: 'text-red-600', text: 'Error', bgColor: 'bg-red-500' }
             };
             
             const statusInfo = statusColors[project.status] || statusColors['training'];
@@ -1715,11 +1715,11 @@
                 progressBar.innerHTML = '<div class="absolute top-0 -inset-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-shimmer"></div>';
             }
             
-            // 更新训练轮次信息
+            // Update training rounds information
             const progressDetails = document.getElementById('progressDetails');
             if (progressDetails) {
                 const currentRounds = Math.floor((project.progress / 100) * 250);
-                progressDetails.textContent = `轮次 ${currentRounds}/250`;
+                progressDetails.textContent = `Round ${currentRounds}/250`;
             }
             
             // 更新阶段指示器
@@ -2045,35 +2045,35 @@
             document.getElementById('modalCpuBar').style.width = `${node.cpu}%`;
             document.getElementById('modalGpuValue').textContent = `${node.gpu.toFixed(2)}%`;
             document.getElementById('modalGpuBar').style.width = `${node.gpu}%`;
-            document.getElementById('modalMemoryValue').textContent = node.memory || '未知';
+            document.getElementById('modalMemoryValue').textContent = node.memory || 'Unknown';
             
-            // 如果是训练节点或已完成训练的节点，显示训练统计
+            // If it's a training node or a node that has completed training, show training statistics
             const trainingStatsDiv = document.getElementById('modalTrainingStats');
             if ((node.status === 'training' || node.status === 'completed') && node.accuracy && node.loss) {
                 trainingStatsDiv.style.display = 'block';
                 
-                // 根据节点状态更新标题和标签
+                // Update titles and labels based on node status
                 const statsTitle = document.getElementById('modalTrainingStatsTitle');
                 const accuracyLabel = document.getElementById('modalAccuracyLabel');
                 const lossLabel = document.getElementById('modalLossLabel');
                 const chartTitle = document.getElementById('modalChartTitle');
                 
                 if (node.status === 'completed') {
-                    statsTitle.textContent = '历史训练结果';
-                    accuracyLabel.textContent = '最终准确率';
-                    lossLabel.textContent = '最终损失值';
-                    chartTitle.textContent = '训练过程曲线';
+                    statsTitle.textContent = 'Historical Training Results';
+                    accuracyLabel.textContent = 'Final Accuracy';
+                    lossLabel.textContent = 'Final Loss Value';
+                    chartTitle.textContent = 'Training Process Curve';
                 } else {
-                    statsTitle.textContent = '训练统计';
-                    accuracyLabel.textContent = '当前准确率';
-                    lossLabel.textContent = '当前损失值';
-                    chartTitle.textContent = '准确率历史趋势';
+                    statsTitle.textContent = 'Training Statistics';
+                    accuracyLabel.textContent = 'Current Accuracy';
+                    lossLabel.textContent = 'Current Loss Value';
+                    chartTitle.textContent = 'Accuracy History Trend';
                 }
                 
                 document.getElementById('modalAccuracy').textContent = `${node.accuracy.toFixed(2)}%`;
                 document.getElementById('modalLoss').textContent = node.loss.toFixed(2);
                 
-                // 显示历史趋势曲线
+                // Show historical trend curves
                 if (node.stats && node.stats.accuracyHistory && node.stats.accuracyHistory.length > 1) {
                     const chartSvg = document.getElementById('modalAccuracyChart');
                     const svgRect = chartSvg.getBoundingClientRect();
@@ -2083,7 +2083,7 @@
                     const chartWidth = width - 2 * padding;
                     const chartHeight = height - 2 * padding;
                     
-                    // 清空SVG
+                    // Clear SVG
                     chartSvg.innerHTML = '';
                     
                     const accuracyData = node.stats.accuracyHistory;
@@ -2217,37 +2217,37 @@
             modal.classList.add('show');
         }
 
-        // 关闭模态卡片
+        // Close modal card
         function closeNodeModal() {
             const modal = document.getElementById('nodeModal');
             modal.classList.remove('show');
         }
 
-        // 获取状态文本
+        // Get status text
         function getStatusText(status) {
             const statusMap = {
-                'training': '正在训练',
-                'completed': '训练完成',
-                'idle': '空闲待命',
-                'error': '错误状态'
+                'training': 'Training',
+                'completed': 'Training Complete',
+                'idle': 'Idle Standby',
+                'error': 'Error Status'
             };
-            return statusMap[status] || '未知状态';
+            return statusMap[status] || 'Unknown Status';
         }
 
-        // 停止训练功能
+        // Stop training function
         function stopTraining() {
-            alert('停止训练功能暂未实现');
+            alert('Stop training feature not yet implemented');
         }
 
-        // 重启训练功能
+        // Restart training function
         function restartTraining() {
-            alert('重启训练功能暂未实现');
+            alert('Restart training feature not yet implemented');
         }
 
-        // 导出训练结果功能
+        // Export training results function
         function exportTrainingResult() {
             if (!selectedNode) {
-                alert('未选择节点');
+                alert('No node selected');
                 return;
             }
             
@@ -2266,14 +2266,14 @@
                 historyData: selectedNode.stats || {}
             };
             
-            // 创建JSON文件并下载
+            // Create JSON file and download
             const dataStr = JSON.stringify(result, null, 2);
             const dataBlob = new Blob([dataStr], {type: 'application/json'});
             const url = URL.createObjectURL(dataBlob);
             
             const link = document.createElement('a');
             link.href = url;
-            link.download = `${selectedNode.name}_训练结果_${new Date().toISOString().split('T')[0]}.json`;
+            link.download = `${selectedNode.name}_training_results_${new Date().toISOString().split('T')[0]}.json`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -2352,20 +2352,20 @@
         
         function sendInvitations() {
             if (inviteEmailList.length === 0) {
-                alert('请至少添加一个邮箱地址');
+                alert('Please add at least one email address');
                 return;
             }
             
             const role = document.querySelector('input[name="userRole"]:checked').value;
             const message = document.getElementById('inviteMessage').value;
             
-            // 模拟发送邀请
-            alert(`正在向 ${inviteEmailList.length} 个用户发送邀请...\n\n角色: ${role === 'participant' ? '参与者' : '观察者'}\n邮箱列表: ${inviteEmailList.join(', ')}`);
+            // Simulate sending invitations
+            alert(`Sending invitations to ${inviteEmailList.length} users...\n\nRole: ${role === 'participant' ? 'Participant' : 'Observer'}\nEmail list: ${inviteEmailList.join(', ')}`);
             
-            // 发送成功后关闭模态框
+            // Close modal after successful sending
             setTimeout(() => {
                 closeInviteUserModal();
-                alert('邀请已成功发送！');
+                alert('Invitations sent successfully!');
             }, 1000);
         }
         
@@ -2373,7 +2373,7 @@
             inviteEmailList = [];
             updateInviteEmailList();
             document.getElementById('inviteEmail').value = '';
-            document.getElementById('inviteMessage').value = '您好，我邀请您参与我们的EdgeAI项目。期待与您合作！';
+            document.getElementById('inviteMessage').value = 'Hello, I invite you to participate in our EdgeAI project. Looking forward to working with you!';
             document.querySelector('input[name="userRole"][value="participant"]').checked = true;
         }
 
@@ -2579,28 +2579,28 @@
                                     <div class="font-bold text-lg">${node.trainingRounds || 0}</div>
                                 </div>
                                 <div>
-                                    <span class="text-xs text-gray-600">当前准确率</span>
+                                    <span class="text-xs text-gray-600">Current Accuracy</span>
                                     <div class="font-bold text-lg text-green-600">${(node.accuracy || 0).toFixed(2)}%</div>
                                 </div>
                                 <div>
-                                    <span class="text-xs text-gray-600">损失值</span>
+                                    <span class="text-xs text-gray-600">Loss Value</span>
                                     <div class="font-bold text-lg text-red-600">${(node.loss || 0).toFixed(2)}</div>
                                 </div>
                                 <div>
-                                    <span class="text-xs text-gray-600">学习率</span>
+                                    <span class="text-xs text-gray-600">Learning Rate</span>
                                     <div class="font-bold text-lg">0.001</div>
                                 </div>
                             </div>
                         </div>
                         ` : ''}
                         
-                        <!-- 资源使用卡片 -->
+                        <!-- Resource Usage Card -->
                         <div class="bg-gray-50 rounded-lg p-4">
-                            <h5 class="font-semibold mb-3 text-red-600">资源使用</h5>
+                            <h5 class="font-semibold mb-3 text-red-600">Resource Usage</h5>
                             <div class="space-y-3">
                                 <div>
                                     <div class="flex justify-between text-sm">
-                                        <span>CPU使用率</span>
+                                        <span>CPU Usage</span>
                                         <span class="font-semibold">${node.cpu.toFixed(2)}%</span>
                                     </div>
                                     <div class="w-full bg-gray-200 rounded-full h-2 mt-1">
@@ -2609,7 +2609,7 @@
                                 </div>
                                 <div>
                                     <div class="flex justify-between text-sm">
-                                        <span>GPU使用率</span>
+                                        <span>GPU Usage</span>
                                         <span class="font-semibold">${node.gpu.toFixed(2)}%</span>
                                     </div>
                                     <div class="w-full bg-gray-200 rounded-full h-2 mt-1">
@@ -2618,26 +2618,26 @@
                                 </div>
                                 <div>
                                     <div class="flex justify-between text-sm">
-                                        <span>内存使用</span>
+                                        <span>Memory Usage</span>
                                         <span class="font-semibold">${node.memory}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- 历史趋势卡片 -->
+                        <!-- Historical Trend Card -->
                         ${node.stats ? `
                         <div class="bg-gray-50 rounded-lg p-4">
-                            <h5 class="font-semibold mb-3 text-indigo-600">趋势分析</h5>
+                            <h5 class="font-semibold mb-3 text-indigo-600">Trend Analysis</h5>
                             <div class="space-y-2">
                                 <div>
-                                    <span class="text-xs text-gray-600">准确率趋势</span>
+                                    <span class="text-xs text-gray-600">Accuracy Trend</span>
                                     <div class="flex items-center space-x-1 mt-1">
                                         ${node.stats.accuracyHistory.map(acc => 
                                             `<div class="flex-1 bg-green-200 rounded h-3" style="height: ${(acc/100) * 20 + 5}px"></div>`
                                         ).join('')}
                                     </div>
-                                    <div class="text-xs text-gray-500 mt-1">最近4轮: ${node.stats.accuracyHistory.map(acc => acc.toFixed(2)).join(' → ')}%</div>
+                                    <div class="text-xs text-gray-500 mt-1">Last 4 rounds: ${node.stats.accuracyHistory.map(acc => acc.toFixed(2)).join(' → ')}%</div>
                                 </div>
                             </div>
                         </div>
@@ -2753,7 +2753,7 @@
             document.getElementById('quickOnlineCount').textContent = onlineNodes;
             document.getElementById('quickTrainingCount').textContent = trainingNodesCount;
             
-            // 检查训练完成状态
+            // Check training completion status
             checkTrainingComplete();
         }
         
@@ -2764,7 +2764,7 @@
             const completedNodes = allNodes.filter(n => n.status === 'completed');
             const totalActiveNodes = allNodes.filter(n => n.status !== 'error');
             
-            // 如果所有活跃节点都已完成训练，显示完成状态
+            // If all active nodes have completed training, show completion status
             if (trainingNodes.length === 0 && completedNodes.length > 0) {
                 showTrainingComplete(completedNodes.length);
             } else {
@@ -2772,18 +2772,18 @@
             }
         }
         
-        // 显示训练完成状态
+        // Show training completion status
         function showTrainingComplete(completedCount) {
             const completeOverlay = document.getElementById('trainingComplete');
             const statsText = document.getElementById('trainingCompleteStats');
             
             if (completeOverlay && statsText) {
-                statsText.textContent = `共完成 ${completedCount} 个节点的训练`;
+                statsText.textContent = `Completed training for ${completedCount} nodes`;
                 completeOverlay.style.display = 'block';
             }
         }
         
-        // 隐藏训练完成状态
+        // Hide training completion status
         function hideTrainingComplete() {
             const completeOverlay = document.getElementById('trainingComplete');
             if (completeOverlay) {
@@ -2791,13 +2791,13 @@
             }
         }
         
-        // 填充节点表格
+        // Fill node tables
         function fillNodeTables() {
             fillControlNodesTable();
             fillEdgeNodesTable();
         }
         
-        // 填充控制节点表格
+        // Fill control nodes table
         function fillControlNodesTable() {
             const tableBody = document.getElementById('controlNodesTable');
             tableBody.innerHTML = '';
@@ -2815,23 +2815,23 @@
                         </div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="text-sm text-gray-900">${node.type === 'master' ? '主控制器' : node.type === 'participant' ? '参与者' : '观察者'}</span>
+                        <span class="text-sm text-gray-900">${node.type === 'master' ? 'Master Controller' : node.type === 'participant' ? 'Participant' : 'Observer'}</span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            在线
+                            Online
                         </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${node.user}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-mono">${node.ip}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${networkData.edgeNodes.filter(n => n.status !== 'error').length}个</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${networkData.edgeNodes.filter(n => n.status !== 'error').length} nodes</td>
                 `;
                 
                 tableBody.appendChild(row);
             });
         }
         
-        // 填充边缘节点表格
+        // Fill edge nodes table
         function fillEdgeNodesTable() {
             const tableBody = document.getElementById('edgeNodesTable');
             tableBody.innerHTML = '';
@@ -2839,7 +2839,7 @@
             networkData.allEdgeNodes.forEach(node => {
                 const row = document.createElement('tr');
                 row.className = 'hover:bg-gray-50';
-                // 移除行点击事件，只保留按钮点击事件
+                // Remove row click events, keep only button click events
                 
                 const statusColorMap = {
                     'training': 'bg-blue-100 text-blue-800',
@@ -2849,14 +2849,14 @@
                 };
                 
                 const statusTextMap = {
-                    'training': '训练中',
-                    'completed': '已完成',
-                    'idle': '空闲',
-                    'error': '错误'
+                    'training': 'Training',
+                    'completed': 'Completed',
+                    'idle': 'Idle',
+                    'error': 'Error'
                 };
                 
                 const statusColor = statusColorMap[node.status] || 'bg-gray-100 text-gray-800';
-                const statusText = statusTextMap[node.status] || '未知';
+                const statusText = statusTextMap[node.status] || 'Unknown';
                 
                 row.innerHTML = `
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -2883,7 +2883,7 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${node.gpu.toFixed(2)}%</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${node.heartbeat}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <button class="text-indigo-600 hover:text-indigo-900 px-3 py-2 rounded border border-indigo-300 hover:border-indigo-500 bg-transparent cursor-pointer transition-colors duration-200 node-details-btn" data-node-id="${node.id}">查看详情</button>
+                        <button class="text-indigo-600 hover:text-indigo-900 px-3 py-2 rounded border border-indigo-300 hover:border-indigo-500 bg-transparent cursor-pointer transition-colors duration-200 node-details-btn" data-node-id="${node.id}">View Details</button>
                     </td>
                 `;
                 
@@ -2892,7 +2892,7 @@
         }
         
 
-        // 触发随机数据传输动画
+        // Trigger random data transmission animation
         function triggerDataTransmissions() {
             const connections = document.querySelectorAll('.connection-line');
             const trainingConnections = Array.from(connections).filter(line => {
@@ -2901,29 +2901,29 @@
                 return edgeNode && edgeNode.status === 'training';
             });
             
-            // 随机选择2-5条训练连接线进行数据传输（测试模式 - 更多连接线）
+            // Randomly select 2-5 training connection lines for data transmission (test mode - more connection lines)
             const transmissionCount = Math.min(
                 Math.floor(Math.random() * 4) + 2, 
                 trainingConnections.length
             );
             
             if (transmissionCount > 0) {
-                // 随机选择连接线
+                // Randomly select connection lines
                 const shuffled = [...trainingConnections].sort(() => 0.5 - Math.random());
                 const selectedConnections = shuffled.slice(0, transmissionCount);
                 
                 selectedConnections.forEach(line => {
-                    // 清除之前的传输动画
+                    // Clear previous transmission animations
                     line.classList.remove('transmitting-down', 'transmitting-up');
                     
-                    // 随机选择传输方向
+                    // Randomly select transmission direction
                     const direction = Math.random() > 0.5 ? 'transmitting-down' : 'transmitting-up';
                     
-                    // 稍微延迟以确保类被清除
+                    // Slight delay to ensure class is cleared
                     setTimeout(() => {
                         line.classList.add(direction);
                         
-                        // 动画结束后移除类
+                        // Remove class after animation ends
                         setTimeout(() => {
                             line.classList.remove(direction);
                         }, 4000);
@@ -2932,46 +2932,46 @@
             }
         }
 
-        // 启动实时更新
+        // Start real-time updates
         function startRealTimeUpdates() {
             setInterval(() => {
                 let hasCompletedNodes = false;
                 
-                // 随机将等待中的节点开始训练
+                // Randomly start training on idle nodes
                 const idleNodes = networkData.allEdgeNodes.filter(n => n.status === 'idle');
                 if (idleNodes.length > 0 && Math.random() < 0.3) {
                     const randomIdleNode = idleNodes[Math.floor(Math.random() * idleNodes.length)];
                     randomIdleNode.status = 'training';
-                    randomIdleNode.progress = Math.floor(Math.random() * 10); // 开始进度
-                    randomIdleNode.fadeIn = true; // 标记节点需要淡入
+                    randomIdleNode.progress = Math.floor(Math.random() * 10); // Start progress
+                    randomIdleNode.fadeIn = true; // Mark node for fade-in
                 }
                 
-                // 随机更新训练进度
+                // Randomly update training progress
                 networkData.allEdgeNodes.forEach(node => {
                     if (node.status === 'training' && node.progress < 100) {
                         node.progress = Math.min(100, node.progress + Math.floor(Math.random() * 3));
                         
-                        // 更新训练统计数据
+                        // Update training statistics
                         if (node.trainingRounds) {
                             node.trainingRounds += Math.floor(Math.random() * 3 + 1);
                             
-                            // 更新准确率和损失值
-                            if (Math.random() < 0.7) { // 70%概率提升准确率
+                            // Update accuracy and loss values
+                            if (Math.random() < 0.7) { // 70% probability to improve accuracy
                                 node.accuracy = Math.min(99.9, node.accuracy + Math.random() * 0.3);
                                 node.loss = Math.max(0.001, node.loss - Math.random() * 0.005);
                             }
                             
-                            // 更新资源使用历史
+                            // Update resource usage history
                             if (node.stats) {
-                                // CPU波动
+                                // CPU fluctuation
                                 const cpuChange = (Math.random() - 0.5) * 10;
                                 node.cpu = Math.round((Math.max(10, Math.min(100, node.cpu + cpuChange)) * 100)) / 100;
                                 
-                                // GPU波动
+                                // GPU fluctuation
                                 const gpuChange = (Math.random() - 0.5) * 8;
                                 node.gpu = Math.round((Math.max(0, Math.min(100, node.gpu + gpuChange)) * 100)) / 100;
                                 
-                                // 更新历史记录（保持最近4个值）
+                                // Update history records (keep latest 4 values)
                                 node.stats.cpuHistory.push(node.cpu);
                                 node.stats.gpuHistory.push(node.gpu);
                                 node.stats.accuracyHistory.push(Math.round(node.accuracy * 10) / 10);
@@ -2986,19 +2986,19 @@
                         
                         if (node.progress >= 100) {
                             node.status = 'completed';
-                            node.fadeOut = true; // 标记节点需要淡出
+                            node.fadeOut = true; // Mark node for fade-out
                             hasCompletedNodes = true;
                         }
                     }
                 });
                 
-                // 如果有节点完成训练，延迟更新可视化节点（让淡出动画先播放）
+                // If nodes complete training, delay updating visualization nodes (let fade-out animation play first)
                 if (hasCompletedNodes) {
-                    // 立即重绘以显示淡出动画
+                    // Immediately redraw to show fade-out animation
                     drawNodes();
                     drawConnections();
                     
-                    // 1秒后更新可视化节点列表（移除已完成的节点）
+                    // Update visualization node list after 1 second (remove completed nodes)
                     setTimeout(() => {
                         updateVisualizedNodes();
                         drawNodes();
@@ -3007,7 +3007,7 @@
                         fillNodeTables();
                     }, 1000);
                 } else {
-                    // 正常更新
+                    // Normal update
                     updateVisualizedNodes();
                     drawNodes();
                     drawConnections();
@@ -3015,22 +3015,22 @@
                     fillNodeTables();
                 }
                 
-                // 随机数据传输速度
+                // Random data transmission speed
                 const speeds = ['0.8MB/s', '1.2MB/s', '2.1MB/s', '1.5MB/s', '0.9MB/s'];
                 document.getElementById('dataTransfer').textContent = speeds[Math.floor(Math.random() * speeds.length)];
                 
-                // 随机触发数据传输动画（80%概率 - 高频测试模式）
+                // Randomly trigger data transmission animation (80% probability - high frequency test mode)
                 if (Math.random() < 0.8) {
                     triggerDataTransmissions();
                 }
                 
-                // 随机网络延迟（如果元素存在）
+                // Random network latency (if element exists)
                 const networkLatencyElement = document.getElementById('networkLatency');
                 if (networkLatencyElement) {
                     networkLatencyElement.textContent = `${Math.floor(Math.random() * 20 + 15)}ms`;
                 }
                 
-                // 如果有节点详情面板打开，实时更新其内容
+                // If node details panel is open, update its content in real-time
                 if (selectedNode && document.getElementById('nodeDetails').classList.contains('show')) {
                     const updatedNode = networkData.allEdgeNodes.find(n => n.id === selectedNode.id);
                     if (updatedNode) {
@@ -3040,20 +3040,20 @@
             }, 3000);
         }
         
-        // 控制面板功能
+        // Control panel functions
         function inviteUser() {
-            alert('邀请用户功能开发中...\n\n将提供：\n- 用户邀请链接生成\n- 权限设置\n- 用户管理\n- 协作控制');
+            alert('User invitation feature in development...\n\nWill provide:\n- User invitation link generation\n- Permission settings\n- User management\n- Collaboration control');
         }
         
         function addNode() {
-            alert('添加节点功能开发中...\n\n将支持：\n- 自动发现边缘设备\n- 手动添加节点\n- 节点配置\n- 连接测试');
+            alert('Add node feature in development...\n\nWill support:\n- Automatic edge device discovery\n- Manual node addition\n- Node configuration\n- Connection testing');
         }
         
         function startTraining() {
-            alert('开始训练功能开发中...\n\n将包含：\n- 训练参数设置\n- 数据分发策略\n- 模型同步机制\n- 进度监控');
+            alert('Start training feature in development...\n\nWill include:\n- Training parameter settings\n- Data distribution strategy\n- Model synchronization mechanism\n- Progress monitoring');
         }
         
-        // 测试功能：完成所有训练
+        // Test function: Complete all training
         function completeAllTraining() {
             networkData.allEdgeNodes.forEach(node => {
                 if (node.status === 'training' || node.status === 'idle') {
@@ -3062,26 +3062,26 @@
                 }
             });
             
-            // 重新绘制界面
+            // Redraw interface
             updateVisualizedNodes();
             drawNodes();
             drawConnections();
             updateStats();
             fillNodeTables();
             
-            alert('所有节点训练已完成！');
+            alert('All node training completed!');
         }
         
         function resetView() {
-            // 重置可视化视图
+            // Reset visualization view
             initializeVisualization();
             closeNodeDetails();
-            alert('视图已重置');
+            alert('View has been reset');
         }
         
-        // 边缘节点表格排序功能
+        // Edge node table sorting functionality
         function sortEdgeNodes(field) {
-            // 更新排序方向
+            // Update sort direction
             if (currentSortField === field) {
                 currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
             } else {
@@ -3089,20 +3089,20 @@
                 currentSortDirection = 'asc';
             }
             
-            // 清除所有排序指示器
+            // Clear all sort indicators
             const sortIndicators = ['sort-name', 'sort-status', 'sort-progress', 'sort-cpu', 'sort-memory', 'sort-gpu', 'sort-heartbeat'];
             sortIndicators.forEach(id => {
                 const element = document.getElementById(id);
                 if (element) element.textContent = '⇅';
             });
             
-            // 设置当前排序指示器
+            // Set current sort indicator
             const currentIndicator = document.getElementById(`sort-${field}`);
             if (currentIndicator) {
                 currentIndicator.textContent = currentSortDirection === 'asc' ? '↑' : '↓';
             }
             
-            // 执行排序
+            // Execute sorting
             networkData.allEdgeNodes.sort((a, b) => {
                 let valueA, valueB;
                 
@@ -3112,7 +3112,7 @@
                         valueB = b.name.toLowerCase();
                         break;
                     case 'status':
-                        // 状态排序：training > idle > completed > error
+                        // Status sorting: training > idle > completed > error
                         const statusOrder = { 'training': 1, 'idle': 2, 'completed': 3, 'error': 4 };
                         valueA = statusOrder[a.status] || 5;
                         valueB = statusOrder[b.status] || 5;
@@ -3126,7 +3126,7 @@
                         valueB = b.cpu || 0;
                         break;
                     case 'memory':
-                        // 解析内存值（去除GB后缀）
+                        // Parse memory value (remove GB suffix)
                         valueA = parseFloat(a.memory.replace('GB', '')) || 0;
                         valueB = parseFloat(b.memory.replace('GB', '')) || 0;
                         break;
@@ -3137,12 +3137,12 @@
                     case 'heartbeat':
                         // 解析心跳时间（简化处理）
                         const parseHeartbeat = (heartbeat) => {
-                            if (heartbeat.includes('秒前')) {
-                                return parseInt(heartbeat.replace('秒前', '')) || 0;
-                            } else if (heartbeat.includes('分钟前')) {
-                                return (parseInt(heartbeat.replace('分钟前', '')) || 0) * 60;
+                            if (heartbeat.includes('sec ago')) {
+                                return parseInt(heartbeat.replace(' sec ago', '')) || 0;
+                            } else if (heartbeat.includes('min ago')) {
+                                return (parseInt(heartbeat.replace(' min ago', '')) || 0) * 60;
                             }
-                            return 999; // 其他情况排在最后
+                            return 999; // Other cases go last
                         };
                         valueA = parseHeartbeat(a.heartbeat);
                         valueB = parseHeartbeat(b.heartbeat);
@@ -3163,11 +3163,11 @@
                 }
             });
             
-            // 重新填充表格
+            // Refill table
             fillEdgeNodesTable();
         }
         
-        // 导航功能
+        // Navigation functionality
         function goBack() {
             window.location.href = '/edgeai/pages/dashboard.html';
         }

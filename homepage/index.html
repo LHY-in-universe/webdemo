@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>OpenTMP多方计算平台</title>
+    <title>OpenTMP LLM Engine</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzM3NDE1MSIvPgo8cGF0aCBkPSJtMTcgOSA0IDQtNCA0LTQtNCA0LTR6IiBmaWxsPSIjZjlmYWZiIiBzdHJva2U9Im5vbmUiLz4KPC9zdmc+" />
     <!-- ==================== 防白闪脚本 ==================== -->
     <script>
@@ -503,7 +503,7 @@
                     </svg>
                 </div>
                 <div class="navbar-brand text-xl font-bold">
-                    <span data-i18n="homepage.title">OpenTMP多方计算平台</span>
+                    <span data-i18n="homepage.title">OpenTMP LLM Engine</span>
                 </div>
             </div>
             
@@ -522,10 +522,10 @@
             <!-- 主标题区域 -->
             <div class="text-center mb-20 fade-in-up">
                 <h1 class="hero-title text-5xl md:text-7xl font-extrabold mb-8 leading-tight" data-i18n="homepage.title">
-                    OpenTMP多方计算平台
+                    OpenTMP LLM Engine
                 </h1>
                 <p class="hero-subtitle text-xl md:text-2xl font-medium max-w-3xl mx-auto leading-relaxed" style="color: var(--text-secondary) !important; font-weight: 600 !important;" data-i18n="homepage.subtitle">
-                    安全、高效的分布式机器学习解决方案
+                    高效边缘AI训练和推理跨设备解决方案
                 </p>
                 <div class="mt-8 flex justify-center">
                     <div class="w-24 h-1 bg-gradient-to-r from-transparent via-gray-500 to-transparent"></div>
@@ -542,9 +542,9 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-900" data-i18n="homepage.modules.p2pai.title">P2P AI训练</h3>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-900" data-i18n="homepage.modules.p2pai.title">P2P AI Intelligence</h3>
                         <p class="module-description text-gray-600 font-medium leading-relaxed" data-i18n="homepage.modules.p2pai.description">
-                            点对点联邦学习与多方计算
+                            多实体联合学习无数据泄露
                         </p>
                         <div class="mt-6 inline-flex items-center text-sm font-semibold text-gray-500 transition-colors duration-300 group-hover:text-gray-700">
                             <span data-i18n="homepage.enterModule">进入模块</span>
@@ -563,9 +563,9 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-4 text-gray-900" data-i18n="homepage.modules.edgeai.title">边缘AI智能</h3>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-900" data-i18n="homepage.modules.edgeai.title">Edge AI Intelligence</h3>
                         <p class="module-description text-gray-600 font-medium leading-relaxed" data-i18n="homepage.modules.edgeai.description">
-                            边缘设备智能训练与可视化管理
+                            高效边缘AI训练和推理跨设备
                         </p>
                         <div class="mt-6 inline-flex items-center text-sm font-semibold text-gray-500 transition-colors duration-300 group-hover:text-gray-700">
                             <span data-i18n="homepage.enterModule">进入模块</span>
@@ -619,8 +619,6 @@
                         console.log(`切换主题: ${current} → ${newTheme}`);
                         window.unifiedThemeManager.setTheme(newTheme);
                     };
-                    
-                    console.log('可以在控制台运行 testThemeSwitch() 来测试主题切换');
                 } else {
                     console.warn('主题管理器未正确初始化');
                     
@@ -631,6 +629,26 @@
                         window.themeManager = window.unifiedThemeManager;
                     }
                 }
+                
+                // 确保国际化管理器已初始化
+                if (window.i18nManager) {
+                    console.log('国际化管理器已初始化，当前语言:', window.i18nManager.getCurrentLanguage());
+                    
+                    // 测试语言切换功能
+                    window.testLanguageSwitch = () => {
+                        const current = window.i18nManager.getCurrentLanguage();
+                        const newLang = current === 'zh' ? 'en' : 'zh';
+                        console.log(`切换语言: ${current} → ${newLang}`);
+                        window.i18nManager.switchLanguage(newLang);
+                    };
+                    
+                    console.log('可以在控制台运行 testLanguageSwitch() 来测试语言切换');
+                } else {
+                    console.warn('国际化管理器未正确初始化');
+                }
+                
+                console.log('可以在控制台运行 testThemeSwitch() 来测试主题切换');
+                console.log('可以在控制台运行 testLanguageSwitch() 来测试语言切换');
             }, 500);
         };
     </script>

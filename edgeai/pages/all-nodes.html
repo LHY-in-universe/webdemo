@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>查看所有节点 - EdgeAI</title>
+    <title>View All Nodes - EdgeAI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../../shared/css/unified-styles.css?v=1756673001">
     <style>
-        /* EdgeAI 节点管理页面 - 仅保留必要的自定义样式 */
+        /* EdgeAI Node Management Page - Only keep necessary custom styles */
         
         [data-theme="dark"] .text-gray-900 {
             color: #f9fafb !important;
@@ -98,7 +98,7 @@
             color: #9ca3af !important;
         }
         
-        /* 过滤器标签样式 */
+        /* Filter tag styles */
         [data-theme="light"] .text-gray-700 {
             color: #374151 !important;
         }
@@ -111,7 +111,7 @@
             background-color: #374151 !important;
         }
         
-        /* 统计卡片深色模式 */
+        /* Statistics card dark mode */
         [data-theme="dark"] .bg-green-100 {
             background-color: rgba(34, 197, 94, 0.2) !important;
         }
@@ -215,7 +215,7 @@
             background-color: #374151 !important;
         }
         
-        /* 节点管理模态框深色模式 */
+        /* Node management modal dark mode */
         [data-theme="dark"] #nodeManageModal .bg-white {
             background-color: #1f2937 !important;
         }
@@ -320,7 +320,7 @@
             background-color: #4b5563 !important;
         }
         
-        /* 节点类型标签自定义样式 */
+        /* Node type badge custom styles */
         .type-badge-edge {
             background-color: #3b82f6 !important;
             color: #ffffff !important;
@@ -336,7 +336,7 @@
             color: #ffffff !important;
         }
         
-        /* 深色模式下节点类型标签样式调整 */
+        /* Node type badge style adjustments in dark mode */
         [data-theme="dark"] .type-badge-edge {
             background-color: #2563eb !important;
         }
@@ -349,7 +349,7 @@
             background-color: #4b5563 !important;
         }
         
-        /* 返回按钮深色模式样式 */
+        /* Back button dark mode styles */
         [data-theme="dark"] .text-gray-600 {
             color: #d1d5db !important;
         }
@@ -362,7 +362,7 @@
             background-color: #374151 !important;
         }
         
-        /* 项目分组容器样式 */
+        /* Project group container styles */
         .project-group {
             background: var(--bg-primary);
             border: 1px solid var(--border-primary);
@@ -393,7 +393,7 @@
             font-weight: 600;
         }
         
-        /* 训练节点主题色 - 蓝色系 */
+        /* Training nodes theme color - Blue series */
         .training-nodes-section {
             border-left: 4px solid #3b82f6;
         }
@@ -458,7 +458,7 @@
             margin-bottom: 0;
         }
         
-        /* 自定义滚动条样式 */
+        /* Custom scrollbar styles */
         .node-card::-webkit-scrollbar {
             height: 6px;
         }
@@ -478,7 +478,7 @@
         }
         
         
-        /* 控制节点卡片特殊样式 */
+        /* Control node card special styles */
         .control-node-card {
             border-left: 4px solid #f97316;
             background: rgba(249, 115, 22, 0.05);
@@ -489,7 +489,7 @@
             border-left-color: #fb923c;
         }
         
-        /* 训练节点卡片样式 */
+        /* Training node card styles */
         .training-node-card {
             border-left: 4px solid #3b82f6;
             background: rgba(59, 130, 246, 0.05);
@@ -500,7 +500,7 @@
             border-left-color: #60a5fa;
         }
         
-        /* 观察节点卡片样式 */
+        /* Observer node card styles */
         .observer-node-card {
             border-left: 4px solid #8b5cf6;
             background: rgba(139, 92, 246, 0.05);
@@ -511,7 +511,7 @@
             border-left-color: #a78bfa;
         }
         
-        /* 更新控制节点类型标签颜色 */
+        /* Update control node type badge color */
         .type-badge-control {
             background-color: #f97316 !important;
             color: #ffffff !important;
@@ -521,7 +521,7 @@
             background-color: #ea580c !important;
         }
         
-        /* 节点卡片按钮样式统一 */
+        /* Unified node card button styles */
         .node-card button {
             min-width: 60px;
             height: 36px;
@@ -540,7 +540,7 @@
             color: #f9fafb !important;
         }
         
-        /* 确保深色模式下数据列标签可见 */
+        /* Ensure data column labels are visible in dark mode */
         [data-theme="dark"] .node-card .text-gray-500 {
             color: #9ca3af !important;
         }
@@ -552,7 +552,7 @@
 </head>
 <body class="module-background theme-transition">
     <div class="min-h-screen">
-        <!-- 顶部导航 -->
+        <!-- Top Navigation -->
         <nav class="navbar fade-in-up">
             <div class="max-w-6xl mx-auto flex items-center justify-between">
                 <div class="flex items-center">
@@ -561,38 +561,38 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                         </svg>
                     </button>
-                    <span class="navbar-brand" data-i18n="edgeai.allNodes.title">所有节点管理</span>
+                    <span class="navbar-brand" data-i18n="edgeai.allNodes.title">All Nodes Management</span>
                 </div>
                 
                 <div class="navbar-nav">
-                    <button class="theme-toggle" title="切换主题">
+                    <button class="theme-toggle" title="Toggle Theme">
                         <span>🌙</span>
                     </button>
-                    <button class="language-toggle" title="切换语言">EN</button>
+                    <button class="language-toggle" title="Toggle Language">EN</button>
                 </div>
             </div>
         </nav>
 
-        <!-- 主要内容 -->
+        <!-- Main Content -->
         <div class="max-w-6xl mx-auto px-6 py-8">
-            <!-- 页面头部 -->
+            <!-- Page Header -->
             <div class="mb-8">
                 <div class="flex justify-between items-center mb-6">
                     <div>
-                        <h2 class="text-2xl font-bold text-gray-900 mb-2" data-i18n="edgeai.allNodes.overview">EdgeAI 节点总览</h2>
-                        <p class="text-gray-600" data-i18n="edgeai.allNodes.description">管理和监控所有边缘AI节点的状态和性能</p>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-2" data-i18n="edgeai.allNodes.overview">EdgeAI Node Overview</h2>
+                        <p class="text-gray-600" data-i18n="edgeai.allNodes.description">Manage and monitor the status and performance of all edge AI nodes</p>
                     </div>
                     <div class="flex space-x-3">
                         <button onclick="refreshNodes()" class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">
                             <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                             </svg>
-                            刷新
+                            Refresh
                         </button>
                     </div>
                 </div>
 
-                <!-- 统计卡片 -->
+                <!-- Statistics Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                     <div class="card fade-in-up delay-1">
                         <div class="flex items-center">
@@ -604,7 +604,7 @@
                                 </div>
                             </div>
                             <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-600">在线节点</p>
+                                <p class="text-sm font-medium text-gray-600">Online Nodes</p>
                                 <p class="text-2xl font-semibold text-gray-900" id="onlineCount">15</p>
                             </div>
                         </div>
@@ -620,7 +620,7 @@
                                 </div>
                             </div>
                             <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-600">训练中</p>
+                                <p class="text-sm font-medium text-gray-600">Training</p>
                                 <p class="text-2xl font-semibold text-gray-900" id="trainingCount">8</p>
                             </div>
                         </div>
@@ -636,7 +636,7 @@
                                 </div>
                             </div>
                             <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-600">空闲节点</p>
+                                <p class="text-sm font-medium text-gray-600">Idle Nodes</p>
                                 <p class="text-2xl font-semibold text-gray-900" id="idleCount">5</p>
                             </div>
                         </div>
@@ -652,7 +652,7 @@
                                 </div>
                             </div>
                             <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-600">故障节点</p>
+                                <p class="text-sm font-medium text-gray-600">Error Nodes</p>
                                 <p class="text-2xl font-semibold text-gray-900" id="errorCount">2</p>
                             </div>
                         </div>
@@ -660,12 +660,12 @@
                 </div>
             </div>
 
-            <!-- 搜索和过滤 -->
+            <!-- Search and Filter -->
             <div class="card mb-8 fade-in-up delay-5">
-                <!-- 搜索栏 -->
+                <!-- Search Bar -->
                 <div class="mb-4">
                     <div class="relative max-w-md">
-                        <input type="text" id="searchInput" placeholder="搜索节点名称或地址..."
+                        <input type="text" id="searchInput" placeholder="Search node name or address..."
                                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
                         <div class="absolute left-3 top-3.5 text-gray-400">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -675,76 +675,76 @@
                     </div>
                 </div>
 
-                <!-- 过滤器和操作按钮 -->
+                <!-- Filters and Action Buttons -->
                 <div class="flex flex-wrap items-center justify-between gap-4">
-                    <!-- 过滤选项 -->
+                    <!-- Filter Options -->
                     <div class="flex flex-wrap gap-3">
-                        <!-- 状态过滤 -->
+                        <!-- Status Filter -->
                         <div class="flex flex-col">
-                            <label class="text-xs font-medium text-gray-700 mb-1">状态</label>
+                            <label class="text-xs font-medium text-gray-700 mb-1">Status</label>
                             <select id="statusFilter" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm min-w-28">
-                                <option value="">所有状态</option>
-                                <option value="training">训练中</option>
-                                <option value="completed">已完成</option>
-                                <option value="idle">空闲</option>
-                                <option value="error">故障</option>
+                                <option value="">All Status</option>
+                                <option value="training">Training</option>
+                                <option value="completed">Completed</option>
+                                <option value="idle">Idle</option>
+                                <option value="error">Error</option>
                             </select>
                         </div>
 
-                        <!-- 节点类型过滤 -->
+                        <!-- Node Type Filter -->
                         <div class="flex flex-col">
-                            <label class="text-xs font-medium text-gray-700 mb-1">类型</label>
+                            <label class="text-xs font-medium text-gray-700 mb-1">Type</label>
                             <select id="typeFilter" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm min-w-28">
-                                <option value="">所有类型</option>
-                                <option value="edge">边缘节点</option>
-                                <option value="control">控制节点</option>
-                                <option value="observer">观察节点</option>
+                                <option value="">All Types</option>
+                                <option value="edge">Edge Node</option>
+                                <option value="control">Control Node</option>
+                                <option value="observer">Observer Node</option>
                             </select>
                         </div>
 
-                        <!-- 项目过滤 -->
+                        <!-- Project Filter -->
                         <div class="flex flex-col">
-                            <label class="text-xs font-medium text-gray-700 mb-1">项目</label>
+                            <label class="text-xs font-medium text-gray-700 mb-1">Project</label>
                             <select id="projectFilter" class="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm min-w-28">
-                                <option value="">所有项目</option>
-                                <option value="项目A">项目A</option>
-                                <option value="项目B">项目B</option>
-                                <option value="项目C">项目C</option>
-                                <option value="项目D">项目D</option>
-                                <option value="系统">系统</option>
-                                <option value="监控">监控</option>
-                                <option value="未分配">未分配</option>
+                                <option value="">All Projects</option>
+                                <option value="项目A">Project A</option>
+                                <option value="项目B">Project B</option>
+                                <option value="项目C">Project C</option>
+                                <option value="项目D">Project D</option>
+                                <option value="系统">System</option>
+                                <option value="监控">Monitor</option>
+                                <option value="未分配">Unassigned</option>
                             </select>
                         </div>
                     </div>
 
-                    <!-- 批量操作 -->
+                    <!-- Batch Operations -->
                     <div class="flex gap-3">
                         <button onclick="batchStart()" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h1m4 0h1m6-6V7a3 3 0 00-3-3H6a3 3 0 00-3 3v10a3 3 0 003 3h7m-3-7l3-3 3 3m-6 4v6"></path>
                             </svg>
-                            批量启动
+                            Batch Start
                         </button>
                         <button onclick="batchStop()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 9l6 6m0-6l-6 6"></path>
                             </svg>
-                            批量停止
+                            Batch Stop
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- 按项目分组的节点列表 -->
+            <!-- Node List Grouped by Project -->
             <div id="projectsContainer" class="space-y-8 fade-in-up delay-6">
-                <!-- 项目组将动态生成 -->
+                <!-- Project groups will be dynamically generated -->
             </div>
         </div>
     </div>
 
-    <!-- 节点详情模态框 -->
+    <!-- Node Details Modal -->
     <div id="nodeDetailsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
         <div class="bg-white rounded-lg max-w-lg w-full m-4 max-h-[80vh] overflow-y-auto">
             <div class="p-4">

@@ -21,34 +21,34 @@ class DatasetManager {
         this.container.innerHTML = `
             <div class="dataset-manager">
                 <div class="manager-header">
-                    <h3 data-i18n="ai.dashboard.dataset.management">数据集管理</h3>
+                    <h3 data-i18n="p2pai.dashboard.dataset.management">数据集管理</h3>
                     <div class="manager-controls">
-                        <button id="uploadDataset" class="btn btn-primary" data-i18n="ai.dashboard.dataset.upload">上传数据集</button>
-                        <button id="createDataset" class="btn btn-secondary" data-i18n="ai.dashboard.dataset.create">创建数据集</button>
+                        <button id="uploadDataset" class="btn btn-primary" data-i18n="p2pai.dashboard.dataset.upload">上传数据集</button>
+            <button id="createDataset" class="btn btn-secondary" data-i18n="p2pai.dashboard.dataset.create">创建数据集</button>
                         <button id="refreshDatasets" class="btn btn-outline-primary" data-i18n="common.refresh">刷新</button>
                     </div>
                 </div>
                 
                 <div class="manager-filters">
                     <div class="filter-group">
-                        <label for="dataTypeFilter" data-i18n="ai.dashboard.dataset.dataType">数据类型:</label>
+                        <label for="dataTypeFilter" data-i18n="p2pai.dashboard.dataset.dataType">数据类型:</label>
                         <select id="dataTypeFilter" class="form-select">
                             <option value="" data-i18n="common.all">全部</option>
-                            <option value="image" data-i18n="ai.dashboard.dataset.types.image">图像</option>
-                            <option value="text" data-i18n="ai.dashboard.dataset.types.text">文本</option>
-                            <option value="tabular" data-i18n="ai.dashboard.dataset.types.tabular">表格</option>
-                            <option value="audio" data-i18n="ai.dashboard.dataset.types.audio">音频</option>
-                            <option value="time_series" data-i18n="ai.dashboard.dataset.types.timeSeries">时间序列</option>
+                            <option value="image" data-i18n="p2pai.dashboard.dataset.types.image">图像</option>
+                    <option value="text" data-i18n="p2pai.dashboard.dataset.types.text">文本</option>
+                    <option value="tabular" data-i18n="p2pai.dashboard.dataset.types.tabular">表格</option>
+                    <option value="audio" data-i18n="p2pai.dashboard.dataset.types.audio">音频</option>
+                    <option value="time_series" data-i18n="p2pai.dashboard.dataset.types.timeSeries">时间序列</option>
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label for="statusFilter" data-i18n="ai.dashboard.dataset.status">状态:</label>
+                        <label for="statusFilter" data-i18n="p2pai.dashboard.dataset.status">状态:</label>
                         <select id="statusFilter" class="form-select">
                             <option value="" data-i18n="common.all">全部</option>
-                            <option value="created" data-i18n="ai.dashboard.dataset.statuses.created">已创建</option>
-                            <option value="processing" data-i18n="ai.dashboard.dataset.statuses.processing">处理中</option>
-                            <option value="ready" data-i18n="ai.dashboard.dataset.statuses.ready">就绪</option>
-                            <option value="error" data-i18n="ai.dashboard.dataset.statuses.error">错误</option>
+                            <option value="created" data-i18n="p2pai.dashboard.dataset.statuses.created">已创建</option>
+                    <option value="processing" data-i18n="p2pai.dashboard.dataset.statuses.processing">处理中</option>
+                    <option value="ready" data-i18n="p2pai.dashboard.dataset.statuses.ready">就绪</option>
+                    <option value="error" data-i18n="p2pai.dashboard.dataset.statuses.error">错误</option>
                         </select>
                     </div>
                 </div>
@@ -60,14 +60,14 @@ class DatasetManager {
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" data-i18n="ai.dashboard.dataset.detail">数据集详情</h5>
+                                <h5 class="modal-title" data-i18n="p2pai.dashboard.dataset.detail">数据集详情</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body" id="datasetDetailContent"></div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="common.close">关闭</button>
-                                <button type="button" class="btn btn-info" id="previewDataset" data-i18n="ai.dashboard.dataset.preview">预览数据</button>
-                                <button type="button" class="btn btn-primary" id="analyzeDataset" data-i18n="ai.dashboard.dataset.analyze">分析数据集</button>
+                                <button type="button" class="btn btn-info" id="previewDataset" data-i18n="p2pai.dashboard.dataset.preview">预览数据</button>
+                    <button type="button" class="btn btn-primary" id="analyzeDataset" data-i18n="p2pai.dashboard.dataset.analyze">分析数据集</button>
                             </div>
                         </div>
                     </div>
@@ -78,43 +78,43 @@ class DatasetManager {
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" data-i18n="ai.dashboard.dataset.uploadTitle">上传数据集</h5>
+                                <h5 class="modal-title" data-i18n="p2pai.dashboard.dataset.uploadTitle">上传数据集</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
                                 <form id="uploadDatasetForm">
                                     <div class="mb-3">
-                                        <label for="datasetName" class="form-label" data-i18n="ai.dashboard.dataset.form.name">数据集名称</label>
+                                        <label for="datasetName" class="form-label" data-i18n="p2pai.dashboard.dataset.form.name">数据集名称</label>
                                         <input type="text" class="form-control" id="datasetName" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="datasetDescription" class="form-label" data-i18n="ai.dashboard.dataset.form.description">描述</label>
+                                        <label for="datasetDescription" class="form-label" data-i18n="p2pai.dashboard.dataset.form.description">描述</label>
                                         <textarea class="form-control" id="datasetDescription" rows="3"></textarea>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="datasetType" class="form-label" data-i18n="ai.dashboard.dataset.form.type">数据类型</label>
+                                        <label for="datasetType" class="form-label" data-i18n="p2pai.dashboard.dataset.form.type">数据类型</label>
                                         <select class="form-select" id="datasetType" required>
-                                            <option value="" data-i18n="ai.dashboard.dataset.form.selectType">选择数据类型</option>
-                                            <option value="image" data-i18n="ai.dashboard.dataset.form.imageData">图像数据</option>
-                                            <option value="text" data-i18n="ai.dashboard.dataset.form.textData">文本数据</option>
-                                            <option value="tabular" data-i18n="ai.dashboard.dataset.form.tabularData">表格数据</option>
-                                            <option value="audio" data-i18n="ai.dashboard.dataset.form.audioData">音频数据</option>
-                                            <option value="time_series" data-i18n="ai.dashboard.dataset.form.timeSeriesData">时间序列</option>
+                                            <option value="" data-i18n="p2pai.dashboard.dataset.form.selectType">选择数据类型</option>
+                            <option value="image" data-i18n="p2pai.dashboard.dataset.form.imageData">图像数据</option>
+                            <option value="text" data-i18n="p2pai.dashboard.dataset.form.textData">文本数据</option>
+                            <option value="tabular" data-i18n="p2pai.dashboard.dataset.form.tabularData">表格数据</option>
+                            <option value="audio" data-i18n="p2pai.dashboard.dataset.form.audioData">音频数据</option>
+                            <option value="time_series" data-i18n="p2pai.dashboard.dataset.form.timeSeriesData">时间序列</option>
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="datasetFile" class="form-label" data-i18n="ai.dashboard.dataset.form.file">数据文件</label>
+                                        <label for="datasetFile" class="form-label" data-i18n="p2pai.dashboard.dataset.form.file">数据文件</label>
                                         <input type="file" class="form-control" id="datasetFile" 
                                                accept=".csv,.json,.xlsx,.zip,.tar.gz" required>
                                         <div class="form-text">
-                                            <span data-i18n="ai.dashboard.dataset.form.supportedFormats">支持格式: CSV, JSON, Excel, ZIP, TAR.GZ (最大100MB)</span>
+                                            <span data-i18n="p2pai.dashboard.dataset.form.supportedFormats">支持格式: CSV, JSON, Excel, ZIP, TAR.GZ (最大100MB)</span>
                                         </div>
                                     </div>
                                     <div class="mb-3">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="autoAnalyze" checked>
                                             <label class="form-check-label" for="autoAnalyze">
-                                                <span data-i18n="ai.dashboard.dataset.form.autoAnalyze">上传后自动分析</span>
+                                                <span data-i18n="p2pai.dashboard.dataset.form.autoAnalyze">上传后自动分析</span>
                                             </label>
                                         </div>
                                     </div>
@@ -125,12 +125,12 @@ class DatasetManager {
                                     <div class="progress">
                                         <div class="progress-bar" role="progressbar" style="width: 0%"></div>
                                     </div>
-                                    <small class="text-muted mt-1" data-i18n="ai.dashboard.dataset.form.uploading">正在上传...</small>
+                                    <small class="text-muted mt-1" data-i18n="p2pai.dashboard.dataset.form.uploading">正在上传...</small>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="common.cancel">取消</button>
-                                <button type="button" class="btn btn-primary" id="submitUploadDataset" data-i18n="ai.dashboard.dataset.upload">上传数据集</button>
+                                <button type="button" class="btn btn-primary" id="submitUploadDataset" data-i18n="p2pai.dashboard.dataset.upload">上传数据集</button>
                             </div>
                         </div>
                     </div>
@@ -141,7 +141,7 @@ class DatasetManager {
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" data-i18n="ai.dashboard.dataset.dataPreview">数据预览</h5>
+                                <h5 class="modal-title" data-i18n="p2pai.dashboard.dataset.dataPreview">数据预览</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body" id="dataPreviewContent"></div>
@@ -204,8 +204,8 @@ class DatasetManager {
             grid.innerHTML = `
                 <div class="empty-state">
                     <div class="empty-icon">📊</div>
-                    <h4 data-i18n="ai.dashboard.dataset.noDatasets">暂无数据集</h4>
-                    <p data-i18n="ai.dashboard.dataset.noDatasetsTip">点击"上传数据集"开始添加您的训练数据</p>
+                    <h4 data-i18n="p2pai.dashboard.dataset.noDatasets">暂无数据集</h4>
+                    <p data-i18n="p2pai.dashboard.dataset.noDatasetsTip">点击"上传数据集"开始添加您的训练数据</p>
                 </div>
             `;
             return;
@@ -219,19 +219,19 @@ class DatasetManager {
                 </div>
                 <div class="dataset-info">
                     <div class="info-item">
-                        <span class="info-label" data-i18n="ai.dashboard.dataset.labels.type">类型:</span>
+                        <span class="info-label" data-i18n="p2pai.dashboard.dataset.labels.type">类型:</span>
                         <span class="info-value">${this.getDataTypeText(dataset.data_type)}</span>
                     </div>
                     <div class="info-item">
-                        <span class="info-label" data-i18n="ai.dashboard.dataset.labels.samples">样本数:</span>
+                        <span class="info-label" data-i18n="p2pai.dashboard.dataset.labels.samples">样本数:</span>
                         <span class="info-value">${dataset.total_samples.toLocaleString()}</span>
                     </div>
                     <div class="info-item">
-                        <span class="info-label" data-i18n="ai.dashboard.dataset.labels.features">特征数:</span>
+                        <span class="info-label" data-i18n="p2pai.dashboard.dataset.labels.features">特征数:</span>
                         <span class="info-value">${dataset.feature_count}</span>
                     </div>
                     <div class="info-item">
-                        <span class="info-label" data-i18n="ai.dashboard.dataset.labels.size">大小:</span>
+                        <span class="info-label" data-i18n="p2pai.dashboard.dataset.labels.size">大小:</span>
                         <span class="info-value">${this.formatFileSize(dataset.file_size)}</span>
                     </div>
                 </div>
@@ -240,20 +240,20 @@ class DatasetManager {
                     <div class="progress">
                         <div class="progress-bar" style="width: ${dataset.processing_progress || 0}%"></div>
                     </div>
-                    <small><span data-i18n="ai.dashboard.dataset.processing">处理中</span> ${dataset.processing_progress || 0}%</small>
+                    <small><span data-i18n="p2pai.dashboard.dataset.processing">处理中</span> ${dataset.processing_progress || 0}%</small>
                 </div>
                 ` : ''}
                 <div class="dataset-actions">
                     <button class="btn btn-sm btn-outline-primary view-dataset" data-dataset-id="${dataset.id}">
-                        <span data-i18n="ai.dashboard.dataset.viewDetails">查看详情</span>
+                        <span data-i18n="p2pai.dashboard.dataset.viewDetails">查看详情</span>
                     </button>
                     <button class="btn btn-sm btn-info preview-dataset" data-dataset-id="${dataset.id}"
                             ${dataset.status !== 'ready' ? 'disabled' : ''}>
-                        <span data-i18n="ai.dashboard.dataset.previewData">预览数据</span>
+                        <span data-i18n="p2pai.dashboard.dataset.previewData">预览数据</span>
                     </button>
                 </div>
                 <div class="dataset-footer">
-                    <small class="text-muted"><span data-i18n="ai.dashboard.dataset.createdOn">创建于</span> ${new Date(dataset.created_at).toLocaleString()}</small>
+                    <small class="text-muted"><span data-i18n="p2pai.dashboard.dataset.createdOn">创建于</span> ${new Date(dataset.created_at).toLocaleString()}</small>
                 </div>
             </div>
         `).join('');
@@ -377,41 +377,41 @@ class DatasetManager {
                 <div class="row">
                     <div class="col-md-6">
                         <div class="detail-section">
-                            <h6 data-i18n="ai.dashboard.dataset.detail.basicInfo">基本信息</h6>
+                            <h6 data-i18n="p2pai.dashboard.dataset.detail.basicInfo">基本信息</h6>
                             <div class="detail-grid">
                                 <div class="detail-item">
-                                    <label data-i18n="ai.dashboard.dataset.detail.name">名称:</label>
+                                    <label data-i18n="p2pai.dashboard.dataset.detail.name">名称:</label>
                                     <span>${dataset.name}</span>
                                 </div>
                                 <div class="detail-item">
-                                    <label data-i18n="ai.dashboard.dataset.detail.dataType">数据类型:</label>
+                                    <label data-i18n="p2pai.dashboard.dataset.detail.dataType">数据类型:</label>
                                     <span>${this.getDataTypeText(dataset.data_type)}</span>
                                 </div>
                                 <div class="detail-item">
-                                    <label data-i18n="ai.dashboard.dataset.detail.status">状态:</label>
+                                    <label data-i18n="p2pai.dashboard.dataset.detail.status">状态:</label>
                                     <span class="status-${dataset.status}">${this.getStatusText(dataset.status)}</span>
                                 </div>
                                 <div class="detail-item">
-                                    <label data-i18n="ai.dashboard.dataset.detail.fileSize">文件大小:</label>
+                                    <label data-i18n="p2pai.dashboard.dataset.detail.fileSize">文件大小:</label>
                                     <span>${this.formatFileSize(dataset.file_size)}</span>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="detail-section">
-                            <h6 data-i18n="ai.dashboard.dataset.detail.dataStats">数据统计</h6>
+                            <h6 data-i18n="p2pai.dashboard.dataset.detail.dataStats">数据统计</h6>
                             <div class="stats-grid">
                                 <div class="stat-card">
                                     <div class="stat-value">${dataset.total_samples.toLocaleString()}</div>
-                                    <div class="stat-label" data-i18n="ai.dashboard.dataset.detail.totalSamples">总样本数</div>
+                                    <div class="stat-label" data-i18n="p2pai.dashboard.dataset.detail.totalSamples">总样本数</div>
                                 </div>
                                 <div class="stat-card">
                                     <div class="stat-value">${dataset.feature_count}</div>
-                                    <div class="stat-label" data-i18n="ai.dashboard.dataset.detail.featureCount">特征数量</div>
+                                    <div class="stat-label" data-i18n="p2pai.dashboard.dataset.detail.featureCount">特征数量</div>
                                 </div>
                                 <div class="stat-card">
                                     <div class="stat-value">${dataset.class_count}</div>
-                                    <div class="stat-label" data-i18n="ai.dashboard.dataset.detail.classCount">类别数量</div>
+                                    <div class="stat-label" data-i18n="p2pai.dashboard.dataset.detail.classCount">类别数量</div>
                                 </div>
                             </div>
                         </div>

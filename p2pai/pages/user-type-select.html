@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-i18n-title="ai.userType.title">
+<html lang="en" data-i18n-title="p2pai.userType.title">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,10 +74,10 @@
             </div>
             
             <div class="navbar-nav">
-                <button class="theme-toggle" title="切换主题">
-                    <span>🌙</span>
+                <button class="theme-toggle" title="Toggle Theme">
+                    <span data-theme-icon>🌙</span>
                 </button>
-                <button class="language-toggle" title="切换语言">EN</button>
+                <button class="language-toggle" title="Switch Language">EN</button>
             </div>
         </div>
     </nav>
@@ -131,8 +131,8 @@
         </div>
     </div>
 
-    <!-- 返回主页按钮 -->
-    <button class="homepage-return-btn btn-click" onclick="goHome()" title="返回主页">
+    <!-- Back to Home Button -->
+    <button class="homepage-return-btn btn-click" onclick="goHome()" title="Back to Home">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
         </svg>
@@ -142,7 +142,7 @@
     <script src="../../shared/js/navigation-unified.js?v=20250902"></script>
     <script src="../../shared/js/theme-manager-unified.js?v=20250827"></script>
     <!-- <script src="../../shared/js/router-unified.js?v=20250827"></script> -->
-    <script src="../../shared/js/i18n-manager.js"></script>
+    <script src="../../shared/js/i18n-manager.js?v=20250905"></script>
     <script>
         function selectUserType(userType) {
             localStorage.setItem('aiUserType', userType);

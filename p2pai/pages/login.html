@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-i18n-title="ai.login.title">
+<html lang="en" data-i18n-title="p2pai.login.title">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,14 +52,14 @@
     <nav class="navbar fixed top-0 left-0 right-0 fade-in-up">
         <div class="max-w-4xl mx-auto flex items-center justify-between">
             <div class="navbar-brand">
-                <span data-i18n="ai.title">AI模型训练</span>
+                <span data-i18n="p2pai.title">P2P AI训练</span>
             </div>
             
             <div class="navbar-nav">
-                <button class="theme-toggle" title="切换主题">
-                    <span>🌙</span>
+                <button class="theme-toggle" title="Toggle Theme">
+                    <span data-theme-icon>🌙</span>
                 </button>
-                <button class="language-toggle" title="切换语言">EN</button>
+                <button class="language-toggle" title="Switch Language">EN</button>
             </div>
         </div>
     </nav>
@@ -72,24 +72,23 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                 </svg>
             </div>
-            <h1 class="text-3xl font-bold mb-2" data-i18n="ai.login.title">登录</h1>
-            <p id="userTypeDisplay" class="text-lg font-medium text-gray-600"></p>
+            <h1 class="text-3xl font-bold mb-2" data-i18n="p2pai.login.title">登录</h1>
         </div>
 
         <!-- 登录表单 -->
         <div class="card fade-in-up delay-1">
             <form id="loginForm" class="space-y-6">
                 <div class="form-group">
-                    <label for="username" class="form-label" data-i18n="ai.login.username">用户名</label>
+                    <label for="username" class="form-label" data-i18n="p2pai.login.username">用户名</label>
                     <input type="text" id="username" name="username" required class="input"
-                           placeholder="请输入您的用户名" data-i18n="ai.login.usernamePlaceholder">
+                           placeholder="请输入您的用户名" data-i18n-placeholder="p2pai.login.usernamePlaceholder">
                 </div>
 
                 <div class="form-group">
-                    <label for="password" class="form-label" data-i18n="ai.login.password">密码</label>
+                    <label for="password" class="form-label" data-i18n="p2pai.login.password">密码</label>
                     <div class="relative">
                         <input type="password" id="password" name="password" required class="input pr-10"
-                               placeholder="请输入您的密码" data-i18n="ai.login.passwordPlaceholder">
+                               placeholder="请输入您的密码" data-i18n-placeholder="p2pai.login.passwordPlaceholder">
                         <button type="button" id="togglePassword" class="absolute right-3 top-1/2 transform -translate-y-1/2 focus:outline-none z-10">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -102,44 +101,44 @@
                 <div class="flex items-center justify-between">
                     <label class="flex items-center">
                         <input type="checkbox" id="rememberMe" class="h-4 w-4 border-gray-300 rounded focus:border-gray-500">
-                        <span class="ml-2 text-sm text-gray-600">记住我</span>
+                        <span class="ml-2 text-sm text-gray-600" data-i18n="p2pai.login.rememberMe">记住我</span>
                     </label>
                 </div>
 
                 <button type="submit" class="btn btn-primary w-full btn-click">
-                    <span id="loginButtonText" data-i18n="ai.login.loginBtn">登录</span>
+                    <span id="loginButtonText" data-i18n="p2pai.login.loginBtn">登录</span>
                     <div id="loginSpinner" class="hidden inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin ml-2"></div>
                 </button>
             </form>
 
             <!-- 快速进入按钮 -->
             <div class="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <h4 class="text-sm font-semibold text-gray-700 mb-3" data-i18n="ai.login.quickAccess">快速进入：</h4>
+                <h4 class="text-sm font-semibold text-gray-700 mb-3" data-i18n="p2pai.login.quickAccess">快速进入：</h4>
                 <div class="space-y-2">
                     <button onclick="quickLogin('client1', '123456')" class="btn btn-secondary w-full text-sm btn-click">
-                        <span data-i18n="ai.login.quickClient">客户端登录</span>
+                        <span data-i18n="p2pai.login.quickClient">AI节点</span>
                     </button>
                     <button onclick="quickLogin('server', 'admin123')" class="btn btn-secondary w-full text-sm btn-click">
-                        <span data-i18n="ai.login.quickServer">服务器登录</span>
+                        <span data-i18n="p2pai.login.quickServer">管理控制监控</span>
                     </button>
                 </div>
             </div>
 
             <!-- 模拟账号提示 -->
             <div class="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <h4 class="text-sm font-semibold text-gray-700 mb-2" data-i18n="ai.login.testAccounts">测试账号：</h4>
+                <h4 class="text-sm font-semibold text-gray-700 mb-2" data-i18n="p2pai.login.testAccounts">测试账号：</h4>
                 <div class="text-xs text-gray-600 space-y-1">
-                    <div data-i18n="ai.login.clientAccount1">客户端: client1 / 123456</div>
-                    <div data-i18n="ai.login.clientAccount2">客户端: client2 / 123456</div>
-                    <div data-i18n="ai.login.serverAccount1">服务器: server / admin123</div>
-                    <div data-i18n="ai.login.serverAccount2">服务器: admin / admin123</div>
+                    <div data-i18n="p2pai.login.clientAccount1">客户端: client1 / 123456</div>
+                    <div data-i18n="p2pai.login.clientAccount2">客户端: client2 / 123456</div>
+                    <div data-i18n="p2pai.login.serverAccount1">服务器: server / admin123</div>
+                    <div data-i18n="p2pai.login.serverAccount2">服务器: admin / admin123</div>
                 </div>
             </div>
 
             <!-- 返回链接 -->
             <div class="mt-6 text-center">
                 <button onclick="goBack()" class="btn btn-secondary btn-click">
-                    <span data-i18n="ai.login.backToUserType">← 返回用户类型选择</span>
+                    <span data-i18n="p2pai.login.backToUserType">← 返回用户类型选择</span>
                 </button>
             </div>
         </div>
@@ -150,7 +149,7 @@
         </div>
     </div>
 
-    <!-- 返回主页按钮 -->
+    <!-- Back to Home Button -->
     <button class="homepage-return-btn btn-click" onclick="
         console.log('🏠 按钮被点击了');
         try {
@@ -165,7 +164,7 @@
             console.error('❌ 导航出错:', error);
             window.location.href = '/homepage/index.html';
         }
-    " title="返回主页">
+    " title="Back to Home">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
         </svg>
@@ -173,7 +172,7 @@
 
     <script src="../../shared/js/navigation-unified.js?v=20250902"></script>
     <script src="../../shared/js/theme-manager-unified.js?v=20250827"></script>
-    <script src="../../shared/js/i18n-manager.js"></script>
+    <script src="../../shared/js/i18n-manager.js?v=20250905"></script>
     <script src="../../shared/js/api-config.js"></script>
     <script>
         // 确保goHome函数可用（备用实现）
@@ -197,16 +196,7 @@
                     localStorage.setItem('userType', 'server');
                 }
                 
-                // 更新用户类型显示
-                const userTypeDisplay = document.getElementById('userTypeDisplay');
-                const userType = localStorage.getItem('aiUserType');
-                if (userTypeDisplay) {
-                    if (userType === 'client') {
-                        userTypeDisplay.textContent = '客户端登录';
-                    } else if (userType === 'server') {
-                        userTypeDisplay.textContent = '服务器管理登录';
-                    }
-                }
+
                 
                 // 创建一个模拟的事件对象并调用登录处理函数
                 const mockEvent = {
@@ -229,21 +219,12 @@
         // 页面初始化
         document.addEventListener('DOMContentLoaded', function() {
             let userType = localStorage.getItem('aiUserType') || localStorage.getItem('userType');
-            const userTypeDisplay = document.getElementById('userTypeDisplay');
             
             // 如果没有用户类型，设置默认为client
             if (!userType) {
                 userType = 'client';
                 localStorage.setItem('aiUserType', 'client');
                 localStorage.setItem('userType', 'client');
-            }
-            
-            if (userType === 'client') {
-                userTypeDisplay.textContent = '客户端登录';
-            } else if (userType === 'server') {
-                userTypeDisplay.textContent = '服务器管理登录';
-            } else {
-                userTypeDisplay.textContent = '用户登录';
             }
 
             // 密码显示/隐藏切换
@@ -352,11 +333,11 @@
             const submitBtn = document.querySelector('button[type="submit"]');
             
             if (show) {
-                button.textContent = '登录中...';
+                button.textContent = window.i18nManager ? window.i18nManager.getTranslation('p2pai.login.loggingIn') : '登录中...';
                 spinner.classList.remove('hidden');
                 submitBtn.disabled = true;
             } else {
-                button.textContent = '登录';
+                button.textContent = window.i18nManager ? window.i18nManager.getTranslation('p2pai.login.login') : '登录';
                 spinner.classList.add('hidden');
                 submitBtn.disabled = false;
             }
@@ -379,7 +360,6 @@
     </script>
     
     <!-- 统一主题和路由管理 -->
-    <script src="../../shared/js/theme-manager-unified.js?v=20250827"></script>
     <!-- <script src="../../shared/js/router-unified.js?v=20250827"></script> -->
 </body>
 </html>

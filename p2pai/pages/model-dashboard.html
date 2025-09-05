@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-i18n-title="ai.dashboard.model.title">
+<html lang="en" data-i18n-title="p2pai.dashboard.model.title">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,13 +20,13 @@
                     <i class="bi bi-arrow-left"></i>
                 </button>
                 <div>
-                    <h4 class="mb-0" data-i18n="ai.dashboard.model.managementCenter">模型管理中心</h4>
-                    <small class="text-muted" data-i18n="ai.dashboard.model.subtitle">管理和部署AI模型</small>
+                    <h4 class="mb-0" data-i18n="p2pai.dashboard.model.managementCenter">模型管理中心</h4>
+                    <small class="text-muted" data-i18n="p2pai.dashboard.model.subtitle">管理和部署AI模型</small>
                 </div>
             </div>
             
             <div class="navbar-nav d-flex align-items-center">
-                <button class="theme-toggle btn btn-outline-secondary me-2 btn-click" title="切换主题" aria-label="切换主题"><span data-theme-icon>🌙</span></button><button class="btn btn-outline-secondary me-2 btn-click" onclick="goHome()">
+                <button class="theme-toggle btn btn-outline-secondary me-2 btn-click" title="Toggle Theme" aria-label="Toggle Theme"><span data-theme-icon>🌙</span></button><button class="language-toggle btn btn-outline-secondary me-2 btn-click" title="Switch Language">EN</button><button class="btn btn-outline-secondary me-2 btn-click" onclick="goHome()">
                     <i class="bi bi-house"></i> <span data-i18n="common.home">返回主页</span>
                 </button>
             </div>
@@ -57,8 +57,8 @@
                 document.getElementById('modelManagerContainer').innerHTML = `
                     <div class="ai-card p-4 text-center fade-in-up delay-1">
                         <i class="bi bi-exclamation-triangle text-warning" style="font-size: 3rem;"></i>
-                        <h4 class="mt-3" data-i18n="ai.dashboard.model.unavailable">模型管理暂时不可用</h4>
-                        <p class="text-muted" data-i18n="ai.dashboard.model.tryAgain">请稍后重试或联系管理员</p>
+                        <h4 class="mt-3" data-i18n="p2pai.dashboard.model.unavailable">模型管理暂时不可用</h4>
+                        <p class="text-muted" data-i18n="p2pai.dashboard.model.tryAgain">请稍后重试或联系管理员</p>
                         <button class="ai-btn btn-click" onclick="location.reload()" data-i18n="common.reload">重新加载</button>
                     </div>
                 `;

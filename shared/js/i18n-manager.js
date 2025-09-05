@@ -8,12 +8,23 @@ class I18nManager {
         this.currentLanguage = this.getStoredLanguage() || this.getBrowserLanguage();
         this.translations = {};
         this.originalTexts = {}; // 存储原始HTML中的中文文本
+        this.isLoading = false; // 防止重复加载
+        this.loadTimeout = null; // 防抖定时器
         
         // 设置HTML lang属性
         document.documentElement.lang = this.currentLanguage === 'zh' ? 'zh-CN' : 'en';
         
-        this.saveOriginalTexts(); // 保存原始文本
-        this.loadTranslations();
+        // 确保DOM加载完成后再保存原始文本和加载翻译
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.saveOriginalTexts();
+                this.loadTranslations();
+            });
+        } else {
+            this.saveOriginalTexts(); // 保存原始文本
+            this.loadTranslations();
+        }
+        
         this.setupEventListeners();
     }
 
@@ -24,8 +35,8 @@ class I18nManager {
 
     // 获取浏览器语言
     getBrowserLanguage() {
-        const browserLang = navigator.language || navigator.userLanguage;
-        return browserLang.startsWith('zh') ? 'zh' : 'en';
+        // 强制返回英文，确保界面显示英文
+        return 'en';
     }
 
     // 保存原始HTML中的文本
@@ -58,12 +69,39 @@ class I18nManager {
 
     // 加载翻译文件
     async loadTranslations() {
+        // 清除之前的防抖定时器
+        if (this.loadTimeout) {
+            clearTimeout(this.loadTimeout);
+        }
+        
+        // 防止重复加载
+        if (this.isLoading) {
+            return;
+        }
+        
         // 如果是中文，直接使用原始文本，不需要加载翻译文件
         if (this.currentLanguage === 'zh') {
             this.applyTranslations();
             this.updateLanguageToggle();
             return;
         }
+        
+        // 使用防抖机制，延迟100ms执行
+        return new Promise((resolve) => {
+            this.loadTimeout = setTimeout(async () => {
+                if (this.isLoading) {
+                    resolve();
+                    return;
+                }
+                
+                this.isLoading = true;
+                await this._doLoadTranslations();
+                resolve();
+            }, 100);
+        });
+    }
+    
+    async _doLoadTranslations() {
 
         try {
             // 使用相对路径，从当前页面位置计算
@@ -81,26 +119,17 @@ class I18nManager {
                 ? '../shared/i18n/'
                 : './shared/i18n/';
             
-            console.log(`🔍 Current pathname: ${window.location.pathname}`);
-            console.log(`📂 Calculated base path: ${basePath}`);
-            console.log(`🌐 Loading translations from: ${basePath}${this.currentLanguage}.json`);
-            
-            const response = await fetch(`${basePath}${this.currentLanguage}.json?v=${Date.now()}`);
-            console.log(`📡 Fetch response status: ${response.status}`);
+            const response = await fetch(`${basePath}${this.currentLanguage}.json?v=20250905`);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
             }
             
             this.translations = await response.json();
-            console.log('✅ Translations loaded successfully');
-            console.log('📋 EdgeAI translations available:', !!this.translations.edgeai);
-            if (this.translations.edgeai) {
-                console.log('🔍 EdgeAI title translation:', this.translations.edgeai.title);
-            }
         } catch (error) {
-            console.warn('Failed to load translations, using default Chinese texts');
             this.translations = this.getDefaultTranslations();
+        } finally {
+            this.isLoading = false;
         }
         this.applyTranslations();
         this.updateLanguageToggle();
@@ -169,31 +198,31 @@ class I18nManager {
                 "dashboard": {
                     "client": {
                         "title": "客户端控制面板",
-                        "localTraining": "本地训练",
-                        "federatedTraining": "联邦训练",
-                        "localDesc": "在本地设备上训练模型",
-                        "federatedDesc": "参与分布式联邦学习"
+                        "localTraining": "Local Training",
+                        "federatedTraining": "Federated Training",
+                        "localDesc": "Train models on local devices",
+                        "federatedDesc": "Participate in distributed federated learning"
                     },
                     "server": {
-                        "title": "服务器控制面板",
-                        "requests": "训练请求",
-                        "monitoring": "网络监控",
-                        "management": "客户端管理"
+                        "title": "Server Control Panel",
+                        "requests": "Training Requests",
+                        "monitoring": "Network Monitoring",
+                        "management": "Client Management"
                     }
                 },
                 "training": {
                     "local": {
-                        "title": "本地训练",
-                        "modelConfig": "模型配置",
-                        "datasetUpload": "上传数据集",
-                        "startTraining": "开始训练"
+                        "title": "Local Training",
+                        "modelConfig": "Model Configuration",
+                        "datasetUpload": "Upload Dataset",
+                        "startTraining": "Start Training"
                     },
                     "federated": {
-                        "title": "联邦训练模式选择",
-                        "standard": "标准联邦学习",
-                        "mpc": "MPC联邦学习",
-                        "standardDesc": "可见全局训练进度和详细信息",
-                        "mpcDesc": "仅可见自己的训练进度，更强的隐私保护"
+                        "title": "Federated Training Mode Selection",
+                        "standard": "Single Model Node",
+                "mpc": "MPC Decentralized Model Node",
+                        "standardDesc": "View global training progress and detailed information",
+                        "mpcDesc": "View only your own training progress with stronger privacy protection"
                     }
                 }
             },
@@ -238,10 +267,6 @@ class I18nManager {
 
     // 应用翻译
     applyTranslations() {
-        console.log(`🔄 Applying translations for language: ${this.currentLanguage}`);
-        console.log(`📊 Available translation keys:`, Object.keys(this.translations));
-        let translatedCount = 0;
-        
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
             let text;
@@ -251,10 +276,6 @@ class I18nManager {
                 text = this.originalTexts[key];
             } else {
                 text = this.getTranslation(key);
-                if (text) {
-                    console.log(`Translated ${key}: ${text}`);
-                    translatedCount++;
-                }
             }
             
             if (text) {
@@ -267,12 +288,8 @@ class I18nManager {
                 } else {
                     element.textContent = text;
                 }
-            } else {
-                console.warn(`No translation found for key: ${key}`);
             }
         });
-        
-        console.log(`Total translations applied: ${translatedCount}`);
 
         // 处理placeholder翻译
         document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
@@ -353,5 +370,13 @@ class I18nManager {
     }
 }
 
-// 创建全局国际化管理器实例
-window.i18nManager = new I18nManager();
+// 创建全局国际化管理器实例（单例模式）
+if (!window.i18nManager) {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.i18nManager = new I18nManager();
+        });
+    } else {
+        window.i18nManager = new I18nManager();
+    }
+}

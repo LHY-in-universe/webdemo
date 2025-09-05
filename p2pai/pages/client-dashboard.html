@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-i18n-title="ai.dashboard.client.title">
+<html lang="en" data-i18n-title="p2pai.dashboard.client.title">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>客户端控制台</title>
+    <title data-i18n="p2pai.dashboard.client.pageTitle">客户端控制台</title>
     <!-- ==================== 防白闪脚本 ==================== -->
     <script src="../../shared/js/anti-flash.js"></script>
     
@@ -729,15 +729,15 @@
     <nav class="navbar fade-in-up">
         <div class="max-w-4xl mx-auto flex items-center justify-between">
             <div class="navbar-brand">
-                <span data-i18n="ai.dashboard.client.title">客户端控制面板</span>
+                <span data-i18n="p2pai.dashboard.client.title">客户端控制面板</span>
             </div>
             
             <div class="navbar-nav">
                 <span id="userInfo" class="text-sm text-gray-600"></span>
-                <button class="theme-toggle" title="切换主题">
-                    <span>🌙</span>
+                <button class="theme-toggle" title="Toggle Theme">
+                    <span data-theme-icon>🌙</span>
                 </button>
-                <button class="language-toggle" title="切换语言">EN</button>
+                <button class="language-toggle" title="Switch Language">EN</button>
                 <button onclick="logout()" class="btn btn-secondary text-sm btn-click">
                     <span data-i18n="common.logout">退出登录</span>
                 </button>
@@ -750,9 +750,9 @@
         <!-- Welcome Section -->
         <div class="text-center mb-12 fade-in-up delay-1">
             <h2 class="text-3xl font-bold text-gray-900 mb-4">
-                <span data-i18n="ai.dashboard.client.welcome">欢迎回来！</span>
+                <span data-i18n="p2pai.dashboard.client.welcome">Welcome Back!</span>
             </h2>
-            <p class="text-gray-600" data-i18n="ai.dashboard.client.selectMode">选择您想要进行的训练模式</p>
+            <p class="text-gray-600" data-i18n="p2pai.dashboard.client.selectMode">Select your preferred training mode</p>
         </div>
 
         <!-- Training Options -->
@@ -765,28 +765,28 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-i18n="ai.dashboard.client.localTraining">本地模型训练</h3>
-                    <p class="text-gray-600 mb-6" data-i18n="ai.dashboard.client.localDesc">使用本地数据独立训练模型，保护数据隐私</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-i18n="p2pai.dashboard.client.localTraining">Local Training</h3>
+                <p class="text-gray-600 mb-6" data-i18n="p2pai.dashboard.client.localDesc">Train models independently using local data, protecting data privacy</p>
                     
                     <div class="bg-gray-50 rounded-lg p-4 mb-6">
                         <div class="text-sm text-gray-700 space-y-2">
                             <div class="flex items-center justify-between">
-                                <span data-i18n="ai.dashboard.client.dataSecurity">数据安全性：</span>
-                                <span class="font-medium text-gray-600" data-i18n="ai.dashboard.client.localStorage">本地存储</span>
+                                <span data-i18n="p2pai.dashboard.client.dataSecurity">Data Security:</span>
+                    <span class="font-medium text-gray-600" data-i18n="p2pai.dashboard.client.localStorage">Local Storage</span>
                             </div>
                             <div class="flex items-center justify-between">
-                                <span data-i18n="ai.dashboard.client.trainingSpeed">训练速度：</span>
-                                <span class="font-medium text-gray-600" data-i18n="ai.dashboard.client.fast">快速</span>
+                                <span data-i18n="p2pai.dashboard.client.trainingSpeed">Training Speed:</span>
+                    <span class="font-medium text-gray-600" data-i18n="p2pai.dashboard.client.fast">Fast</span>
                             </div>
                             <div class="flex items-center justify-between">
-                                <span data-i18n="ai.dashboard.client.modelEffect">模型效果：</span>
-                                <span class="font-medium text-gray-600" data-i18n="ai.dashboard.client.limitedByLocal">受限于本地数据</span>
+                                <span data-i18n="p2pai.dashboard.client.modelEffect">Model Performance:</span>
+                    <span class="font-medium text-gray-600" data-i18n="p2pai.dashboard.client.limitedByLocal">Limited by Local Data</span>
                             </div>
                         </div>
                     </div>
                     
                     <div class="text-gray-700 font-semibold">
-                        <span data-i18n="ai.dashboard.client.startLocal">开始本地训练</span> →
+                        <span data-i18n="p2pai.dashboard.client.startLocal">Start Local Training</span> →
                     </div>
                 </div>
             </div>
@@ -799,28 +799,28 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-i18n="ai.dashboard.client.federatedTraining">联邦学习训练</h3>
-                    <p class="text-gray-600 mb-6" data-i18n="ai.dashboard.client.federatedDesc">参与分布式联邦学习，获得更好的模型效果</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-i18n="p2pai.dashboard.client.federatedTraining">Federated Training</h3>
+                <p class="text-gray-600 mb-6" data-i18n="p2pai.dashboard.client.federatedDesc">Participate in distributed federated learning for better model performance</p>
                     
                     <div class="bg-gray-50 rounded-lg p-4 mb-6">
                         <div class="text-sm text-gray-700 space-y-2">
                             <div class="flex items-center justify-between">
-                                <span data-i18n="ai.dashboard.client.dataSecurity">数据安全性：</span>
-                                <span class="font-medium text-gray-600" data-i18n="ai.dashboard.client.privacyProtected">隐私保护</span>
+                                <span data-i18n="p2pai.dashboard.client.dataSecurity">数据安全性：</span>
+                    <span class="font-medium text-gray-600" data-i18n="p2pai.dashboard.client.privacyProtected">Privacy Protected</span>
                             </div>
                             <div class="flex items-center justify-between">
-                                <span data-i18n="ai.dashboard.client.trainingSpeed">训练速度：</span>
-                                <span class="font-medium text-gray-600" data-i18n="ai.dashboard.client.moderate">适中</span>
+                                <span data-i18n="p2pai.dashboard.client.trainingSpeed">训练速度：</span>
+                    <span class="font-medium text-gray-600" data-i18n="p2pai.dashboard.client.moderate">Moderate</span>
                             </div>
                             <div class="flex items-center justify-between">
-                                <span data-i18n="ai.dashboard.client.modelEffect">模型效果：</span>
-                                <span class="font-medium text-gray-600" data-i18n="ai.dashboard.client.excellent">优秀</span>
+                                <span data-i18n="p2pai.dashboard.client.modelEffect">模型效果：</span>
+                    <span class="font-medium text-gray-600" data-i18n="p2pai.dashboard.client.excellent">Excellent</span>
                             </div>
                         </div>
                     </div>
                     
                     <div class="text-gray-700 font-semibold">
-                        <span data-i18n="ai.dashboard.client.startFederated">开始联邦训练</span> →
+                        <span data-i18n="p2pai.dashboard.client.startFederated">Start Federated Training</span> →
                     </div>
                 </div>
             </div>
@@ -836,10 +836,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">数据集管理中心</h3>
-                    <p class="text-gray-600 text-sm mb-4">管理和组织训练数据集，上传新数据集</p>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2" data-i18n="p2pai.dashboard.client.datasetManagementCenter">Dataset Management Center</h3>
+                <p class="text-gray-600 text-sm mb-4" data-i18n="p2pai.dashboard.client.datasetManagementDesc">Manage and organize training datasets, upload new datasets</p>
                     <div class="text-blue-600 font-medium text-sm">
-                        进入数据集中心 →
+                        <span data-i18n="p2pai.dashboard.client.enterDatasetCenter">Enter Dataset Center →</span>
                     </div>
                 </div>
             </div>
@@ -852,10 +852,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">模型管理中心</h3>
-                    <p class="text-gray-600 text-sm mb-4">查看和管理已训练的模型，导入新模型</p>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2" data-i18n="p2pai.dashboard.client.modelManagementCenter">Model Management Center</h3>
+                <p class="text-gray-600 text-sm mb-4" data-i18n="p2pai.dashboard.client.modelManagementDesc">View and manage trained models, import new models</p>
                     <div class="text-green-600 font-medium text-sm">
-                        进入模型中心 →
+                        <span data-i18n="p2pai.dashboard.client.enterModelCenter">Enter Model Center →</span>
                     </div>
                 </div>
             </div>
@@ -863,22 +863,22 @@
 
         <!-- Status Overview -->
         <div class="card mb-8 fade-in-up delay-4">
-            <h3 class="text-lg font-semibold text-gray-900 mb-6" data-i18n="ai.dashboard.client.status">训练状态概览</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-6" data-i18n="p2pai.dashboard.client.status">Training Status Overview</h3>
             <div class="grid md:grid-cols-3 gap-6">
                 <div class="text-center cursor-pointer hover:bg-gray-50 p-3 rounded-lg transition-colors" onclick="viewCompletedTraining()">
                     <div class="text-2xl font-bold text-gray-700">3</div>
-                    <div class="text-sm text-gray-500" data-i18n="ai.dashboard.client.completedTraining">已完成训练</div>
-                    <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">点击查看详情</div>
+                    <div class="text-sm text-gray-500" data-i18n="p2pai.dashboard.client.completedTraining">Completed Training</div>
+                    <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">Click to view details</div>
                 </div>
                 <div class="text-center cursor-pointer hover:bg-gray-50 p-3 rounded-lg transition-colors" onclick="viewOngoingTraining()">
                     <div class="text-2xl font-bold text-gray-700">1</div>
-                    <div class="text-sm text-gray-500" data-i18n="ai.dashboard.client.ongoingTraining">进行中训练</div>
-                    <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">点击查看详情</div>
+                    <div class="text-sm text-gray-500" data-i18n="p2pai.dashboard.client.ongoingTraining">Ongoing Training</div>
+                    <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">Click to view details</div>
                 </div>
                 <div class="text-center cursor-pointer hover:bg-gray-50 p-3 rounded-lg transition-colors" onclick="viewAccuracyStats()">
                     <div class="text-2xl font-bold text-gray-700">92.5%</div>
-                    <div class="text-sm text-gray-500" data-i18n="ai.dashboard.client.averageAccuracy"><span data-i18n="ai.dashboard.client.averageAccuracyStat">平均准确率</span></div>
-                    <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">点击查看详情</div>
+                    <div class="text-sm text-gray-500" data-i18n="p2pai.dashboard.client.averageAccuracy"><span data-i18n="p2pai.dashboard.client.averageAccuracyStat">Average Accuracy</span></div>
+                    <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">Click to view details</div>
                 </div>
             </div>
         </div>
@@ -886,53 +886,53 @@
         <!-- Recent Training History -->
         <div class="card fade-in-up delay-5">
             <div class="flex items-center justify-between mb-6">
-                <h3 class="text-lg font-semibold text-gray-900" data-i18n="ai.dashboard.client.recentHistory">最近训练记录</h3>
+                <h3 class="text-lg font-semibold text-gray-900" data-i18n="p2pai.dashboard.client.recentHistory">Recent Training History</h3>
                 <button class="text-blue-600 hover:text-blue-800 text-sm font-medium" onclick="viewAllTrainingHistory()">
-                    <span data-i18n="ai.dashboard.client.viewAll">查看全部 →</span>
+                    <span data-i18n="p2pai.dashboard.client.viewAll">View All →</span>
                 </button>
             </div>
             <div class="space-y-4">
                 <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors" onclick="viewProjectVisualization('img_classify_001')">
                     <div>
-                        <div class="font-medium text-gray-900" data-i18n="ai.dashboard.client.imageClassification">图像分类模型</div>
+                        <div class="font-medium text-gray-900" data-i18n="p2pai.dashboard.client.imageClassification">Image Classification Model</div>
                         <div class="text-sm text-gray-500">2024-01-15 14:30</div>
                     </div>
                     <div class="text-right">
-                        <div class="text-sm font-medium text-gray-700"><span data-i18n="ai.dashboard.client.accuracy">准确率</span>: 94.2%</div>
-                        <div class="text-xs text-gray-500" data-i18n="ai.dashboard.client.localTraining">本地训练</div>
-                        <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">点击查看详情</div>
+                        <div class="text-sm font-medium text-gray-700"><span data-i18n="p2pai.dashboard.client.accuracy">Accuracy</span>: 94.2%</div>
+                <div class="text-xs text-gray-500" data-i18n="p2pai.dashboard.client.localTraining">Local Training</div>
+                        <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">Click to view details</div>
                     </div>
                 </div>
                 
                 <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors" onclick="viewProjectVisualization('text_classify_002')">
                     <div>
-                        <div class="font-medium text-gray-900" data-i18n="ai.dashboard.client.textClassification">文本分类模型</div>
+                        <div class="font-medium text-gray-900" data-i18n="p2pai.dashboard.client.textClassification">Text Classification Model</div>
                         <div class="text-sm text-gray-500">2024-01-14 10:15</div>
                     </div>
                     <div class="text-right">
-                        <div class="text-sm font-medium text-gray-700"><span data-i18n="ai.dashboard.client.accuracy">准确率</span>: 91.8%</div>
-                        <div class="text-xs text-gray-500" data-i18n="ai.dashboard.client.federatedTraining">联邦训练</div>
-                        <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">点击查看详情</div>
+                        <div class="text-sm font-medium text-gray-700"><span data-i18n="p2pai.dashboard.client.accuracy">Accuracy</span>: 91.8%</div>
+                <div class="text-xs text-gray-500" data-i18n="p2pai.dashboard.client.federatedTraining">Federated Training</div>
+                        <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">Click to view details</div>
                     </div>
                 </div>
                 
                 <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors" onclick="viewProjectVisualization('regression_003')">
                     <div>
-                        <div class="font-medium text-gray-900" data-i18n="ai.dashboard.client.regressionModel">回归预测模型</div>
+                        <div class="font-medium text-gray-900" data-i18n="p2pai.dashboard.client.regressionModel">Regression Prediction Model</div>
                         <div class="text-sm text-gray-500">2024-01-13 16:45</div>
                     </div>
                     <div class="text-right">
                         <div class="text-sm font-medium text-gray-700">RMSE: 0.023</div>
-                        <div class="text-xs text-gray-500" data-i18n="ai.dashboard.client.localTraining">本地训练</div>
-                        <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">点击查看详情</div>
+                        <div class="text-xs text-gray-500" data-i18n="p2pai.dashboard.client.localTraining">Local Training</div>
+                        <div class="text-xs text-blue-600 mt-1" data-i18n="modals.common.viewDetails">Click to view details</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 返回主页按钮 -->
-    <button class="homepage-return-btn btn-click" onclick="handleGoHome()" title="返回主页">
+    <!-- Back to Home Button -->
+    <button class="homepage-return-btn btn-click" onclick="handleGoHome()" title="Back to Home">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
         </svg>
@@ -961,8 +961,9 @@
     </div>
 
     <script src="../../shared/js/theme-manager-unified.js?v=20250827"></script>
-    <script src="../../shared/js/i18n-manager.js"></script>
+    <script src="../../shared/js/i18n-manager.js?v=20250905"></script>
     <script>
+        // 国际化管理器会自动初始化，无需手动创建
         function selectTrainingMode(mode) {
             if (mode === 'local') {
                 window.location.href = '/p2pai/pages/local-training.html';
@@ -1034,7 +1035,7 @@
                         <div class="stat-card best fade-in-up delay-1">
                             <div class="stat-icon">🎯</div>
                             <div class="stat-content">
-                                <div class="stat-label"><span data-i18n="ai.dashboard.client.highestAccuracy">最高准确率</span></div>
+                                <div class="stat-label"><span data-i18n="p2pai.dashboard.client.highestAccuracy">最高准确率</span></div>
                                 <div class="stat-value">94.2%</div>
                                 <div class="stat-desc">图像分类模型</div>
                             </div>
@@ -1061,11 +1062,11 @@
                         <h5 style="margin-bottom: 12px; font-weight: 600; color: #374151;">完成的训练任务</h5>
                         <div class="summary-item">
                             <span class="summary-label">📸 图像分类模型</span>
-                            <span class="summary-value"><span data-i18n="ai.dashboard.client.accuracy">准确率</span>: 94.2%</span>
+                            <span class="summary-value"><span data-i18n="p2pai.dashboard.client.accuracy">准确率</span>: 94.2%</span>
                         </div>
                         <div class="summary-item">
                             <span class="summary-label">📝 文本分类模型</span>
-                            <span class="summary-value"><span data-i18n="ai.dashboard.client.accuracy">准确率</span>: 91.8%</span>
+                            <span class="summary-value"><span data-i18n="p2pai.dashboard.client.accuracy">准确率</span>: 91.8%</span>
                         </div>
                         <div class="summary-item">
                             <span class="summary-label">📈 回归预测模型</span>
@@ -1107,7 +1108,7 @@
                                 <span style="font-weight: 600;">1.2 小时</span>
                             </div>
                             <div class="detail-row">
-                                <span><span data-i18n="ai.dashboard.client.currentAccuracyStat">当前准确率</span></span>
+                                <span><span data-i18n="p2pai.dashboard.client.currentAccuracyStat">当前准确率</span></span>
                                 <span style="font-weight: 600; color: #3b82f6;">89.3%</span>
                             </div>
                         </div>
@@ -1151,7 +1152,7 @@
                         <div class="stat-card best fade-in-up delay-1">
                             <div class="stat-icon">🏆</div>
                             <div class="stat-content">
-                                <div class="stat-label"><span data-i18n="ai.dashboard.client.highestAccuracy">最高准确率</span></div>
+                                <div class="stat-label"><span data-i18n="p2pai.dashboard.client.highestAccuracy">最高准确率</span></div>
                                 <div class="stat-value">94.2%</div>
                                 <div class="stat-desc">图像分类</div>
                             </div>
@@ -1159,7 +1160,7 @@
                         <div class="stat-card average fade-in-up delay-2">
                             <div class="stat-icon">📊</div>
                             <div class="stat-content">
-                                <div class="stat-label"><span data-i18n="ai.dashboard.client.averageAccuracyStat">平均准确率</span></div>
+                                <div class="stat-label"><span data-i18n="p2pai.dashboard.client.averageAccuracyStat">平均准确率</span></div>
                                 <div class="stat-value">92.5%</div>
                                 <div class="stat-desc">全部模型</div>
                             </div>
@@ -1167,7 +1168,7 @@
                         <div class="stat-card low fade-in-up delay-6">
                             <div class="stat-icon">📉</div>
                             <div class="stat-content">
-                                <div class="stat-label"><span data-i18n="ai.dashboard.client.lowestAccuracy">最低准确率</span></div>
+                                <div class="stat-label"><span data-i18n="p2pai.dashboard.client.lowestAccuracy">最低准确率</span></div>
                                 <div class="stat-value">91.8%</div>
                                 <div class="stat-desc">文本分类</div>
                             </div>
@@ -1179,12 +1180,12 @@
                         <div class="type-stats">
                             <div class="type-item">
                                 <div class="type-indicator local"></div>
-                                <span class="type-label">本地训练平均</span>
+                                <span class="type-label">Local Training Average</span>
                                 <span class="type-value">93.1%</span>
                             </div>
                             <div class="type-item">
                                 <div class="type-indicator federated"></div>
-                                <span class="type-label">联邦训练平均</span>
+                                <span class="type-label">Federated Training Average</span>
                                 <span class="type-value">91.8%</span>
                             </div>
                         </div>
@@ -1218,10 +1219,10 @@
             const trainingDetails = {
                 'img_classify_001': {
                     name: '图像分类模型',
-                    type: '本地训练',
+                    type: 'Local Training',
                     accuracy: '94.2%',
                     date: '2024-01-15 14:30',
-                    duration: '2.5小时',
+                    duration: '2.5 hours',
                     dataset: 'CIFAR-10',
                     epochs: '100',
                     loss: '0.15',
@@ -1230,11 +1231,11 @@
                 },
                 'text_classify_002': {
                     name: '文本分类模型', 
-                    type: '联邦训练',
+                    type: 'Federated Training',
                     accuracy: '91.8%',
                     date: '2024-01-14 10:15',
-                    duration: '3.2小时',
-                    dataset: 'IMDb评论',
+                    duration: '3.2 hours',
+                    dataset: 'IMDb Reviews',
                     epochs: '80',
                     loss: '0.22',
                     parameters: '850K',
@@ -1242,11 +1243,11 @@
                 },
                 'regression_003': {
                     name: '回归预测模型',
-                    type: '本地训练', 
+                    type: 'Local Training', 
                     accuracy: 'RMSE: 0.023',
                     date: '2024-01-13 16:45',
-                    duration: '1.8小时',
-                    dataset: '房价数据',
+                    duration: '1.8 hours',
+                    dataset: 'Housing Price Data',
                     epochs: '120',
                     loss: '0.031',
                     parameters: '450K',
@@ -1269,14 +1270,14 @@
                         
                         <div class="detail-grid">
                             <div class="detail-item">
-                                <div class="detail-label">训练类型</div>
+                                <div class="detail-label">Training Type</div>
                                 <div class="detail-value">${detail.type}</div>
-                                <div class="detail-meta">${detail.type === '本地训练' ? '数据本地处理' : '分布式协作训练'}</div>
+                                <div class="detail-meta">${detail.type === 'Local Training' ? 'Local Data Processing' : 'Distributed Collaborative Training'}</div>
                             </div>
                             <div class="detail-item">
-                                <div class="detail-label">${isRegression ? '模型误差' : '准确率'}</div>
+                                <div class="detail-label">${isRegression ? 'Model Error' : 'Accuracy'}</div>
                                 <div class="detail-value" style="color: ${isRegression ? '#059669' : '#3b82f6'};">${detail.accuracy}</div>
-                                <div class="detail-meta">${isRegression ? '均方根误差' : '测试集表现'}</div>
+                                <div class="detail-meta">${isRegression ? 'Root Mean Square Error' : 'Test Set Performance'}</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-label">训练时长</div>
@@ -1375,7 +1376,7 @@
             showModal('全部训练历史', content);
         }
 
-        // 返回主页处理函数
+        // Back to home handler function
         function handleGoHome() {
             console.log('handleGoHome 被调用');
             try {

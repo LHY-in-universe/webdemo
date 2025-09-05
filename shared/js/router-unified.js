@@ -90,16 +90,16 @@ class UnifiedRouter {
         this.addRoute('/ai/local-training', {
             module: 'ai',
             path: '../ai/pages/local-training.html',
-            title: '本地训练',
-            description: '本地AI模型训练',
+            title: 'Local Training',
+            description: 'Local AI Model Training',
             requireAuth: true
         });
 
         this.addRoute('/ai/mpc-training', {
             module: 'ai',
             path: '../ai/pages/mpc-training.html',
-            title: 'MPC训练',
-            description: '多方安全计算训练',
+            title: 'MPC Training',
+            description: 'Multi-party Secure Computation Training',
             requireAuth: true
         });
 

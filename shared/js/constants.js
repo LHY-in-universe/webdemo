@@ -227,9 +227,9 @@ const UnifiedConstants = {
         },
         PAUSED: {
             key: 'paused',
-            name: '已暂停',
-            color: '#f59e0b',
-            description: '项目训练已暂停'
+            name: 'Paused',
+        color: '#f59e0b',
+        description: 'Project training has been paused'
         },
         COMPLETED: {
             key: 'completed',
@@ -241,25 +241,25 @@ const UnifiedConstants = {
             key: 'waiting_approval',
             name: '等待审批',
             color: '#f59e0b',
-            description: '联合训练申请等待总服务器审批'
+            description: 'Federated training request waiting for server approval'
         },
         APPROVED: {
             key: 'approved',
             name: '已批准',
             color: '#10b981',
-            description: '联合训练申请已获批准'
+            description: 'Federated training request has been approved'
         },
         REJECTED: {
             key: 'rejected',
             name: '已拒绝',
             color: '#ef4444',
-            description: '联合训练申请已被拒绝'
+            description: 'Federated training request has been rejected'
         },
         STOPPED: {
             key: 'stopped',
-            name: '已停止',
-            color: '#6b7280',
-            description: '项目训练已停止'
+            name: 'Stopped',
+        color: '#6b7280',
+        description: 'Project training has been stopped'
         }
     },
 
@@ -281,7 +281,7 @@ const UnifiedConstants = {
         },
         TRAINING: {
             key: 'training',
-            name: '训练中',
+            name: 'Training',
             color: '#3b82f6',
             icon: '●'
         },
@@ -709,7 +709,7 @@ const UnifiedConstants = {
         REQUEST_APPROVED: '申请已批准',
         REQUEST_REJECTED: '申请已拒绝',
         TRAINING_STARTED: '训练已开始',
-        TRAINING_STOPPED: '训练已停止',
+        TRAINING_STOPPED: 'Training Stopped',
         
         // 密钥加密模块成功消息
         KEY_GENERATED: '密钥生成成功',

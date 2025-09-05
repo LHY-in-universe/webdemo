@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-i18n-title="edgeai.visualization.title">
+<html lang="en" data-i18n-title="edgeai.visualization.title">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -630,10 +630,10 @@
             </div>
             
             <div class="navbar-nav">
-                <button class="theme-toggle" title="切换主题">
+                <button class="theme-toggle" title="Toggle Theme">
                     <span>🌙</span>
                 </button>
-                <button class="language-toggle" title="切换语言">EN</button>
+                <button class="language-toggle" title="Switch Language">EN</button>
             </div>
         </div>
     </nav>
@@ -644,27 +644,27 @@
             <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
                 <div class="flex items-start justify-between mb-6">
                     <div class="flex-1">
-                        <h2 id="projectTitle" class="text-2xl font-bold text-gray-900 mb-2" data-i18n="ai.dashboard.project.distributedTraining">分布式训练项目</h2>
-                        <p id="projectDescription" class="text-gray-600 mb-4" data-i18n="ai.dashboard.project.description">基于P2PAI的多方计算训练系统，实现隐私保护的分布式机器学习和模型协同训练。</p>
+                        <h2 id="projectTitle" class="text-2xl font-bold text-gray-900 mb-2" data-i18n="p2pai.dashboard.project.distributedTraining">Single Model Node Project</h2>
+                        <p id="projectDescription" class="text-gray-600 mb-4" data-i18n="p2pai.dashboard.project.description">基于P2PAI的多方计算训练系统，实现隐私保护的分布式机器学习和模型协同训练。</p>
                         
                         <div class="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm">
                             <div class="flex items-center whitespace-nowrap">
                                 <div id="statusDot" class="w-2 h-2 bg-green-500 rounded-full mr-2 flex-shrink-0"></div>
-                                <span class="text-gray-500" data-i18n="ai.dashboard.project.statusLabel">状态：</span>
-                                <span id="projectStatus" class="font-semibold text-green-600 ml-2" data-i18n="ai.dashboard.project.statuses.training">训练中</span>
+                                <span class="text-gray-500" data-i18n="p2pai.dashboard.project.statusLabel">状态：</span>
+                                <span id="projectStatus" class="font-semibold text-green-600 ml-2" data-i18n="p2pai.dashboard.project.statuses.training">训练中</span>
                             </div>
                             <div class="flex items-center whitespace-nowrap">
                                 <svg class="w-4 h-4 text-gray-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
-                                <span class="text-gray-500" data-i18n="ai.dashboard.project.createdTime">创建时间：</span>
+                                <span class="text-gray-500" data-i18n="p2pai.dashboard.project.createdTime">创建时间：</span>
                                 <span id="projectCreated" class="font-medium ml-2">2024-01-15</span>
                             </div>
                             <div class="flex items-center whitespace-nowrap">
                                 <svg class="w-4 h-4 text-gray-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                                 </svg>
-                                <span class="text-gray-500" data-i18n="ai.dashboard.project.lastUpdated">最后更新：</span>
+                                <span class="text-gray-500" data-i18n="p2pai.dashboard.project.lastUpdated">最后更新：</span>
                                 <span id="projectUpdated" class="font-medium ml-2">2小时前</span>
                             </div>
                         </div>
@@ -685,11 +685,11 @@
                         <!-- 快速统计 -->
                         <div class="text-right space-y-1">
                             <div class="text-2xl font-bold text-gray-900" id="quickNodeCount">15</div>
-                            <div class="text-sm text-gray-500" data-i18n="ai.dashboard.project.totalParticipants">参与方总数</div>
+                            <div class="text-sm text-gray-500" data-i18n="p2pai.dashboard.project.totalParticipants">参与方总数</div>
                             <div class="text-sm">
-                                <span class="text-green-600 font-semibold" id="quickOnlineCount">12</span> <span data-i18n="ai.dashboard.project.online">在线</span>
+                                <span class="text-green-600 font-semibold" id="quickOnlineCount">12</span> <span data-i18n="p2pai.dashboard.project.online">在线</span>
                                 <span class="text-gray-400">/</span> 
-                                <span class="text-red-600 font-semibold">1</span> <span data-i18n="ai.dashboard.project.myNode">我的节点</span>
+                                <span class="text-red-600 font-semibold">1</span> <span data-i18n="p2pai.dashboard.project.myNode">我的节点</span>
                             </div>
                         </div>
                     </div>
@@ -698,19 +698,19 @@
                 <!-- 项目配置信息 -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-gray-100">
                     <div class="text-center">
-                        <div class="text-sm text-gray-500 mb-1" data-i18n="ai.dashboard.project.aiModel">AI模型</div>
-                        <div class="font-semibold text-gray-900" id="aiModelType" data-i18n="ai.dashboard.project.cnnDeepLearning">CNN深度学习</div>
+                        <div class="text-sm text-gray-500 mb-1" data-i18n="p2pai.dashboard.project.aiModel">AI模型</div>
+                        <div class="font-semibold text-gray-900" id="aiModelType" data-i18n="p2pai.dashboard.project.cnnDeepLearning">CNN深度学习</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-sm text-gray-500 mb-1" data-i18n="ai.dashboard.project.trainingStrategy">训练策略</div>
-                        <div class="font-semibold text-gray-900" id="trainingStrategy" data-i18n="ai.dashboard.project.federatedLearning">联邦学习</div>
+                        <div class="text-sm text-gray-500 mb-1" data-i18n="p2pai.dashboard.project.trainingStrategy">训练策略</div>
+                        <div class="font-semibold text-gray-900" id="trainingStrategy" data-i18n="p2pai.dashboard.project.federatedLearning">联邦学习</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-sm text-gray-500 mb-1" data-i18n="ai.dashboard.project.targetAccuracy">目标准确率</div>
+                        <div class="text-sm text-gray-500 mb-1" data-i18n="p2pai.dashboard.project.targetAccuracy">目标准确率</div>
                         <div class="font-semibold text-gray-900" id="targetAccuracy">≥90%</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-sm text-gray-500 mb-1" data-i18n="ai.dashboard.project.estimatedCompletion">预计完成</div>
+                        <div class="text-sm text-gray-500 mb-1" data-i18n="p2pai.dashboard.project.estimatedCompletion">预计完成</div>
                         <div class="font-semibold text-gray-900" id="estimatedTime">2天后</div>
                     </div>
                 </div>
@@ -759,46 +759,46 @@
             
             <!-- 控制面板 -->
             <div class="control-panel">
-                <h4 class="text-lg font-semibold mb-4" data-i18n="ai.dashboard.project.controlPanel">控制面板</h4>
+                <h4 class="text-lg font-semibold mb-4" data-i18n="p2pai.dashboard.project.controlPanel">控制面板</h4>
                 
                 <!-- 按钮网格布局 -->
                 <div class="grid grid-cols-2 gap-3 mb-6">
                     <button onclick="showInviteUserModal()" class="btn btn-primary btn-click text-sm py-3 px-4">
-                        <span data-i18n="ai.dashboard.project.inviteParticipants">邀请参与方</span>
+                        <span data-i18n="p2pai.dashboard.project.inviteParticipants">邀请参与方</span>
                     </button>
                     <button onclick="showAddNodeModal()" class="btn btn-secondary btn-click text-sm py-3 px-4">
-                        <span data-i18n="ai.dashboard.project.addComputeNode">添加计算节点</span>
+                        <span data-i18n="p2pai.dashboard.project.addComputeNode">添加计算节点</span>
                     </button>
                     <button onclick="startTraining()" class="btn btn-secondary btn-click text-sm py-3 px-4">
-                        <span data-i18n="ai.dashboard.project.startTraining">开始训练</span>
+                        <span data-i18n="p2pai.dashboard.project.startTraining">开始训练</span>
                     </button>
                     <button onclick="resetView()" class="btn btn-secondary btn-click text-sm py-3 px-4">
-                        <span data-i18n="ai.dashboard.project.resetView">重置视图</span>
+                        <span data-i18n="p2pai.dashboard.project.resetView">重置视图</span>
                     </button>
                 </div>
                 
                 <!-- 测试按钮单独一行 -->
                 <div class="mb-6">
                     <button onclick="completeAllTraining()" class="btn btn-success btn-click w-full text-sm py-3">
-                        <span data-i18n="ai.dashboard.project.completeTraining">完成训练(测试)</span>
+                        <span data-i18n="p2pai.dashboard.project.completeTraining">完成训练(测试)</span>
                     </button>
                 </div>
                 
                 <!-- 实时状态 -->
                 <div class="pt-4 border-t border-gray-200">
-                    <h5 class="text-base font-medium text-gray-600 mb-3" data-i18n="ai.dashboard.project.realTimeStatus">实时状态</h5>
+                    <h5 class="text-base font-medium text-gray-600 mb-3" data-i18n="p2pai.dashboard.project.realTimeStatus">实时状态</h5>
                     <div class="grid grid-cols-3 gap-4">
                         <div class="text-center">
                             <div class="text-2xl font-bold text-green-600" id="onlineNodes">8</div>
-                            <div class="text-sm text-gray-600" data-i18n="ai.dashboard.project.onlineParticipants">在线参与方</div>
+                            <div class="text-sm text-gray-600" data-i18n="p2pai.dashboard.project.onlineParticipants">在线参与方</div>
                         </div>
                         <div class="text-center">
                             <div class="text-2xl font-bold text-red-600" id="trainingNodes">97%</div>
-                            <div class="text-sm text-gray-600" data-i18n="ai.dashboard.project.myProgress">我的进度</div>
+                            <div class="text-sm text-gray-600" data-i18n="p2pai.dashboard.project.myProgress">我的进度</div>
                         </div>
                         <div class="text-center">
                             <div class="text-lg font-bold text-purple-600" id="dataTransfer">加密</div>
-                            <div class="text-sm text-gray-600" data-i18n="ai.dashboard.project.transmissionSecurity">传输安全</div>
+                            <div class="text-sm text-gray-600" data-i18n="p2pai.dashboard.project.transmissionSecurity">传输安全</div>
                         </div>
                     </div>
                 </div>
@@ -807,7 +807,7 @@
             <!-- 节点详情面板 -->
             <div id="nodeDetails" class="node-details">
                 <div class="flex justify-between items-center mb-4">
-                    <h4 class="text-lg font-semibold" id="nodeTitle" data-i18n="ai.dashboard.project.nodeDetails">节点详情</h4>
+                    <h4 class="text-lg font-semibold" id="nodeTitle" data-i18n="p2pai.dashboard.project.nodeDetails">节点详情</h4>
                     <button onclick="closeNodeDetails()" class="btn btn-secondary btn-click text-sm py-2 px-4">
                         <span data-i18n="common.close">关闭</span>
                     </button>
@@ -831,7 +831,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold text-gray-900" data-i18n="ai.dashboard.project.inviteUser">邀请用户</h2>
+                                <h2 class="text-2xl font-bold text-gray-900" data-i18n="p2pai.dashboard.project.inviteUser">邀请用户</h2>
                                 <p class="text-gray-600">邀请其他用户参与EdgeAI项目</p>
                             </div>
                         </div>
@@ -921,7 +921,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold text-gray-900" data-i18n="ai.dashboard.project.addNode">添加节点</h2>
+                                <h2 class="text-2xl font-bold text-gray-900" data-i18n="p2pai.dashboard.project.addNode">添加节点</h2>
                                 <p class="text-gray-600">添加新的边缘节点到训练网络</p>
                             </div>
                         </div>
@@ -962,7 +962,7 @@
                                 <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
                                     <input type="radio" name="nodeType" value="control" class="mr-3">
                                     <div>
-                                        <div class="font-medium">控制节点</div>
+                                        <div class="font-medium">模型节点</div>
                                         <div class="text-sm text-gray-500">协调训练</div>
                                     </div>
                                 </label>
@@ -978,9 +978,9 @@
 
                         <!-- 连接配置 -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">连接到控制节点</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">连接到模型节点</label>
                             <select id="connectToControl" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
-                                <option value="">选择控制节点...</option>
+                                <option value="">选择模型节点...</option>
                                 <option value="http://192.168.1.100:8080">主控节点1 (192.168.1.100:8080)</option>
                                 <option value="http://192.168.1.101:8080">主控节点2 (192.168.1.101:8080)</option>
                                 <option value="http://192.168.1.102:8080">备用控制 (192.168.1.102:8080)</option>
@@ -1078,7 +1078,7 @@
                         <div class="space-y-6">
                             <!-- 基础信息卡片 -->
                             <div class="bg-gray-50 rounded-lg p-6">
-                                <h3 class="text-lg font-semibold mb-4 text-gray-900" data-i18n="ai.dashboard.project.basicInfo">基础信息</h3>
+                                <h3 class="text-lg font-semibold mb-4 text-gray-900" data-i18n="p2pai.dashboard.project.basicInfo">基础信息</h3>
                                 <div class="space-y-3">
                                     <div class="flex justify-between">
                                         <span class="text-gray-600">节点名称：</span>
@@ -1110,7 +1110,7 @@
 
                             <!-- 连接信息卡片 -->
                             <div class="bg-gray-50 rounded-lg p-6">
-                                <h3 class="text-lg font-semibold mb-4 text-gray-900" data-i18n="ai.dashboard.project.networkConnection">网络连接</h3>
+                                <h3 class="text-lg font-semibold mb-4 text-gray-900" data-i18n="p2pai.dashboard.project.networkConnection">网络连接</h3>
                                 <div class="space-y-3">
                                     <div>
                                         <span class="text-gray-600 block mb-2">连接到控制节点：</span>
@@ -1126,7 +1126,7 @@
                         <div class="space-y-6">
                             <!-- 性能监控卡片 -->
                             <div class="bg-gray-50 rounded-lg p-6">
-                                <h3 class="text-lg font-semibold mb-4 text-gray-900" data-i18n="ai.dashboard.project.resourceUsage">资源使用情况</h3>
+                                <h3 class="text-lg font-semibold mb-4 text-gray-900" data-i18n="p2pai.dashboard.project.resourceUsage">资源使用情况</h3>
                                 <div class="space-y-4">
                                     <!-- CPU使用率 -->
                                     <div>
@@ -1162,7 +1162,7 @@
 
                             <!-- 训练统计卡片 -->
                             <div class="bg-gray-50 rounded-lg p-6" id="modalTrainingStats" style="display: none;">
-                                <h3 class="text-lg font-semibold mb-4 text-gray-900" id="modalTrainingStatsTitle" data-i18n="ai.dashboard.project.trainingStats">训练统计</h3>
+                                <h3 class="text-lg font-semibold mb-4 text-gray-900" id="modalTrainingStatsTitle" data-i18n="p2pai.dashboard.project.trainingStats">训练统计</h3>
                                 <div class="grid grid-cols-2 gap-4 mb-6">
                                     <div class="text-center">
                                         <div class="text-2xl font-bold text-green-600" id="modalAccuracy">-</div>
@@ -1195,7 +1195,7 @@
                     <!-- 底部操作按钮 -->
                     <div class="flex justify-end space-x-3 mt-8 pt-6 border-t border-gray-200" id="modalActionButtons">
                         <button id="stopTrainingBtn" onclick="stopTraining()" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors">
-                            <span data-i18n="ai.dashboard.project.stopTraining">停止训练</span>
+                            <span data-i18n="p2pai.dashboard.project.stopTraining">停止训练</span>
                         </button>
                         <button id="restartTrainingBtn" onclick="restartTraining()" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-colors">
                             重启训练
@@ -1261,27 +1261,27 @@
         <!-- 节点详情列表 -->
         <div class="mt-12 fade-in-up delay-3">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold text-gray-900" data-i18n="ai.dashboard.project.participantsList">多方计算参与方列表</h3>
+                <h3 class="text-xl font-bold text-gray-900" data-i18n="p2pai.dashboard.project.participantsList">多方计算参与方列表</h3>
                 <div class="flex items-center space-x-4 text-sm text-gray-600">
-                    <span><span data-i18n="ai.dashboard.project.coordinationNodes">协调节点</span>: <span class="font-semibold text-green-600" id="controlNodeCount">3</span></span>
-                    <span><span data-i18n="ai.dashboard.project.participants">参与方</span>: <span class="font-semibold text-blue-600" id="edgeNodeCount">12</span></span>
-                    <span><span data-i18n="ai.dashboard.project.total">总计</span>: <span class="font-semibold text-gray-900" id="totalNodeCount">15</span></span>
+                    <span><span data-i18n="p2pai.dashboard.project.coordinationNodes">协调节点</span>: <span class="font-semibold text-green-600" id="controlNodeCount">3</span></span>
+                <span><span data-i18n="p2pai.dashboard.project.participants">参与方</span>: <span class="font-semibold text-blue-600" id="edgeNodeCount">12</span></span>
+                <span><span data-i18n="p2pai.dashboard.project.total">总计</span>: <span class="font-semibold text-gray-900" id="totalNodeCount">15</span></span>
                 </div>
             </div>
             
             <!-- 控制节点表格 -->
             <div class="mb-8">
-                <h4 class="text-lg font-semibold mb-4 text-green-600" data-i18n="ai.dashboard.project.controlNodes">控制节点 (最多15个)</h4>
+                <h4 class="text-lg font-semibold mb-4 text-green-600" data-i18n="p2pai.dashboard.project.controlNodes">控制节点 (最多15个)</h4>
                 <div class="overflow-x-auto bg-white rounded-lg shadow">
                     <table class="min-w-full">
                         <thead class="bg-gray-50">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-i18n="ai.dashboard.project.tableCols.nodeName">节点名称</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-i18n="ai.dashboard.project.tableCols.role">角色</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-i18n="ai.dashboard.project.tableCols.status">状态</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-i18n="ai.dashboard.project.tableCols.user">负责用户</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-i18n="ai.dashboard.project.tableCols.ipAddress">IP地址</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-i18n="ai.dashboard.project.tableCols.connectedNodes">连接节点</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-i18n="p2pai.dashboard.project.tableCols.nodeName">节点名称</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-i18n="p2pai.dashboard.project.tableCols.role">角色</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-i18n="p2pai.dashboard.project.tableCols.status">状态</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-i18n="p2pai.dashboard.project.tableCols.user">负责用户</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-i18n="p2pai.dashboard.project.tableCols.ipAddress">IP地址</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-i18n="p2pai.dashboard.project.tableCols.connectedNodes">连接节点</th>
                             </tr>
                         </thead>
                         <tbody id="controlNodesTable" class="bg-white divide-y divide-gray-200">
@@ -1293,33 +1293,33 @@
             
             <!-- 边缘节点表格 -->
             <div class="mb-8">
-                <h4 class="text-lg font-semibold mb-4 text-blue-600" data-i18n="ai.dashboard.project.participantStatus">参与方节点状态</h4>
+                <h4 class="text-lg font-semibold mb-4 text-blue-600" data-i18n="p2pai.dashboard.project.participantStatus">参与方节点状态</h4>
                 <div class="overflow-x-auto bg-white rounded-lg shadow">
                     <table class="min-w-full">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none" onclick="sortEdgeNodes('name')">
-                                    <span data-i18n="ai.dashboard.project.tableCols.nodeName">节点名称</span> <span id="sort-name" class="ml-1">⇅</span>
+                                    <span data-i18n="p2pai.dashboard.project.tableCols.nodeName">节点名称</span> <span id="sort-name" class="ml-1">⇅</span>
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none" onclick="sortEdgeNodes('status')">
-                                    <span data-i18n="ai.dashboard.project.tableCols.status">状态</span> <span id="sort-status" class="ml-1">⇅</span>
+                                    <span data-i18n="p2pai.dashboard.project.tableCols.status">状态</span> <span id="sort-status" class="ml-1">⇅</span>
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none" onclick="sortEdgeNodes('progress')">
-                                    <span data-i18n="ai.dashboard.project.tableCols.progress">训练进度</span> <span id="sort-progress" class="ml-1">⇅</span>
+                                    <span data-i18n="p2pai.dashboard.project.tableCols.progress">训练进度</span> <span id="sort-progress" class="ml-1">⇅</span>
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none" onclick="sortEdgeNodes('cpu')">
-                                    <span data-i18n="ai.dashboard.project.tableCols.cpu">CPU</span> <span id="sort-cpu" class="ml-1">⇅</span>
+                                    <span data-i18n="p2pai.dashboard.project.tableCols.cpu">CPU</span> <span id="sort-cpu" class="ml-1">⇅</span>
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none" onclick="sortEdgeNodes('memory')">
-                                    <span data-i18n="ai.dashboard.project.tableCols.memory">内存</span> <span id="sort-memory" class="ml-1">⇅</span>
+                                    <span data-i18n="p2pai.dashboard.project.tableCols.memory">内存</span> <span id="sort-memory" class="ml-1">⇅</span>
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none" onclick="sortEdgeNodes('gpu')">
-                                    <span data-i18n="ai.dashboard.project.tableCols.gpu">GPU</span> <span id="sort-gpu" class="ml-1">⇅</span>
+                                    <span data-i18n="p2pai.dashboard.project.tableCols.gpu">GPU</span> <span id="sort-gpu" class="ml-1">⇅</span>
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 select-none" onclick="sortEdgeNodes('heartbeat')">
-                                    <span data-i18n="ai.dashboard.project.tableCols.heartbeat">最后心跳</span> <span id="sort-heartbeat" class="ml-1">⇅</span>
+                                    <span data-i18n="p2pai.dashboard.project.tableCols.heartbeat">最后心跳</span> <span id="sort-heartbeat" class="ml-1">⇅</span>
                                 </th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-i18n="ai.dashboard.project.tableCols.actions">操作</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-i18n="p2pai.dashboard.project.tableCols.actions">操作</th>
                             </tr>
                         </thead>
                         <tbody id="edgeNodesTable" class="bg-white divide-y divide-gray-200">
@@ -1635,7 +1635,8 @@
             const urlParams = new URLSearchParams(window.location.search);
             projectId = urlParams.get('projectId') || localStorage.getItem('currentProjectId') || '1';
             
-            document.getElementById('projectName').textContent = `- 项目 ${projectId}`;
+            const projectText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.projectName') : '项目';
+                document.getElementById('projectName').textContent = `- ${projectText} ${projectId}`;
             initializeProjectInfo(); // 初始化项目信息
             initializeVisualization();
             startRealTimeUpdates();
@@ -1943,11 +1944,13 @@
             document.getElementById('modalNodeTitle').textContent = getTranslatedNodeName(node.name);
             document.getElementById('modalNodeStatus').textContent = getStatusText(node.status);
             document.getElementById('modalNodeName').textContent = getTranslatedNodeName(node.name);
-            document.getElementById('modalNodeUrl').textContent = node.url || '未配置';
+            const notConfiguredText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.notConfigured') : '未配置';
+                document.getElementById('modalNodeUrl').textContent = node.url || notConfiguredText;
             document.getElementById('modalTrainingRounds').textContent = node.trainingRounds || 0;
             document.getElementById('modalProgress').textContent = `${node.progress}%`;
             document.getElementById('modalProgressBar').style.width = `${node.progress}%`;
-            document.getElementById('modalHeartbeat').textContent = node.heartbeat || '未知';
+            const unknownText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.unknown') : '未知';
+                document.getElementById('modalHeartbeat').textContent = node.heartbeat || unknownText;
             
             // 填充连接节点信息
             const connectedNodesDiv = document.getElementById('modalConnectedNodes');
@@ -1972,7 +1975,7 @@
             document.getElementById('modalCpuBar').style.width = `${node.cpu}%`;
             document.getElementById('modalGpuValue').textContent = `${node.gpu.toFixed(2)}%`;
             document.getElementById('modalGpuBar').style.width = `${node.gpu}%`;
-            document.getElementById('modalMemoryValue').textContent = node.memory || '未知';
+            document.getElementById('modalMemoryValue').textContent = node.memory || unknownText;
             
             // 如果是训练节点或已完成训练的节点，显示训练统计
             const trainingStatsDiv = document.getElementById('modalTrainingStats');
@@ -1986,15 +1989,25 @@
                 const chartTitle = document.getElementById('modalChartTitle');
                 
                 if (node.status === 'completed') {
-                    statsTitle.textContent = '历史训练结果';
-                    accuracyLabel.textContent = '最终准确率';
-                    lossLabel.textContent = '最终损失值';
-                    chartTitle.textContent = '训练过程曲线';
+                    const historyResultsText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.historyResults') : '历史训练结果';
+                const finalAccuracyText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.finalAccuracy') : '最终准确率';
+                const finalLossText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.finalLoss') : '最终损失值';
+                const trainingCurveText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.trainingCurve') : '训练过程曲线';
+                
+                statsTitle.textContent = historyResultsText;
+                accuracyLabel.textContent = finalAccuracyText;
+                lossLabel.textContent = finalLossText;
+                chartTitle.textContent = trainingCurveText;
                 } else {
-                    statsTitle.textContent = '训练统计';
-                    accuracyLabel.textContent = '当前准确率';
-                    lossLabel.textContent = '当前损失值';
-                    chartTitle.textContent = '准确率历史趋势';
+                    const trainingStatsText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.trainingStats') : '训练统计';
+                const currentAccuracyText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.currentAccuracy') : '当前准确率';
+                const currentLossText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.currentLoss') : '当前损失值';
+                const accuracyTrendText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.accuracyTrend') : '准确率历史趋势';
+                
+                statsTitle.textContent = trainingStatsText;
+                accuracyLabel.textContent = currentAccuracyText;
+                lossLabel.textContent = currentLossText;
+                chartTitle.textContent = accuracyTrendText;
                 }
                 
                 document.getElementById('modalAccuracy').textContent = `${node.accuracy.toFixed(2)}%`;
@@ -2103,17 +2116,24 @@
                     
                     // 更新轮次显示
                     const currentRound = (node.trainingRounds || 0) - rounds + 1;
-                    document.getElementById('modalRoundStart').textContent = `轮次 ${Math.max(1, currentRound)}`;
-                    document.getElementById('modalRoundEnd').textContent = `轮次 ${node.trainingRounds || rounds}`;
-                    document.getElementById('modalAccuracyHistory').textContent = 
-                        `历史准确率: ${accuracyData.map(acc => acc.toFixed(2)).join('% → ')}%`;
+                    const roundText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.round') : '轮次';
+                document.getElementById('modalRoundStart').textContent = `${roundText} ${Math.max(1, currentRound)}`;
+                document.getElementById('modalRoundEnd').textContent = `${roundText} ${node.trainingRounds || rounds}`;
+                    const historyAccuracyText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.historyAccuracy') : '历史准确率';
+                     document.getElementById('modalAccuracyHistory').textContent = 
+                         `${historyAccuracyText}: ${accuracyData.map(acc => acc.toFixed(2)).join('% → ')}%`;
                 } else {
                     // 如果没有历史数据，显示占位内容
                     const chartSvg = document.getElementById('modalAccuracyChart');
-                    chartSvg.innerHTML = '<text x="50%" y="50%" text-anchor="middle" fill="#9CA3AF" font-size="12">暂无历史数据</text>';
-                    document.getElementById('modalRoundStart').textContent = '轮次';
-                    document.getElementById('modalRoundEnd').textContent = '当前';
-                    document.getElementById('modalAccuracyHistory').textContent = '暂无历史数据';
+                    const noDataSvgText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.noHistoryData') : '暂无历史数据';
+                     chartSvg.innerHTML = `<text x="50%" y="50%" text-anchor="middle" fill="#9CA3AF" font-size="12">${noDataSvgText}</text>`;
+                    const roundText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.round') : '轮次';
+                const currentText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.current') : '当前';
+                const noDataText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.noHistoryData') : '暂无历史数据';
+                
+                document.getElementById('modalRoundStart').textContent = roundText;
+                document.getElementById('modalRoundEnd').textContent = currentText;
+                document.getElementById('modalAccuracyHistory').textContent = noDataText;
                 }
             } else {
                 trainingStatsDiv.style.display = 'none';
@@ -2126,16 +2146,19 @@
             
             if (node.status === 'completed') {
                 stopBtn.style.display = 'none';
-                restartBtn.textContent = '重新训练';
+                const retrainText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.retrain') : '重新训练';
+                restartBtn.textContent = retrainText;
                 exportBtn.style.display = 'inline-block';
             } else if (node.status === 'training') {
                 stopBtn.style.display = 'inline-block';
-                restartBtn.textContent = '重启训练';
+                const restartTrainingText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.restartTraining') : '重启训练';
+                restartBtn.textContent = restartTrainingText;
                 restartBtn.style.display = 'inline-block';
                 exportBtn.style.display = 'none';
             } else {
                 stopBtn.style.display = 'none';
-                restartBtn.textContent = '开始训练';
+                const startTrainingText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.training.local.startTraining') : '开始训练';
+                restartBtn.textContent = startTrainingText;
                 restartBtn.style.display = 'inline-block';
                 exportBtn.style.display = 'none';
             }
@@ -2518,7 +2541,8 @@
             const nodeTitle = document.getElementById('nodeTitle');
             const nodeInfo = document.getElementById('nodeInfo');
             
-            nodeTitle.textContent = `${getTranslatedNodeName(node.name)} - ${window.i18nManager?.getCurrentLanguage() === 'en' ? 'Details' : '详情'}`;
+            const detailsText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.details') : '详情';
+                nodeTitle.textContent = `${getTranslatedNodeName(node.name)} - ${detailsText}`;
             
             if (type === 'control') {
                 nodeInfo.innerHTML = `
@@ -2780,7 +2804,8 @@
             // 更新控制面板实时状态
             document.getElementById('onlineNodes').textContent = onlineParticipants;
             document.getElementById('trainingNodes').textContent = `${myProgress}%`;
-            document.getElementById('dataTransfer').textContent = '加密';
+            const encryptedText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.encrypted') : '加密';
+                document.getElementById('dataTransfer').textContent = encryptedText;
             
             // 更新概览卡片
             document.getElementById('totalNodesCount').textContent = networkData.allEdgeNodes.length + networkData.controlNodes.length;
@@ -2791,7 +2816,8 @@
                 myProgressBar.style.width = `${myProgress}%`;
             }
             document.getElementById('networkLatency').textContent = `${Math.floor(Math.random() * 20 + 15)}ms`;
-            document.getElementById('systemHealth').textContent = '启用';
+            const enabledText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.enabled') : '启用';
+                document.getElementById('systemHealth').textContent = enabledText;
             
             // 更新节点计数
             document.getElementById('controlNodeCount').textContent = networkData.controlNodes.length;
@@ -2830,7 +2856,9 @@
             const statsText = document.getElementById('trainingCompleteStats');
             
             if (completeOverlay && statsText) {
-                statsText.textContent = `共完成 ${completedCount} 个节点的训练`;
+                const completedTrainingText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.completedTraining') : '共完成';
+                const nodesTrainingText = window.i18nManager ? window.i18nManager.getTranslation('p2pai.dashboard.project.nodesTraining') : '个节点的训练';
+                statsText.textContent = `${completedTrainingText} ${completedCount} ${nodesTrainingText}`;
                 completeOverlay.style.display = 'block';
             }
         }
