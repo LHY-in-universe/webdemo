@@ -750,6 +750,10 @@
                         <div class="font-semibold text-gray-900" id="trainingStrategy">dpo</div>
                     </div>
                     <div class="text-center">
+                        <div class="text-sm text-gray-500 mb-1">Protocol</div>
+                        <div class="font-semibold text-gray-900" id="Protocol">fedavg</div>
+                    </div>
+                    <div class="text-center">
                         <div class="text-sm text-gray-500 mb-1">Target Accuracy</div>
                         <div class="font-semibold text-gray-900" id="targetAccuracy">≥95%</div>
                     </div>
@@ -1632,7 +1636,8 @@
                 updated: '2 hours ago',
                 progress: 75,
                 aiModel: 'gemma',
-                strategy: 'FedAvg',
+                strategy: 'dpo',
+                protocol: 'fedavg',
                 targetAccuracy: '≥90%',
                 estimatedTime: '2 days'
             },
@@ -1645,8 +1650,10 @@
                 progress: 45,
                 aiModel: 'RNN Recurrent Neural Network',
                 strategy: 'Reinforcement Learning',
-                targetAccuracy: '≥85%',
-                estimatedTime: '5 days'
+                protocol: 'fedavg',
+                targetAccuracy: '≥85%', 
+                estimatedTime: '5 days',
+                
             },
             3: {
                 name: 'Medical Image Intelligent Diagnosis',
@@ -1657,6 +1664,7 @@
                 progress: 100,
                 aiModel: 'ResNet Deep Residual Network',
                 strategy: 'Transfer Learning',
+                protocol: 'fedavg',
                 targetAccuracy: '≥95%',
                 estimatedTime: 'Completed'
             }
