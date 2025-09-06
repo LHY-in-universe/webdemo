@@ -129,17 +129,17 @@
                 <div class="flex justify-between items-center mt-8">
                     <div class="flex space-x-4">
                         <button id="startTrainingBtn" onclick="startTraining()" class="btn btn-primary btn-click">
-                            <span data-i18n="p2pai.dashboard.training.local.startTraining">开始训练</span>
+                            <span data-i18n="p2pai.dashboard.training.local.startTraining">Start Training</span>
                         </button>
                         <button id="pauseTrainingBtn" onclick="pauseTraining()" class="btn btn-secondary hidden btn-click">
                             <span data-i18n="p2pai.dashboard.training.local.pauseTraining">Pause Training</span>
                         </button>
                         <button id="stopTrainingBtn" onclick="stopTraining()" class="btn btn-secondary hidden btn-click">
-                            <span data-i18n="p2pai.dashboard.training.local.stopTraining">停止训练</span>
+                            <span data-i18n="p2pai.dashboard.training.local.stopTraining">Stop Training</span>
                         </button>
                     </div>
                     <button onclick="resetConfig()" class="btn btn-secondary btn-click">
-                        <span data-i18n="p2pai.dashboard.training.federated.resetConfig">重置配置</span>
+                        <span data-i18n="p2pai.dashboard.training.federated.resetConfig">Reset Configuration</span>
                     </button>
                 </div>
             </div>
@@ -149,14 +149,14 @@
         <div class="grid lg:grid-cols-2 gap-8 mb-8">
             <!-- Training Progress -->
             <div class="card p-6 fade-in-up delay-2">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.local.trainingStatus">训练状态</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.local.trainingStatus">Training Status</h3>
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.currentStatus">当前状态</span>
-                        <span id="trainingStatus" class="text-sm font-semibold text-gray-900" data-i18n="p2pai.dashboard.training.local.notStarted">● 未开始</span>
+                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.currentStatus">Current Status</span>
+                        <span id="trainingStatus" class="text-sm font-semibold text-gray-900" data-i18n="p2pai.dashboard.training.local.notStarted">● Not Started</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.federated.currentRound">当前聚合轮次</span>
+                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.federated.currentRound">Current Aggregation Round</span>
                         <span id="currentRound" class="text-sm font-semibold text-gray-900">0/5</span>
                     </div>
                     <div class="flex items-center justify-between">
@@ -164,12 +164,12 @@
                         <span id="connectedParticipants" class="text-sm font-semibold text-gray-900">0/3</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.trainingTime">训练时间</span>
+                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.trainingTime">Training Time</span>
                         <span id="trainingTime" class="text-sm font-semibold text-gray-900">00:00:00</span>
                     </div>
                     <div>
                         <div class="flex items-center justify-between mb-2">
-                            <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.progress">进度</span>
+                            <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.progress">Progress</span>
                             <span id="progressPercentage" class="text-sm font-semibold text-gray-900">0%</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-2">
@@ -181,22 +181,22 @@
 
             <!-- Performance Metrics -->
             <div class="card p-6 fade-in-up delay-2">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.local.performanceMetrics">性能指标</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.local.performanceMetrics">Performance Metrics</h3>
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.currentAccuracy">当前准确率</span>
+                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.currentAccuracy">Current Accuracy</span>
                         <span id="currentAccuracy" class="text-sm font-semibold text-gray-900">0%</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.currentLoss">当前损失</span>
+                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.currentLoss">Current Loss</span>
                         <span id="currentLoss" class="text-sm font-semibold text-gray-900">0.0</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.bestAccuracy">最佳准确率</span>
+                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.local.bestAccuracy">Best Accuracy</span>
                         <span id="bestAccuracy" class="text-sm font-semibold text-gray-900">0%</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.federated.globalAccuracy">全局准确率</span>
+                        <span class="text-sm font-medium text-gray-600" data-i18n="p2pai.dashboard.training.federated.globalAccuracy">Global Accuracy</span>
                         <span id="globalAccuracy" class="text-sm font-semibold text-gray-900">0%</span>
                     </div>
                 </div>
@@ -205,7 +205,7 @@
 
         <!-- Training Metrics Chart -->
         <div class="card p-6 mb-8 fade-in-up delay-5">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.local.trainingMetrics">训练指标</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.local.trainingMetrics">Training Metrics</h3>
             <div class="h-80">
                 <canvas id="trainingChart"></canvas>
             </div>
@@ -213,19 +213,19 @@
 
         <!-- Global Statistics -->
         <div class="card p-6 fade-in-up delay-2">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.federated.globalStatistics">全局统计信息</h3>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.federated.globalStatistics">Global Statistics</h3>
             <div class="grid md:grid-cols-3 gap-6">
                 <div class="text-center p-4 bg-gray-50 rounded-lg">
                     <div class="text-2xl font-bold text-gray-700" id="totalParticipants">0</div>
-                    <div class="text-sm text-gray-500" data-i18n="p2pai.dashboard.training.federated.totalParticipants">总参与方</div>
+                    <div class="text-sm text-gray-500" data-i18n="p2pai.dashboard.training.federated.totalParticipants">Total Participants</div>
                 </div>
                 <div class="text-center p-4 bg-gray-50 rounded-lg">
                     <div class="text-2xl font-bold text-gray-700" id="totalSamples">0</div>
-                    <div class="text-sm text-gray-500" data-i18n="p2pai.dashboard.training.federated.totalSamples">总样本数</div>
+                    <div class="text-sm text-gray-500" data-i18n="p2pai.dashboard.training.federated.totalSamples">Total Samples</div>
                 </div>
                 <div class="text-center p-4 bg-gray-50 rounded-lg">
                     <div class="text-2xl font-bold text-gray-700" id="averageTime">0s</div>
-                    <div class="text-sm text-gray-500" data-i18n="p2pai.dashboard.training.federated.averageRoundTime">平均轮次时间</div>
+                    <div class="text-sm text-gray-500" data-i18n="p2pai.dashboard.training.federated.averageRoundTime">Average Round Time</div>
                 </div>
             </div>
         </div>
@@ -241,7 +241,7 @@
 
 
     <script>
-        // 防止任何认证检查弹窗
+        // Prevent any authentication check popups
         window.showSecurityError = function() {
             console.log('Security error blocked for federated training page');
         };
@@ -249,7 +249,7 @@
             return { success: true };
         };
         
-        // 确保localStorage有必要的认证信息
+        // Ensure localStorage has necessary authentication information
         if (!localStorage.getItem('user')) {
             const defaultUser = {
                 name: 'Server Admin',
@@ -266,22 +266,22 @@
             localStorage.setItem('loginTime', new Date().toISOString());
         }
     </script>
-    <!-- 启用国际化和主题管理脚本 -->
+    <!-- Enable internationalization and theme management scripts -->
     <script src="../../shared/js/navigation-unified.js?v=20250902"></script>
     <script src="../../shared/js/theme-manager-unified.js?v=20250827"></script>
     <script>
-        // 基本导航函数
+        // Basic navigation functions
         window.goHome = function() {
             console.log("🏠 Back to home");
             window.location.href = "/homepage/index.html";
         };
         
         window.goBack = function() {
-            console.log("🔙 返回上一页");
+            console.log("🔙 Go back to previous page");
             window.history.back();
         };
         
-        // 基本主题切换功能（简化版）
+        // Basic theme switching functionality (simplified version)
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('theme-toggle')) {
                 const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
@@ -289,12 +289,12 @@
                 document.documentElement.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
                 
-                // 更新按钮文本
+                // Update button text
                 e.target.innerHTML = newTheme === 'light' ? '<span>🌙</span>' : '<span>☀️</span>';
             }
         });
         
-        // 应用保存的主题
+        // Apply saved theme
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
                 let trainingInterval;
@@ -322,10 +322,10 @@
             document.getElementById('pauseTrainingBtn').classList.remove('hidden');
             document.getElementById('stopTrainingBtn').classList.remove('hidden');
             
-            // 模拟联邦训练进度
+            // Simulate federated training progress
             trainingInterval = setInterval(updateTrainingProgress, 1000);
             
-            // 模拟参与方连接
+            // Simulate participant connections
             setTimeout(() => {
                 document.getElementById('connectedParticipants').textContent = '3/3';
             }, 2000);
@@ -356,7 +356,7 @@
         }
 
         function resetConfig() {
-            // 重置所有配置为默认值
+            // Reset all configurations to default values
             document.getElementById('modelType').selectedIndex = 0;
             document.getElementById('learningRate').value = '0.001';
             document.getElementById('batchSize').selectedIndex = 1;

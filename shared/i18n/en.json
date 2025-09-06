@@ -457,10 +457,10 @@
                 "totalTime": "Total time"
             },
             "federated": {
-                "title": "Select Distributed Training Mode",
-                "subtitle": "Choose the most suitable distributed training solution based on your privacy requirements and training objectives",
+                "title": "Select Training Node",
+                "subtitle": "Choose the node solution that best fits your privacy needs and training goals",
                 "select": {
-                    "title": "Select Distributed Training Mode"
+                    "title": "Select Single Model Node Mode"
                 },
                 "standard": "Single Model Node",
                 "mpc": "MPC Decentralized Model Node",

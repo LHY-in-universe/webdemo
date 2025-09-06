@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select Single Model Node Mode</title>
+    <title>Select Training Node</title>
     <!-- ==================== 防白闪脚本 ==================== -->
     <script>
         (function() {
@@ -103,7 +103,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
                 </button>
-                <span data-i18n="p2pai.dashboard.training.federated.title">Select Single Model Node Mode</span>
+                <span data-i18n="p2pai.dashboard.training.federated.title">Select Training Node</span>
             </div>
             
             <div class="navbar-nav">
@@ -128,9 +128,9 @@
                     </svg>
                 </div>
             </div>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.federated.title">Select Single Model Node Mode</h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-i18n="p2pai.dashboard.training.federated.title">Select Training Node</h2>
             <p class="text-lg text-gray-600 max-w-2xl mx-auto" data-i18n="p2pai.dashboard.training.federated.subtitle">
-                Choose the most suitable single model node solution based on your privacy requirements and training objectives
+                Choose the node solution that best fits your privacy needs and training goals
             </p>
         </div>
 
@@ -360,6 +360,11 @@
 
         // Page loading animation
         document.addEventListener('DOMContentLoaded', function() {
+            // Apply translations
+            if (window.i18nManager) {
+                window.i18nManager.applyTranslations();
+            }
+            
             const cards = document.querySelectorAll('.card');
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
