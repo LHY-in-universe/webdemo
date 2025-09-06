@@ -114,7 +114,7 @@
                 "limitedByLocal": "Limited by local data",
                 "excellent": "Excellent",
                 "startLocal": "Start Local Training",
-                "startFederated": "Start Federated Training",
+                "startFederated": "Start Distribution Learning",
                 "status": "Training Status Overview",
                 "completedTraining": "Completed Training",
                 "ongoingTraining": "Ongoing Training",
