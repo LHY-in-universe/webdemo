@@ -101,7 +101,7 @@
                 "welcome": "Welcome Back!",
                 "selectMode": "Select your preferred training mode",
                 "localTraining": "Local Model Training",
-                "federatedTraining": "Federated Learning Training",
+                "federatedTraining": "Distribution Learning Training",
                 "localDesc": "Train models independently using local data while protecting data privacy",
                 "federatedDesc": "Participate in distributed federated learning for better model performance",
                 "dataSecurity": "Data Security:",

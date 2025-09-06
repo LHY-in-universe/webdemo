@@ -199,7 +199,7 @@ class I18nManager {
                     "client": {
                         "title": "客户端控制面板",
                         "localTraining": "Local Training",
-                        "federatedTraining": "Federated Training",
+                        "federatedTraining": "Distribution Learning Training",
                         "localDesc": "Train models on local devices",
                         "federatedDesc": "Participate in distributed federated learning"
                     },
