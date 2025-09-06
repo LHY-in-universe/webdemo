@@ -103,7 +103,7 @@
                 "localTraining": "Local Model Training",
                 "federatedTraining": "Distribution Learning Training",
                 "localDesc": "Train models independently using local data while protecting data privacy",
-                "federatedDesc": "Participate in distributed federated learning for better model performance",
+                "federatedDesc": "Participate in distribution learning for better model performance",
                 "dataSecurity": "Data Security:",
                 "localStorage": "Local Storage",
                 "privacyProtected": "Privacy Protected",

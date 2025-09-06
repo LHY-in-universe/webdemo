@@ -201,7 +201,7 @@ class I18nManager {
                         "localTraining": "Local Training",
                         "federatedTraining": "Distribution Learning Training",
                         "localDesc": "Train models on local devices",
-                        "federatedDesc": "Participate in distributed federated learning"
+                        "federatedDesc": "Participate in distribution learning"
                     },
                     "server": {
                         "title": "Server Control Panel",
